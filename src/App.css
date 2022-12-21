@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+/* Ajout CSS perso */
+.bg-color {
+  background-color: #e2e2e2;
+}
