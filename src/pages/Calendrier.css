@@ -1,0 +1,8 @@
+.calendar {
+  background-color: #323131;
+  color: white;
+}
+
+.shadow {
+  box-shadow: 46px 46px 92px #868686, -46px -46px 92px #ffffff;
+}
