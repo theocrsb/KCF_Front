@@ -9,9 +9,9 @@ const Calendrier = () => {
   const [selectedDay, setSelectedDay] = useState(today);
 
   const footer = selectedDay ? (
-    <p>You selected {format(selectedDay, 'PPP')}.</p>
+    <p>Vous avez choisi le {format(selectedDay, 'dd/MM/yyyy')}.</p>
   ) : (
-    <p>Please pick a day.</p>
+    <p>Veuillez choisir un jour.</p>
   );
   return (
     <div className='d-flex justify-content-center'>
