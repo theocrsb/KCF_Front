@@ -1,7 +1,7 @@
 import logo from '../images/favicon.png';
-import '../index.css';
 import { NavLink } from 'react-router-dom';
-import './NavBar.css';
+import '../index.css';
+import './navbar.css';
 
 const NavBar = () => {
   return (
@@ -28,20 +28,26 @@ const NavBar = () => {
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
               <NavLink to='/' end className='nav-link'>
-                Acceuil
+                <a className='nav-link' href='#'>
+                  Acceuil
+                </a>
               </NavLink>
             </li>
             <li className='nav-item'>
               <NavLink to='calendrier' className='nav-link'>
-                Calendrier
+                <a className='nav-link' href='#'>
+                  Calendrier
+                </a>
+              </NavLink>
+            </li>
+            <li className='nav-item'>
+              <NavLink to='' className='nav-link'>
+                <a className='nav-link' href='#'>
+                  Se connecter
+                </a>
               </NavLink>
             </li>
           </ul>
-          {/* btn droite */}
-
-          <button className='btn btn-outline-success button' type='submit'>
-            Se connecter
-          </button>
         </div>
       </div>
     </nav>

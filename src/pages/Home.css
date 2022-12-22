@@ -1,11 +1,11 @@
-.button {
+.btn {
   background-color: #383b87;
   color: #ffffff;
   border: 2px solid #383b87;
 }
 
-.button:hover {
-  background-color: #ffffff;
+.btn:hover {
+  background-color: #323131;
   color: #383b87;
   border: 2px solid #383b87;
 }

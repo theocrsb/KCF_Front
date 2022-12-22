@@ -9,7 +9,7 @@ import Calendrier from './pages/Calendrier';
 
 function App() {
   return (
-    <div className='bg-color w-100 min-vh-100'>
+    <div>
       <BrowserRouter>
         {/* On utilise notre composant dans notre JSX */}
         <NavBar />
