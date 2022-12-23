@@ -1,7 +1,6 @@
 import logo from '../images/favicon.png';
+import logooffi from '../images/logo.jpg';
 import { NavLink } from 'react-router-dom';
-import '../index.css';
-import './navbar.css';
 
 const NavBar = () => {
   return (

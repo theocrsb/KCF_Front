@@ -1,0 +1,15 @@
+.btnPerso {
+  background-color: #383b87;
+  color: white;
+  border-color: #383b87;
+}
+
+.btn:hover {
+  background-color: #383b8700;
+  color: #383b87;
+  border-color: #383b87;
+}
+
+.bgCard {
+  background-color: #e2e2e213;
+}
