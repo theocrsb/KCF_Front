@@ -2,6 +2,8 @@
   background-color: #383b87;
   color: white;
   border-color: #383b87;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .btn:hover {
@@ -12,4 +14,18 @@
 
 .bgCard {
   background-color: #e2e2e213;
+}
+
+.btnDirection {
+  background-color: #323131;
+  color: white;
+  border-color: #323131;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.btnDirection:hover {
+  background-color: #ffffff00;
+  color: #323131;
+  border-color: #323131;
 }

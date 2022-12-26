@@ -1,11 +1,12 @@
 import logo from '../images/logo.jpg';
 import logoMick from '../images/logoMick.png';
 import planning from '../images/planning.png';
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
   return (
     <div>
-      <div className='d-flex flex-wrap justify-content-around m-3  border border-light rounded shadow-lg p-3 mb-5 bgCard'>
+      <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard'>
         <div className='m-3'>
           <img
             className='img-responsive'
@@ -34,8 +35,10 @@ const Home = () => {
         </div>
       </div>
       {/* Fin partie logo + info principal */}
-      <div className='d-flex flex-wrap justify-content-around m-3'>
-        <button className='btn btn-primary btnPerso'>Nous rejoindre</button>
+      <div className='d-flex flex-wrap justify-content-center m-3'>
+        <NavLink to='connect' className='nav-link'>
+          <button className='btn btn-primary btnPerso'>Nous rejoindre</button>
+        </NavLink>
         <button className='btn btn-primary btnPerso'>En savoir plus</button>
       </div>
     </div>

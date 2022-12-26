@@ -40,7 +40,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink to='' className='nav-link'>
+              <NavLink to='connect' className='nav-link'>
                 <a className='nav-link' href='#'>
                   Se connecter
                 </a>

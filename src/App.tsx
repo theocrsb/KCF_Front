@@ -6,6 +6,8 @@ import NavBar from './components/NavBar';
 import Home from './pages/Home';
 // import 'bootstrap/dist/css/bootstrap.css';
 import Calendrier from './pages/Calendrier';
+import Connect from './pages/Connect';
+import Subscribe from './pages/Subscribe';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/calendrier' element={<Calendrier />} />
+          <Route path='/connect' element={<Connect />} />
+          <Route path='/subscribe' element={<Subscribe />} />
         </Routes>
       </BrowserRouter>
     </div>
