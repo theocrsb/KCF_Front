@@ -6,12 +6,12 @@ const NavBar = () => {
   return (
     <nav className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow opacity-75'>
       <div className='container-fluid'>
-        <a className='navbar-brand' href='#'>
+        <div className='navbar-brand'>
           <NavLink to='/' className='nav-link'>
             <img src={logo} width={32} alt='logo de karate'></img> | Karaté Club
             Fosses
           </NavLink>
-        </a>
+        </div>
         <button
           className='navbar-toggler'
           type='button'
@@ -27,23 +27,17 @@ const NavBar = () => {
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
               <NavLink to='/' end className='nav-link'>
-                <a className='nav-link' href='#'>
-                  Acceuil
-                </a>
+                <div className='nav-link'>Acceuil</div>
               </NavLink>
             </li>
             <li className='nav-item'>
               <NavLink to='calendrier' className='nav-link'>
-                <a className='nav-link' href='#'>
-                  Calendrier
-                </a>
+                <div className='nav-link'>Calendrier</div>
               </NavLink>
             </li>
             <li className='nav-item'>
               <NavLink to='connect' className='nav-link'>
-                <a className='nav-link' href='#'>
-                  Se connecter
-                </a>
+                <div className='nav-link'>Se connecter</div>
               </NavLink>
             </li>
           </ul>
