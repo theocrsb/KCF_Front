@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Calendrier from './pages/Calendrier';
 import Connect from './pages/Connect';
 import Subscribe from './pages/Subscribe';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/calendrier' element={<Calendrier />} />
           <Route path='/connect' element={<Connect />} />
           <Route path='/subscribe' element={<Subscribe />} />
+          <Route path='/admin' element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </div>

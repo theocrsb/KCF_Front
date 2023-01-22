@@ -40,6 +40,12 @@ const NavBar = () => {
                 <div className='nav-link'>Se connecter</div>
               </NavLink>
             </li>
+            {/* mettre affichage conditionnel pour admin */}
+            <li className='nav-item'>
+              <NavLink to='admin' className='nav-link'>
+                <div className='nav-link'>Administrateur</div>
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
