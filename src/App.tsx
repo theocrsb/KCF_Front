@@ -9,6 +9,8 @@ import Calendrier from './pages/Calendrier';
 import Connect from './pages/Connect';
 import Subscribe from './pages/Subscribe';
 import Admin from './pages/Admin';
+import CoursSelect from './pages/CoursSelect';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
           <Route path='/connect' element={<Connect />} />
           <Route path='/subscribe' element={<Subscribe />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/calendrier/:id' element={<CoursSelect />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
