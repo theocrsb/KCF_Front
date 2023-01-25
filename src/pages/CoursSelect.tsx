@@ -1,3 +1,4 @@
+import { DeleteOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
@@ -7,9 +8,11 @@ const CoursSelect = () => {
   //   console.log(coursId.id);
   const [oneCours, SetOneCours] = useState<Cours>();
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
-
   const [checkCategories, setCheckCategories] = useState<string>('');
+  const [count, setCount] = useState<number>(0);
 
+  const karatekaId = allKarateka?.map((x) => x.id);
+  console.log(karatekaId, 'id des karateka');
   // Requete pour afficher les cours select
   useEffect(() => {
     // get le cours par l'id
@@ -41,7 +44,7 @@ const CoursSelect = () => {
       .catch((error) => {
         // console.log('Get All Cours Error', error);
       });
-  }, []);
+  }, [coursId.id, count]);
   // Fin requete get
   //   console.log(oneCours);
   //   console.log('allKarateka', allKarateka);
@@ -54,7 +57,7 @@ const CoursSelect = () => {
   //   fonction submit inscritption cours
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('id du karateka select', checkCategories);
+    // console.log('id du karateka select', checkCategories);
 
     //Requete ajout karateka a un cours
     axios
@@ -70,17 +73,48 @@ const CoursSelect = () => {
         }
       )
       .then((response) => {
-        console.log('response', response);
+        // console.log('response', response);
+        setCount(count + 1);
       })
       .catch((error) => {
         console.log('Error', error);
       });
   };
+
+  // Retrait d'une personne inscrite si ils nous appartient
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // console.log(e.currentTarget.value);
+
+    axios
+      .patch(
+        `http://localhost:8080/api/cours/${coursId.id}/delete`,
+        {
+          karateka: [{ id: e.currentTarget.value }],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      )
+      .then((response) => {
+        // console.log('response', response);
+        setCount(count + 1);
+      })
+      .catch((error) => {
+        console.log('Error', error);
+      });
+  };
+
   console.log(oneCours, 'oneCours');
+  console.log(allKarateka, 'mes karateka');
   return (
     <div style={{ minHeight: '700px' }}>
       <div className='card text-center mt-3'>
-        <div className='card-header'>
+        <div
+          className='card-header'
+          style={{ fontWeight: 'bold', fontSize: '1.4rem' }}
+        >
           {oneCours?.sensei} : {oneCours?.type}
         </div>
         <div className='card-body'>
@@ -92,7 +126,7 @@ const CoursSelect = () => {
             style={{ backgroundColor: '#e2e2e2', borderRadius: '10px' }}
           >
             <p className='card-text'>
-              Selectionne les personnes que tu souhaites ajouter au cours :
+              Selectionne chaque personnes que tu souhaites ajouter au cours :
             </p>
           </div>
           {/* debut form */}
@@ -136,9 +170,20 @@ const CoursSelect = () => {
       <div>
         <h4>Listes des personnes inscrites au cours :</h4>
         <ul>
-          {oneCours?.karateka.map((x) => (
-            <li>
-              {x.prenom} {x.nom}
+          {oneCours?.karateka.map((x, i) => (
+            <li key={i} style={{ listStyleType: 'none' }}>
+              {x.prenom} {x.nom}{' '}
+              <button
+                onClick={handleDelete}
+                value={x.id}
+                style={{ backgroundColor: 'transparent', border: 'none' }}
+              >
+                {karatekaId?.includes(x.id) ? (
+                  <DeleteOutlined />
+                ) : (
+                  <LockOutlined />
+                )}
+              </button>
             </li>
           ))}
         </ul>

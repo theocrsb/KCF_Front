@@ -1,6 +1,8 @@
 import React, { FormEvent, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+
 const Connect = () => {
   const emailElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);
@@ -38,7 +40,7 @@ const Connect = () => {
     console.log(message);
   };
   return (
-    <div>
+    <div style={{ minHeight: '600px' }}>
       <div className='d-flex text-center justify-content-center'>
         <div>
           <button type='submit' className='btn btn-primary btnDirection mt-3'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'react-day-picker/dist/style.css';
-import { addDays, format } from 'date-fns';
+import { addDays, format, lightFormat } from 'date-fns';
 import { DateRange, DayPicker } from 'react-day-picker';
 import './calendrier.css';
 import fr from 'date-fns/locale/fr';
@@ -9,6 +9,7 @@ import { paste } from '@testing-library/user-event/dist/paste';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import LogoMicka from '../images/logoMickRetouch.png';
+import Modal from 'react-bootstrap/Modal';
 
 export interface Cours {
   id: string;
@@ -36,15 +37,10 @@ const Calendrier = () => {
 
   const isBigScreen = useMediaQuery({ query: '(min-width: 700px)' });
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' });
-  // const navigate = useNavigate();
-  // const todayJour = today.getDay();
-  // const todayMois = today.getMonth();
-  // const todayAnnee = today.getFullYear();
-
   const [allCours, SetAllCours] = useState<Cours[]>();
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(today);
-  // console.log('allCours', allCours);
   const [coursAffiche, setCoursAffiche] = useState<Cours[] | undefined>([]);
+  const [oneCours, SetOneCOurs] = useState<Cours>();
 
   // Ajouter un tableau des cours en fonction du jours select
   useEffect(() => {
@@ -69,7 +65,7 @@ const Calendrier = () => {
   // Requete pour afficher les cours select
   useEffect(() => {
     axios
-      .get('http://localhost:8080/api/cours/', {
+      .get(`http://localhost:8080/api/cours/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
@@ -91,10 +87,39 @@ const Calendrier = () => {
   );
 
   console.log('coursAffiche', coursAffiche);
+
+  /////////////////////////////////////////////// MODAL ///////////////////////////////////////////////
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(e.currentTarget.value);
+    setIsOpen(true);
+    console.log('get les karataka du cours');
+    axios
+      .get(`http://localhost:8080/api/cours/${e.currentTarget.value}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        SetOneCOurs(response.data);
+      })
+      .catch((error) => {
+        // console.log('Get All Cours Error', error);
+      });
+  };
+
+  const hideModal = () => {
+    setIsOpen(false);
+  };
+  console.log(oneCours, 'karateka avant map');
+  /////////////////////////////////////////////// RETURN ///////////////////////////////////////////////
   return (
-    <div style={{ minHeight: '700px' }}>
+    <div style={{ minHeight: '600px' }}>
       {isBigScreen && (
-        <div className='d-flex justify-content-around p-3 flex-wrap mt-5 mb-0'>
+        <div className='d-flex justify-content-around p-3 flex-wrap mt-2 mb-0'>
           {/* Affichage Calendrier */}
 
           <div className='align-self-start mt-5'>
@@ -115,54 +140,57 @@ const Calendrier = () => {
             {coursAffiche !== undefined && coursAffiche.length > 0 ? (
               coursAffiche?.map((x, i) => (
                 <div key={i} className='card text-center mb-3'>
-                  <div className='card-header' style={{ width: '300px' }}>
+                  <div
+                    className='card-header'
+                    // style={{ width: '300px' }}
+                  >
                     {x.type} : {x.sensei}
                   </div>
                   <div className='card-body'>
-                    <p className='card-text'>{x.note}</p>
+                    {/* <p className='card-text'>{x.note}</p> */}
                     <NavLink to={x.id}>
                       <button
-                        className='btn btn-primary btnDirection'
+                        className='btn btn-primary btnDirection btn-sm'
                         value={x.id}
                       >
                         S'inscrire au cours
                       </button>
                     </NavLink>
                     {/* modal */}
-                    {/* <div>
-                      <div className='modal' tabIndex={-1} role='dialog'>
-                        <div className='modal-dialog' role='document'>
-                          <div className='modal-content'>
-                            <div className='modal-header'>
-                              <h5 className='modal-title'>Modal title</h5>
-                              <button
-                                type='button'
-                                className='close'
-                                data-dismiss='modal'
-                                aria-label='Close'
-                              >
-                                <span aria-hidden='true'>&times;</span>
-                              </button>
-                            </div>
-                            <div className='modal-body'>
-                              <p>Modal body text goes here.</p>
-                            </div>
-                            <div className='modal-footer'>
-                              <button
-                                type='button'
-                                className='btn btn-secondary'
-                                data-dismiss='modal'
-                              >
-                                Close
-                              </button>
-                              <button type='button' className='btn btn-primary'>
-                                Save changes
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
+                    {/* <div className='pt-2'> */}
+                    <button
+                      onClick={showModal}
+                      className='btn btn-primary btnPerso btn-sm'
+                      value={x.id}
+                    >
+                      Liste inscrits
+                    </button>
+
+                    <Modal show={isOpen} onHide={hideModal}>
+                      <Modal.Header>
+                        <Modal.Title>
+                          Liste des personnes inscrites au cours :
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <ul>
+                          {oneCours?.karateka.map((x, i) => (
+                            <li key={i} style={{ listStyleType: 'none' }}>
+                              {x.prenom} {x.prenom}
+                            </li>
+                          ))}
+                        </ul>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <button
+                          onClick={hideModal}
+                          className='btn btn-primary btnPerso'
+                        >
+                          Fermer
+                        </button>
+                      </Modal.Footer>
+                    </Modal>
+                    {/* </div> */}
                     {/* fin modal */}
                   </div>
                   <div className='card-footer text-muted'>
@@ -229,7 +257,10 @@ const Calendrier = () => {
             {coursAffiche !== undefined && coursAffiche.length > 0 ? (
               coursAffiche?.map((x, i) => (
                 <div key={i} className='card text-center mb-3'>
-                  <div className='card-header' style={{ width: '300px' }}>
+                  <div
+                    className='card-header'
+                    // style={{ width: '300px' }}
+                  >
                     {x.type} : {x.sensei}
                   </div>
                   <div className='card-body'>
@@ -242,6 +273,42 @@ const Calendrier = () => {
                         S'inscrire au cours
                       </button>
                     </NavLink>
+                    {/* modal */}
+                    {/* <div className='pt-2'> */}
+                    <button
+                      onClick={showModal}
+                      className='btn btn-primary btnPerso btn-sm'
+                      value={x.id}
+                    >
+                      Liste inscrits
+                    </button>
+
+                    <Modal show={isOpen} onHide={hideModal}>
+                      <Modal.Header>
+                        <Modal.Title>
+                          Liste des personnes inscrites au cours :
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <ul>
+                          {oneCours?.karateka.map((x, i) => (
+                            <li key={i} style={{ listStyleType: 'none' }}>
+                              {x.prenom} {x.prenom}
+                            </li>
+                          ))}
+                        </ul>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <button
+                          onClick={hideModal}
+                          className='btn btn-primary btnPerso'
+                        >
+                          Fermer
+                        </button>
+                      </Modal.Footer>
+                    </Modal>
+                    {/* </div> */}
+                    {/* fin modal */}
                   </div>
                   <div className='card-footer text-muted'>
                     {new Date(x.heureDebut).getHours()}H

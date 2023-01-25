@@ -29,7 +29,7 @@ const Subscribe = () => {
       });
   };
   return (
-    <div>
+    <div style={{ minHeight: '600px' }}>
       <div className='d-flex text-center justify-content-center'>
         <div>
           <NavLink to='/connect' className='nav-link'>

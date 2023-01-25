@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div>
+    <div style={{ minHeight: '600px' }}>
       <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard'>
         <div className='m-3'>
           <img
