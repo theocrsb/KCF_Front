@@ -109,69 +109,77 @@ const CoursSelect = () => {
   console.log(oneCours, 'oneCours');
   console.log(allKarateka, 'mes karateka');
   return (
-    <div style={{ minHeight: '700px' }}>
+    <div
+      style={{
+        minHeight: '700px',
+      }}
+    >
       <div className='card text-center mt-3'>
-        <div
-          className='card-header'
-          style={{ fontWeight: 'bold', fontSize: '1.4rem' }}
-        >
-          {oneCours?.sensei} : {oneCours?.type}
-        </div>
-        <div className='card-body'>
-          {/* <h5 className='card-title'>Selection du karateka</h5> */}
-          <p className='card-text'>{oneCours?.note}</p>
-          {/* Ajout des karateka */}
+        <div>
           <div
-            className='card-body'
-            style={{ backgroundColor: '#e2e2e2', borderRadius: '10px' }}
+            className='card-header'
+            style={{ fontWeight: 'bold', fontSize: '1.4rem' }}
           >
-            <p className='card-text'>
-              Selectionne chaque personnes que tu souhaites ajouter au cours :
-            </p>
+            professeur : {oneCours?.sensei} | type de cours : {oneCours?.type}
           </div>
-          {/* debut form */}
-          <div className='form-check mt-3'>
-            <form onSubmit={handleSubmit}>
-              {allKarateka?.map((x, i) => (
-                <div key={i}>
-                  <label className='form-check-label' htmlFor={x.id}>
-                    {x.prenom} {x.nom} {x.id}
-                    <input
-                      name='RadioButton'
-                      type='radio'
-                      className='form-check-input'
-                      id={x.id}
-                      value={x.id}
-                      onChange={handleCheck}
-                    />
-                  </label>
-                </div>
-              ))}
+          <div className='card-body'>
+            {/* <h5 className='card-title'>Selection du karateka</h5> */}
+            <p className='card-text'>note : {oneCours?.note}</p>
+            {/* Ajout des karateka */}
+            <div
+              className='card-body'
+              style={{ backgroundColor: '#e2e2e2', borderRadius: '10px' }}
+            >
+              <p className='card-text'>liste de vos karatéka(s) :</p>
+            </div>
+            {/* debut form */}
+            <div className='form-check mt-3'>
+              <form onSubmit={handleSubmit}>
+                {allKarateka?.map((x, i) => (
+                  <div key={i + x.id}>
+                    <label className='form-check-label' htmlFor={x.id}>
+                      {x.prenom} {x.nom}
+                      <input
+                        name='RadioButton'
+                        type='radio'
+                        className='form-check-input'
+                        id={x.id}
+                        value={x.id}
+                        onChange={handleCheck}
+                      />
+                    </label>
+                  </div>
+                ))}
 
-              {/* fin des karatekas */}
-              <button
-                className='btn btn-primary btnDirection mt-3'
-                // value={oneCours?.id}
-              >
-                Valider les karatekas pour ce cours
-              </button>
-            </form>
+                {/* fin des karatekas */}
+                <button
+                  className='btn btn-primary btnDirection mt-3'
+                  // value={oneCours?.id}
+                >
+                  Valider l'inscription
+                </button>
+              </form>
+            </div>
+            {/* fin form */}
           </div>
-          {/* fin form */}
-        </div>
-        <div className='card-footer text-muted'>
-          {oneCours && new Date(oneCours.heureDebut).getHours()}H
-          {oneCours && new Date(oneCours.heureDebut).getMinutes()} /{' '}
-          {oneCours && new Date(oneCours?.heureFin).getHours()}H
-          {oneCours && new Date(oneCours?.heureFin).getMinutes()}
+          <div className='card-footer text-muted'>
+            {oneCours && new Date(oneCours.heureDebut).getHours()}H
+            {oneCours && new Date(oneCours.heureDebut).getMinutes()} /{' '}
+            {oneCours && new Date(oneCours?.heureFin).getHours()}H
+            {oneCours && new Date(oneCours?.heureFin).getMinutes()}
+          </div>
         </div>
       </div>
       {/* personnes inscrites au cours */}
-      <div>
-        <h4>Listes des personnes inscrites au cours :</h4>
-        <ul>
+      <div className='pt-3 pb-5'>
+        <h4 className='px-2'>Listes inscrits :</h4>
+        <ul className='list-group list-group-flush'>
           {oneCours?.karateka.map((x, i) => (
-            <li key={i} style={{ listStyleType: 'none' }}>
+            <li
+              key={x.id}
+              style={{ listStyleType: 'none' }}
+              className='list-group-item'
+            >
               {x.prenom} {x.nom}{' '}
               <button
                 onClick={handleDelete}

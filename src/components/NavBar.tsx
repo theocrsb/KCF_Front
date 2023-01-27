@@ -32,7 +32,7 @@ const NavBar = () => {
             </li>
             <li className='nav-item'>
               <NavLink to='calendrier' className='nav-link'>
-                <div className='nav-link'>Calendrier</div>
+                <div className='nav-link'>Cours</div>
               </NavLink>
             </li>
             <li className='nav-item'>
@@ -40,9 +40,16 @@ const NavBar = () => {
                 <div className='nav-link'>Se connecter</div>
               </NavLink>
             </li>
-            {/* mettre affichage conditionnel pour admin */}
+            {/* mettre affichage conditionnel pour admin et superadmin */}
+            {/* admin */}
             <li className='nav-item'>
               <NavLink to='admin' className='nav-link'>
+                <div className='nav-link'>Sensei</div>
+              </NavLink>
+            </li>
+            {/* superadmin */}
+            <li className='nav-item'>
+              <NavLink to='superadmin' className='nav-link'>
                 <div className='nav-link'>Administrateur</div>
               </NavLink>
             </li>

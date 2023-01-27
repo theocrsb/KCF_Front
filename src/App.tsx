@@ -11,6 +11,20 @@ import Subscribe from './pages/Subscribe';
 import Admin from './pages/Admin';
 import CoursSelect from './pages/CoursSelect';
 import Footer from './components/footer';
+import SuperAdmin from './pages/SuperAdmin';
+
+export interface PayloadToken {
+  exp: number;
+  iat: number;
+  id: string;
+  role: Role;
+  email: string;
+}
+
+export interface Role {
+  id: string;
+  label: string;
+}
 
 function App() {
   return (
@@ -24,6 +38,7 @@ function App() {
           <Route path='/connect' element={<Connect />} />
           <Route path='/subscribe' element={<Subscribe />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/superadmin' element={<SuperAdmin />} />
           <Route path='/calendrier/:id' element={<CoursSelect />} />
         </Routes>
         <Footer />
