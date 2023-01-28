@@ -316,7 +316,7 @@ const Calendrier = () => {
           >
             {/* MAP du tableau des prochains jours */}
             {coursAfficheTop?.map((x, i) => (
-              <SwiperSlide>
+              <SwiperSlide key={x.id}>
                 <div className='card text-center'>
                   <div className='card-header'>
                     Cours de {x.type} | Sensei : {x.sensei}
