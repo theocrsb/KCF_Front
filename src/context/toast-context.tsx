@@ -1,5 +1,7 @@
 import { createContext, useState, ReactElement, Dispatch } from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
+import LogoMicka from '../images/logoMickRetouch.png';
 
 interface ToastContextProps {
   children: ReactElement;
@@ -7,19 +9,35 @@ interface ToastContextProps {
 
 export interface ToastContextInterface {
   onToastChange: Dispatch<React.SetStateAction<boolean>>;
+  messageToast: Dispatch<React.SetStateAction<string>>;
+  colorToast: Dispatch<React.SetStateAction<string>>;
 }
 
 export const ToastContext = createContext<ToastContextInterface>({
   onToastChange: () => {},
+  messageToast: () => {},
+  colorToast: () => {},
 });
 
 export const ToastContextProvider = ({ children }: ToastContextProps) => {
+  // toast selon la taille d'ecran
+  const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' });
+
   const [show, setShow] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
+  const [color, setColor] = useState<string>('');
 
   const contextValue = {
     onToastChange: setShow,
+    messageToast: setMessage,
+    colorToast: setColor,
   };
 
+  let now = new Date();
+  let heureNow = `${now.getHours()}:${now.getMinutes()}`;
+  console.log(heureNow, 'now');
+  console.log(color);
   return (
     <ToastContext.Provider value={contextValue}>
       {children}
@@ -27,8 +45,9 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
         <Toast
           show={show}
           onClose={() => setShow(false)}
-          delay={3000}
+          delay={5000}
           autohide={true}
+          bg={color}
         >
           <Toast.Header>
             <img
@@ -36,10 +55,15 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
               className='rounded me-2'
               alt=''
             />
-            <strong className='me-auto'>Bootstrap</strong>
-            <small>11 mins ago</small>
+            <strong className='me-auto'>Information</strong>
+            <small>{heureNow}</small>
           </Toast.Header>
-          <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+          <Toast.Body className='d-flex'>
+            <>
+              <img src={LogoMicka} alt='logo de karateka' width={50} />
+              <p className='text-center'>{message}</p>
+            </>
+          </Toast.Body>
         </Toast>
       </ToastContainer>
     </ToastContext.Provider>

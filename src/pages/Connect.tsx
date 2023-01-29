@@ -1,9 +1,14 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useContext, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { ToastContext } from '../context/toast-context';
 
 const Connect = () => {
+  // Lien avec le toast context
+  const { onToastChange } = useContext(ToastContext);
+  const { messageToast } = useContext(ToastContext);
+  const { colorToast } = useContext(ToastContext);
+  //
   const emailElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string>();
@@ -22,11 +27,13 @@ const Connect = () => {
       .then((response) => {
         console.log(response);
         const token = response.data.accessToken;
-        console.log('token lors de la connexion', token);
+        // console.log('token lors de la connexion', token);
         //Mettre le token dans le local storage
         localStorage.setItem('accessToken', token);
         //Futur mettre token dans context + TOAST
-
+        onToastChange(true);
+        messageToast('Connexion réussie !');
+        colorToast('success');
         // Redirection vers Calendrier
         // setTimeout(() => {
         navigate('/calendrier');
@@ -34,13 +41,15 @@ const Connect = () => {
         setMessage('Connexion réussie !');
       })
       .catch((error) => {
-        console.log('connexion impossible', error);
+        onToastChange(true);
+        messageToast(error.response.data.message);
+        console.log('connexion impossible', error.response.data.message);
       });
 
     console.log(message);
   };
   return (
-    <div style={{ minHeight: '600px' }}>
+    <div style={{ minHeight: '100vh' }}>
       <div className='d-flex text-center justify-content-center'>
         <div>
           <button type='submit' className='btn btn-primary btnDirection mt-3'>

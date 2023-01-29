@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import 'react-day-picker/dist/style.css';
 import { addDays, format, lightFormat } from 'date-fns';
-import { DateRange, DayPicker } from 'react-day-picker';
+import { DayPicker } from 'react-day-picker';
 import './calendrier.css';
 import fr from 'date-fns/locale/fr';
 import axios from 'axios';
-import { paste } from '@testing-library/user-event/dist/paste';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import LogoMicka from '../images/logoMickRetouch.png';
 import Modal from 'react-bootstrap/Modal';
 import { MdOutlineSwipe } from 'react-icons/md';
 // import required modules
-import {
-  Pagination,
-  Navigation,
-  Mousewheel,
-  EffectCards,
-  EffectCube,
-} from 'swiper';
+import { Pagination, Navigation, EffectCards } from 'swiper';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import {
-  LeftSquareOutlined,
-  RightSquareOutlined,
-  VerticalLeftOutlined,
-  VerticalRightOutlined,
-} from '@ant-design/icons';
+import { ToastContext } from '../context/toast-context';
 
 export interface Cours {
   id: string;
@@ -55,7 +43,7 @@ export interface Karateka {
 
 const Calendrier = () => {
   const today = new Date();
-
+  const navigate = useNavigate();
   const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' });
   const [allCours, SetAllCours] = useState<Cours[]>();
@@ -65,6 +53,11 @@ const Calendrier = () => {
     []
   );
   const [oneCours, SetOneCOurs] = useState<Cours>();
+  // Lien avec le toast context
+  const { onToastChange } = useContext(ToastContext);
+  const { messageToast } = useContext(ToastContext);
+  const { colorToast } = useContext(ToastContext);
+  //
 
   /////////////////////////////////////////////// FIN USESTATE ///////////////////////////////////////////////
 
@@ -101,7 +94,13 @@ const Calendrier = () => {
         SetAllCours(response.data);
       })
       .catch((error) => {
-        // console.log('Get All Cours Error', error);
+        console.log('Get All Cours Error', error);
+        if (error.response.data.statusCode === 401) {
+          navigate('/connect', { replace: true });
+          onToastChange(true);
+          messageToast('Session expiré. Veuillez vous reconnecté');
+          colorToast('danger');
+        }
       });
   }, [selectedDay]);
   // Fin requete get
@@ -150,7 +149,7 @@ const Calendrier = () => {
   // console.log(dateAjd);
   //1 jour = 86400000 millisecondes
   let dateAjdPlus1 = dateAjd + 86400000;
-  console.log(new Date(dateAjdPlus1));
+  // console.log(new Date(dateAjdPlus1));
   let dateAjdPlus2 = dateAjdPlus1 + 86400000;
   let dateAjdPlus3 = dateAjdPlus2 + 86400000;
   let dateAjdPlus4 = dateAjdPlus3 + 86400000;
@@ -176,7 +175,7 @@ const Calendrier = () => {
         let dateCoursFormater = new Date(allCours[pas].date).toLocaleDateString(
           'fr'
         );
-        console.log(dateCoursFormater, 'dateCoursFormater');
+        // console.log(dateCoursFormater, 'dateCoursFormater');
 
         // tabDate boucle for pour recuperer chaque element
         for (let i = 0; i < tabDate.length; i++) {
@@ -194,9 +193,11 @@ const Calendrier = () => {
       }
     }
   }, [allCours]);
+  /////////////////////////////////////////////// VERIFICATION TOKEN ///////////////////////////////////////////////
+
   /////////////////////////////////////////////// RETURN ///////////////////////////////////////////////
   return (
-    <div style={{ minHeight: '600px' }}>
+    <div style={{ minHeight: '100vh' }}>
       <h3
         style={{
           paddingLeft: '5%',

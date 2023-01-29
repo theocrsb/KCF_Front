@@ -109,11 +109,7 @@ const CoursSelect = () => {
   console.log(oneCours, 'oneCours');
   console.log(allKarateka, 'mes karateka');
   return (
-    <div
-      style={{
-        minHeight: '700px',
-      }}
-    >
+    <div style={{ minHeight: '100vh' }}>
       <div className='card text-center mt-3'>
         <div>
           <div
