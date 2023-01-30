@@ -1,8 +1,22 @@
 import logo from '../images/favicon.png';
 import logooffi from '../images/logo.jpg';
 import { NavLink } from 'react-router-dom';
+import { ToastContext } from '../context/toast-context';
+import { useContext } from 'react';
 
 const NavBar = () => {
+  // Lien avec le toast context
+  const { onToastChange } = useContext(ToastContext);
+  const { messageToast } = useContext(ToastContext);
+  const { colorToast } = useContext(ToastContext);
+  //
+
+  const handleDeco = () => {
+    localStorage.removeItem('accessToken');
+    onToastChange(true);
+    messageToast('Vous êtes déconnecté');
+    colorToast('danger');
+  };
   return (
     <nav className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow opacity-75'>
       <div className='container-fluid'>
@@ -51,6 +65,14 @@ const NavBar = () => {
             <li className='nav-item'>
               <NavLink to='superadmin' className='nav-link'>
                 <div className='nav-link'>Administrateur</div>
+              </NavLink>
+            </li>
+            {/* deconnexion */}
+            <li className='nav-item'>
+              <NavLink to='connect' className='nav-link'>
+                <div onClick={handleDeco} className='nav-link'>
+                  Déconnexion
+                </div>
               </NavLink>
             </li>
           </ul>

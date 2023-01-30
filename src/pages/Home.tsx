@@ -40,7 +40,9 @@ const Home = () => {
       {/* Fin partie logo + info principal */}
       <div className='d-flex flex-wrap justify-content-center m-3'>
         <NavLink to='connect' className='nav-link'>
-          <button className='btn btn-primary btnPerso'>Nous rejoindre</button>
+          <button className='btn btn-primary btnDirection'>
+            Nous rejoindre
+          </button>
         </NavLink>
         {/* <button className='btn btn-primary btnPerso'>En savoir plus</button> */}
       </div>

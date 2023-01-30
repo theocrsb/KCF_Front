@@ -1,9 +1,15 @@
 import { DeleteOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import { ToastContext } from '../context/toast-context';
 import { Cours, Karateka } from './Calendrier';
 const CoursSelect = () => {
+  // Lien avec le toast context
+  const { onToastChange } = useContext(ToastContext);
+  const { messageToast } = useContext(ToastContext);
+  const { colorToast } = useContext(ToastContext);
+  //
   let coursId = useParams();
   //   console.log(coursId.id);
   const [oneCours, SetOneCours] = useState<Cours>();
@@ -73,8 +79,21 @@ const CoursSelect = () => {
         }
       )
       .then((response) => {
-        // console.log('response', response);
+        console.log('response', response);
         setCount(count + 1);
+        onToastChange(true);
+        messageToast('Karatéka ajouté avec succès');
+        colorToast('success');
+        if (
+          response.data ===
+          'Ce karatéka est déjà inscrit dans le cours selectionné'
+        ) {
+          onToastChange(true);
+          messageToast(
+            'Ce karatéka est déjà inscrit dans le cours selectionné'
+          );
+          colorToast('success');
+        }
       })
       .catch((error) => {
         console.log('Error', error);
@@ -100,6 +119,9 @@ const CoursSelect = () => {
       .then((response) => {
         // console.log('response', response);
         setCount(count + 1);
+        onToastChange(true);
+        messageToast('Karatéka retiré avec succès');
+        colorToast('success');
       })
       .catch((error) => {
         console.log('Error', error);
@@ -116,17 +138,17 @@ const CoursSelect = () => {
             className='card-header'
             style={{ fontWeight: 'bold', fontSize: '1.4rem' }}
           >
-            professeur : {oneCours?.sensei} | type de cours : {oneCours?.type}
+            Professeur : {oneCours?.sensei} | Type de cours : {oneCours?.type}
           </div>
           <div className='card-body'>
             {/* <h5 className='card-title'>Selection du karateka</h5> */}
-            <p className='card-text'>note : {oneCours?.note}</p>
+            <p className='card-text'>Note : {oneCours?.note}</p>
             {/* Ajout des karateka */}
             <div
               className='card-body'
               style={{ backgroundColor: '#e2e2e2', borderRadius: '10px' }}
             >
-              <p className='card-text'>liste de vos karatéka(s) :</p>
+              <p className='card-text'>Selectionner la personne à inscrire :</p>
             </div>
             {/* debut form */}
             <div className='form-check mt-3'>
@@ -155,14 +177,26 @@ const CoursSelect = () => {
                   Valider l'inscription
                 </button>
               </form>
+              <NavLink to='/calendrier' className='nav-link'>
+                <button
+                  className='btn btn-primary btnPerso mt-3'
+                  // value={oneCours?.id}
+                >
+                  Retour
+                </button>
+              </NavLink>
             </div>
             {/* fin form */}
           </div>
-          <div className='card-footer text-muted'>
+          <div
+            className='card-footer text-muted'
+            style={{ fontSize: '0.7rem' }}
+          >
             {oneCours && new Date(oneCours.heureDebut).getHours()}H
             {oneCours && new Date(oneCours.heureDebut).getMinutes()} /{' '}
             {oneCours && new Date(oneCours?.heureFin).getHours()}H
-            {oneCours && new Date(oneCours?.heureFin).getMinutes()}
+            {oneCours && new Date(oneCours?.heureFin).getMinutes()} le{' '}
+            {oneCours && new Date(oneCours?.date).toLocaleDateString('fr')}
           </div>
         </div>
       </div>
