@@ -20,7 +20,7 @@ const AddKarateka = () => {
   const sexe = useRef<HTMLSelectElement>(null);
   const ceinture = useRef<HTMLSelectElement>(null);
   useEffect(() => {
-    //get les karateka du user
+    //get les karateka
     axios
       .get(`http://localhost:8080/api/karatekas/`, {
         headers: {

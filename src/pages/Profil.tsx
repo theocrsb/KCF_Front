@@ -8,23 +8,7 @@ const Profil = () => {
   const { messageToast } = useContext(ToastContext);
   const { colorToast } = useContext(ToastContext);
   //
-  const emailElement = useRef<HTMLInputElement>(null);
-  const passwordElement = useRef<HTMLInputElement>(null);
-  const [message, setMessage] = useState<string>();
-  const navigate = useNavigate();
-
-  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
-    console.log(e);
-  };
-
-  // affichage condiotionnel
-  const [displayContent, setDisplayContent] = useState<string>('default');
-
-  const handleClick = (contentType: string) => {
-    setDisplayContent(contentType);
-  };
-  //
-
+  
   return (
     <div style={{ minHeight: '100vh' }}>
       <ul className='nav nav-pills nav-fill border-bottom border-secondary p-2'>

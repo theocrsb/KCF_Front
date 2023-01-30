@@ -46,15 +46,16 @@ function App() {
           <Route path='/admin' element={<Admin />} />
           <Route path='/superadmin' element={<SuperAdmin />} />
           <Route path='/calendrier/:id' element={<CoursSelect />} />
-          {/* Routes du profil */}
 
+          {/* Routes du profil */}
           <Route path='/profil/' element={<Profil />}>
+            {/* sous routes */}
             <Route path='update' element={<Update />} />
             <Route path='add/karateka' element={<AddKarateka />} />
             <Route path='all/karateka' element={<AllKarateka />} />
+            {/* fin sous routes */}
           </Route>
         </Routes>
-
         <Footer />
       </BrowserRouter>
     </div>
