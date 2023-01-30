@@ -33,14 +33,14 @@ const Subscribe = () => {
       <div className='d-flex text-center justify-content-center'>
         <div>
           <NavLink to='/connect' className='nav-link'>
-            <button type='submit' className='btn btn-primary btnDirection mt-3'>
+            <button type='submit' className='btn btn-primary btnPerso mt-3'>
               Page de connexion
             </button>
           </NavLink>
         </div>
 
         <div>
-          <button type='submit' className='btn btn-primary btnDirection mt-3'>
+          <button type='submit' className='btn btn-primary btnPerso mt-3'>
             <NavLink to='/' className='nav-link'>
               Page d'inscription
             </NavLink>
@@ -74,7 +74,7 @@ const Subscribe = () => {
 
           <button
             type='submit'
-            className='btn btn-primary btnPerso mt-3'
+            className='btn btn-primary btnDirection mt-3'
             onClick={handleSubmit}
           >
             S'inscrire

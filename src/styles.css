@@ -84,3 +84,12 @@ body {
 .swiper-pagination {
   display: none;
 }
+
+.nav-pills .nav-link.active {
+  background-color: #383b87;
+}
+
+.nav-pills {
+  --bs-link-color: black;
+  --bs-link-hover-color: #383b87;
+}

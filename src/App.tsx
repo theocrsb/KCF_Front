@@ -32,6 +32,8 @@ export interface Role {
 
 function App() {
   return (
+    // btnPerso = bleu : navigation
+    // btnDirection = noir : validation 
     <div>
       <BrowserRouter>
         {/* On utilise notre composant dans notre JSX */}

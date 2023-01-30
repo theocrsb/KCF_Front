@@ -8,18 +8,21 @@ interface ToastContextProps {
 }
 
 export interface ToastContextInterface {
+  // on type nos values
   onToastChange: Dispatch<React.SetStateAction<boolean>>;
   messageToast: Dispatch<React.SetStateAction<string>>;
   colorToast: Dispatch<React.SetStateAction<string>>;
 }
 
 export const ToastContext = createContext<ToastContextInterface>({
+  // on init nos values
   onToastChange: () => {},
   messageToast: () => {},
   colorToast: () => {},
 });
 
 export const ToastContextProvider = ({ children }: ToastContextProps) => {
+  // functionTest();
   // toast selon la taille d'ecran
   const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' });
@@ -29,6 +32,7 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
   const [color, setColor] = useState<string>('');
 
   const contextValue = {
+  // A gauche, la valeur exportée : A droite, la valeur relié 
     onToastChange: setShow,
     messageToast: setMessage,
     colorToast: setColor,

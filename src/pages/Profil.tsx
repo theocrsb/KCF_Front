@@ -27,24 +27,16 @@ const Profil = () => {
 
   return (
     <div style={{ minHeight: '100vh' }}>
-      <ul className='nav'>
+      <ul className='nav nav-pills nav-fill border-bottom border-secondary p-2'>
         <li className='nav-item'>
-          <NavLink
-            to='all/karateka'
-            className='nav-link active'
-            aria-current='page'
-          >
+          <NavLink to='all/karateka' className='nav-link' aria-current='page'>
             Gestion cours/karatéka
           </NavLink>
         </li>
 
         <li className='nav-item'>
-          <NavLink
-            to='add/karateka'
-            className='nav-link active'
-            aria-current='page'
-          >
-            Ajouter un Karatéka
+          <NavLink to='add/karateka' className='nav-link' aria-current='page'>
+            Ajouter/supprimer karatéka
           </NavLink>
         </li>
 

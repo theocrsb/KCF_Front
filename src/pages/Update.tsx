@@ -57,7 +57,7 @@ const Update = () => {
             />
           </div>
 
-          <button type='submit' className='btn btn-primary btnPerso mt-3'>
+          <button type='submit' className='btn btn-primary btnDirection mt-3'>
             Mettre à jour
           </button>
         </form>

@@ -52,7 +52,7 @@ const Connect = () => {
     <div style={{ minHeight: '100vh' }}>
       <div className='d-flex text-center justify-content-center'>
         <div>
-          <button type='submit' className='btn btn-primary btnDirection mt-3'>
+          <button type='submit' className='btn btn-primary btnPerso mt-3'>
             <NavLink to='' className='nav-link'>
               Page de connexion
             </NavLink>
@@ -60,7 +60,7 @@ const Connect = () => {
         </div>
 
         <div>
-          <button type='submit' className='btn btn-primary btnDirection mt-3'>
+          <button type='submit' className='btn btn-primary btnPerso mt-3'>
             <NavLink to='/subscribe' className='nav-link'>
               Page d'inscription
             </NavLink>
@@ -94,7 +94,7 @@ const Connect = () => {
 
           <button
             type='submit'
-            className='btn btn-primary btnPerso mt-3'
+            className='btn btn-primary btnDirection mt-3'
             onClick={handleSubmit}
           >
             Se connecter

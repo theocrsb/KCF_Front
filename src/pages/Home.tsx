@@ -3,6 +3,8 @@ import logoMick from '../images/logoMick.png';
 import planning from '../images/p2.png';
 import { NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import { useContext, useEffect } from 'react';
+import { ToastContext } from '../context/toast-context';
 
 const Home = () => {
   const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
@@ -51,12 +53,13 @@ const Home = () => {
       {isBigScreen && (
         <div className='d-flex justify-content-center m-3 mt-5'>
           <img
+            className='p-3'
             src={planning}
             alt='planning club karaté'
             style={{ width: '49%' }}
           />
 
-          <div className='bg-success' style={{ width: '49%' }}>
+          <div className='bg-success p-3' style={{ width: '49%' }}>
             INFOS
           </div>
         </div>
