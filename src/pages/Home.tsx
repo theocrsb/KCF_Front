@@ -1,9 +1,12 @@
 import logo from '../images/logo.jpg';
 import logoMick from '../images/logoMick.png';
-import planning from '../images/planning.png';
+import planning from '../images/p2.png';
 import { NavLink } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const Home = () => {
+  const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' });
   return (
     <div style={{ minHeight: '100vh' }}>
       <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard'>
@@ -39,8 +42,40 @@ const Home = () => {
         <NavLink to='connect' className='nav-link'>
           <button className='btn btn-primary btnPerso'>Nous rejoindre</button>
         </NavLink>
-        <button className='btn btn-primary btnPerso'>En savoir plus</button>
+        {/* <button className='btn btn-primary btnPerso'>En savoir plus</button> */}
       </div>
+      {/* calendrier fix + info */}
+      {/* ordi */}
+      {isBigScreen && (
+        <div className='d-flex justify-content-center m-3 mt-5'>
+          <img
+            src={planning}
+            alt='planning club karaté'
+            style={{ width: '49%' }}
+          />
+
+          <div className='bg-success' style={{ width: '49%' }}>
+            INFOS
+          </div>
+        </div>
+      )}
+
+      {isTabletOrMobile && (
+        <div>
+          <div className='d-flex justify-content-center m-3 mt-5'>
+            <img
+              src={planning}
+              alt='planning club karaté'
+              style={{ width: '80%' }}
+            />
+          </div>
+          <div className='d-flex justify-content-center m-3'>
+            <div className='bg-success' style={{ width: '80%' }}>
+              INFOS
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
