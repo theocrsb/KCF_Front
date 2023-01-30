@@ -12,6 +12,10 @@ import Admin from './pages/Admin';
 import CoursSelect from './pages/CoursSelect';
 import Footer from './components/footer';
 import SuperAdmin from './pages/SuperAdmin';
+import Profil from './pages/Profil';
+import Update from './pages/Update';
+import AddKarateka from './pages/AddKarateka';
+import AllKarateka from './pages/AllKarateka';
 
 export interface PayloadToken {
   exp: number;
@@ -27,7 +31,6 @@ export interface Role {
 }
 
 function App() {
-
   return (
     <div>
       <BrowserRouter>
@@ -41,7 +44,15 @@ function App() {
           <Route path='/admin' element={<Admin />} />
           <Route path='/superadmin' element={<SuperAdmin />} />
           <Route path='/calendrier/:id' element={<CoursSelect />} />
+          {/* Routes du profil */}
+
+          <Route path='/profil/' element={<Profil />}>
+            <Route path='update' element={<Update />} />
+            <Route path='add/karateka' element={<AddKarateka />} />
+            <Route path='all/karateka' element={<AllKarateka />} />
+          </Route>
         </Routes>
+
         <Footer />
       </BrowserRouter>
     </div>

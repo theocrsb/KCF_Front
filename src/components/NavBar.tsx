@@ -50,6 +50,11 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className='nav-item'>
+              <NavLink to='profil/all/karateka' className='nav-link'>
+                <div className='nav-link'>Profil</div>
+              </NavLink>
+            </li>
+            <li className='nav-item'>
               <NavLink to='connect' className='nav-link'>
                 <div className='nav-link'>Se connecter</div>
               </NavLink>
