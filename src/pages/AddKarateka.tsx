@@ -38,22 +38,29 @@ const AddKarateka = () => {
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.value);
-    axios
-      .delete(`http://localhost:8080/api/karatekas/${e.currentTarget.value}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
-      .then((response) => {
-        // console.log('response', response);
-        setCount(count + 1);
-        onToastChange(true);
-        messageToast(`Karatéka supprimé`);
-        colorToast('success');
-      })
-      .catch((error) => {
-        console.log('Error', error);
-      });
+    e.preventDefault();
+
+    if (window.confirm('Voulez vous vraiment supprimer ce karatéka ?')) {
+      axios
+        .delete(
+          `http://localhost:8080/api/karatekas/${e.currentTarget.value}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        )
+        .then((response) => {
+          // console.log('response', response);
+          setCount(count + 1);
+          onToastChange(true);
+          messageToast(`Karatéka supprimé`);
+          colorToast('success');
+        })
+        .catch((error) => {
+          console.log('Error', error);
+        });
+    }
   };
 
   /////////////////////////////////////////////// MODAL ///////////////////////////////////////////////
@@ -187,10 +194,15 @@ const AddKarateka = () => {
                   ref={ceinture}
                 >
                   <option>blanche</option>
+                  <option>blanche/jaune</option>
                   <option>jaune</option>
+                  <option>jaune/orange</option>
                   <option>orange</option>
+                  <option>orange/verte</option>
                   <option>verte</option>
+                  <option>verte/bleu</option>
                   <option>bleue</option>
+                  <option>bleue/marron</option>
                   <option>marron</option>
                   <option>noire</option>
                 </select>
