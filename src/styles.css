@@ -93,3 +93,15 @@ body {
   --bs-link-color: black;
   --bs-link-hover-color: #383b87;
 }
+
+.backdrop-spinner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #323131c2;
+  backdrop-filter: blur(3px);
+  height: 100%;
+  width: 100%;
+  z-index: 9000;
+}

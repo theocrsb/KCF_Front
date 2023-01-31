@@ -9,15 +9,17 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './styles.css';
 
 import { ToastContextProvider } from './context/toast-context';
-
+import { LoadingContextProvider } from './context/loading-spinner';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-      <ToastContextProvider>
+    <ToastContextProvider>
+      <LoadingContextProvider>
         <App />
-      </ToastContextProvider>
+      </LoadingContextProvider>
+    </ToastContextProvider>
   </React.StrictMode>
 );

@@ -41,6 +41,16 @@ export interface Karateka {
   membre: boolean;
 }
 
+export interface User {
+  id: string;
+  email: string;
+}
+
+export interface Role {
+  id: string;
+  label: string;
+}
+
 const Calendrier = () => {
   const today = new Date();
   const navigate = useNavigate();

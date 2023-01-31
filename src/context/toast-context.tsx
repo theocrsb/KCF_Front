@@ -32,7 +32,7 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
   const [color, setColor] = useState<string>('');
 
   const contextValue = {
-  // A gauche, la valeur exportée : A droite, la valeur relié 
+    // A gauche, la valeur exportée : A droite, la valeur relié
     onToastChange: setShow,
     messageToast: setMessage,
     colorToast: setColor,
@@ -65,7 +65,9 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
           <Toast.Body className='d-flex'>
             <>
               <img src={LogoMicka} alt='logo de karateka' width={50} />
-              <p className='text-center'>{message}</p>
+              <p className='text-center' style={{ color: 'white' }}>
+                {message}
+              </p>
             </>
           </Toast.Body>
         </Toast>

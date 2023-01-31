@@ -1,6 +1,10 @@
-import React, { useContext, useRef, useState } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { instanceAxios } from '../axios/instance-axios';
+import { LoadingContext } from '../context/loading-spinner';
 import { ToastContext } from '../context/toast-context';
+import { User } from './Calendrier';
 
 const Update = () => {
   // Lien avec le toast context
@@ -12,10 +16,40 @@ const Update = () => {
   const passwordElement = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string>();
   const navigate = useNavigate();
-
+  const { onLoadingChange } = useContext(LoadingContext);
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     console.log(e);
   };
+
+  useEffect(() => {
+    // get avec axios standard
+    // axios
+    //   .get('http://localhost:8080/api/users/id/perso', {
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log('Recuperation user impossible', error);
+    //   });
+    // get avec instance axios pour le spinner
+    instanceAxios
+      .get<User>('/users/id/perso', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div style={{ minHeight: '50vh' }}>
       <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard mt-5'>
