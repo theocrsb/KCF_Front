@@ -9,12 +9,6 @@ import axios from 'axios';
 import { AuthContext } from '../context/Auth-context';
 
 const NavBar = () => {
-  // lien authcontext
-  const navigate = useNavigate();
-  const [tokenRole, setTokenRole] = useState<string>();
-  const { savedToken, UpdateToken, TokenExpirationFunction, tokenExpired } =
-    useContext(AuthContext);
-  //
   // Lien avec le toast context
   const { onToastChange } = useContext(ToastContext);
   const { messageToast } = useContext(ToastContext);
@@ -31,16 +25,6 @@ const NavBar = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // mettre affichage conditionnel pour les roles.
 
-  const handleDeco = () => {
-    localStorage.removeItem('accessToken');
-    onToastChange(true);
-    messageToast('Vous êtes déconnecté');
-    colorToast('danger');
-    //
-    setIsLoggedIn(false);
-    setCount(count + 1);
-  };
-  // faire remonter props en fonction de si le user est co
   useEffect(() => {
     setCount(count + 1);
 
@@ -60,6 +44,16 @@ const NavBar = () => {
         setIsLoading(false);
       });
   }, []);
+
+  const handleDeco = () => {
+    localStorage.removeItem('accessToken');
+    onToastChange(true);
+    messageToast('Vous êtes déconnecté');
+    colorToast('danger');
+    //
+    setIsLoggedIn(false);
+    setCount(count + 1);
+  };
 
   // return (
   return isLoading ? (
