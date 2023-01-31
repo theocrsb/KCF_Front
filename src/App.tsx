@@ -33,6 +33,9 @@ export interface Role {
 }
 
 function App() {
+  const retourConnexionfunction = (e: any) => {
+    console.log(e);
+  };
   return (
     // btnPerso = bleu : navigation
     // btnDirection = noir : validation
@@ -41,10 +44,20 @@ function App() {
         <Interceptor>
           <>
             {/* On utilise notre composant dans notre JSX */}
+            {/* recuper info connexion dans navbar et injecté dans connexion */}
             <NavBar />
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/connect' element={<Connect />} />
+              <Route
+                path='/connect'
+                element={
+                  <Connect
+                    retourConnexion={(retour) =>
+                      retourConnexionfunction(retour)
+                    }
+                  />
+                }
+              />
               <Route path='/subscribe' element={<Subscribe />} />
 
               {/* protected route User */}

@@ -3,7 +3,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContext } from '../context/toast-context';
 
-const Connect = () => {
+interface PropsRetourConnexion {
+  retourConnexion: (retour: Boolean) => void;
+}
+
+const Connect = ({ retourConnexion }: PropsRetourConnexion) => {
   // Lien avec le toast context
   const { onToastChange } = useContext(ToastContext);
   const { messageToast } = useContext(ToastContext);
@@ -25,6 +29,7 @@ const Connect = () => {
         password: passwordElement.current?.value,
       })
       .then((response) => {
+        retourConnexion(true);
         console.log(response);
         const token = response.data.accessToken;
         // console.log('token lors de la connexion', token);

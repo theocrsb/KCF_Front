@@ -2,7 +2,10 @@ import logo from '../images/favicon.png';
 import logooffi from '../images/logo.jpg';
 import { NavLink } from 'react-router-dom';
 import { ToastContext } from '../context/toast-context';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { instanceAxios } from '../axios/instance-axios';
+import { Role } from '../pages/Calendrier';
+import axios from 'axios';
 
 const NavBar = () => {
   // Lien avec le toast context
@@ -10,16 +13,52 @@ const NavBar = () => {
   const { messageToast } = useContext(ToastContext);
   const { colorToast } = useContext(ToastContext);
   //
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const [label, setLabel] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   // mettre affichage conditionnel pour les roles.
+  const [count, setCount] = useState<number>(0);
 
   const handleDeco = () => {
     localStorage.removeItem('accessToken');
     onToastChange(true);
     messageToast('Vous êtes déconnecté');
     colorToast('danger');
+    setCount(count + 1);
+    setIsLoggedIn(false);
   };
-  return (
+  // faire remonter props en fonction de si le user est co
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/api/roles/my/role', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        // console.log(response.data.label, 'dans le useEffect');
+        setLabel(response.data.label);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // console.log(error);
+        setIsLoading(false);
+      });
+  }, [count]);
+
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+
+  // return (
+  return isLoading ? (
+    <div>Chargement...</div>
+  ) : (
     <nav
       className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow'
       style={{ opacity: '90%' }}
@@ -43,7 +82,8 @@ const NavBar = () => {
           <span className='navbar-toggler-icon'></span>
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+          <ul className='navbar-nav me-auto mb-2 mb-lg-0' onClick={handleClick}>
+            {/* --------------------------- debut LI --------------------------- */}
             <li className='nav-item'>
               <NavLink to='/' end className='nav-link'>
                 <div className='nav-link'>Acceuil</div>
@@ -61,36 +101,44 @@ const NavBar = () => {
             </li>
             {/* mettre affichage conditionnel pour admin et superadmin */}
             {/* admin */}
-            <li className='nav-item'>
-              <NavLink to='admin' className='nav-link'>
-                <div className='nav-link'>Professeur</div>
-              </NavLink>
-            </li>
+            {(label === 'admin' || label === 'superadmin') && (
+              <li className='nav-item'>
+                <NavLink to='admin' className='nav-link'>
+                  <div className='nav-link'>Professeur</div>
+                </NavLink>
+              </li>
+            )}
             {/* superadmin */}
-            <li className='nav-item'>
-              <NavLink to='superadmin' className='nav-link'>
-                <div className='nav-link'>Administrateur</div>
-              </NavLink>
-            </li>
+            {(label === 'admin' || label === 'superadmin') && (
+              <li className='nav-item'>
+                <NavLink to='superadmin' className='nav-link'>
+                  <div className='nav-link'>Administrateur</div>
+                </NavLink>
+              </li>
+            )}
             <li className='nav-item'>
               <NavLink to='connect' className='nav-link'>
                 <div className='nav-link'>Connexion</div>
               </NavLink>
             </li>
             {/* deconnexion */}
-            <li className='nav-item'>
-              <NavLink to='connect' className='nav-link'>
-                {/* <div className='nav-link'> */}
-                <button
-                  className='btn btn-primary btnPerso'
-                  style={{ margin: '0' }}
-                  onClick={handleDeco}
-                >
-                  Déconnexion
-                </button>
-                {/* </div> */}
-              </NavLink>
-            </li>
+            {isLoggedIn ? (
+              <li className='nav-item'>
+                <NavLink to='connect' className='nav-link'>
+                  {/* <div className='nav-link'> */}
+                  <button
+                    className='btn btn-primary btnPerso'
+                    style={{ margin: '0' }}
+                    onClick={handleDeco}
+                  >
+                    Déconnexion
+                  </button>
+                  {/* </div> */}
+                </NavLink>
+              </li>
+            ) : (
+              <div></div>
+            )}
           </ul>
         </div>
       </div>

@@ -32,7 +32,9 @@ const Interceptor = ({ children }: InterceptorProps) => {
         // 403 : pas acces a cette donnée (pas bon role)
         if (error.response.data.statusCode === 401) {
           onToastChange(true);
-          messageToast('Session expirée. Veuillez vous reconnecter');
+          messageToast(
+            'Vous devez être connecté pour accéder à cette page. Veuillez vous connecter.'
+          );
           colorToast('danger');
           onLoadingChange(false);
           navigate('/connect');

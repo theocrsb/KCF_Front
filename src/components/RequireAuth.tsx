@@ -24,12 +24,12 @@ const RequireAuth = ({ roles }: RequireAuthProps) => {
         },
       })
       .then((response) => {
-        console.log(response.data.label, 'dans le useEffect');
+        // console.log(response.data.label, 'dans le useEffect');
         setLabel(response.data.label);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setIsLoading(false);
       });
   }, []);
