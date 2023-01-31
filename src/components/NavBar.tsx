@@ -1,39 +1,49 @@
 import logo from '../images/favicon.png';
 import logooffi from '../images/logo.jpg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContext } from '../context/toast-context';
 import { useContext, useEffect, useState } from 'react';
 import { instanceAxios } from '../axios/instance-axios';
 import { Role } from '../pages/Calendrier';
 import axios from 'axios';
+import { AuthContext } from '../context/Auth-context';
 
 const NavBar = () => {
+  // lien authcontext
+  const navigate = useNavigate();
+  const [tokenRole, setTokenRole] = useState<string>();
+  const { savedToken, UpdateToken, TokenExpirationFunction, tokenExpired } =
+    useContext(AuthContext);
+  //
   // Lien avec le toast context
   const { onToastChange } = useContext(ToastContext);
   const { messageToast } = useContext(ToastContext);
   const { colorToast } = useContext(ToastContext);
   //
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
+  // const handleLogin = () => {
+  //   setIsLoggedIn(true);
+  // };
   const [label, setLabel] = useState<string>('');
+  const [count, setCount] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // mettre affichage conditionnel pour les roles.
-  const [count, setCount] = useState<number>(0);
 
   const handleDeco = () => {
     localStorage.removeItem('accessToken');
     onToastChange(true);
     messageToast('Vous êtes déconnecté');
     colorToast('danger');
-    setCount(count + 1);
+    //
     setIsLoggedIn(false);
+    setCount(count + 1);
   };
   // faire remonter props en fonction de si le user est co
   useEffect(() => {
+    setCount(count + 1);
+
     axios
       .get('http://localhost:8080/api/roles/my/role', {
         headers: {
@@ -49,11 +59,7 @@ const NavBar = () => {
         // console.log(error);
         setIsLoading(false);
       });
-  }, [count]);
-
-  const handleClick = () => {
-    setCount(count + 1);
-  };
+  }, []);
 
   // return (
   return isLoading ? (
@@ -82,7 +88,7 @@ const NavBar = () => {
           <span className='navbar-toggler-icon'></span>
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav me-auto mb-2 mb-lg-0' onClick={handleClick}>
+          <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             {/* --------------------------- debut LI --------------------------- */}
             <li className='nav-item'>
               <NavLink to='/' end className='nav-link'>
@@ -116,13 +122,13 @@ const NavBar = () => {
                 </NavLink>
               </li>
             )}
-            <li className='nav-item'>
+            {/* <li className='nav-item'>
               <NavLink to='connect' className='nav-link'>
                 <div className='nav-link'>Connexion</div>
               </NavLink>
-            </li>
+            </li> */}
             {/* deconnexion */}
-            {isLoggedIn ? (
+            {!isLoggedIn === true ? (
               <li className='nav-item'>
                 <NavLink to='connect' className='nav-link'>
                   {/* <div className='nav-link'> */}
@@ -137,7 +143,11 @@ const NavBar = () => {
                 </NavLink>
               </li>
             ) : (
-              <div></div>
+              <li className='nav-item'>
+                <NavLink to='connect' className='nav-link'>
+                  <div className='nav-link'>Connexion</div>
+                </NavLink>
+              </li>
             )}
           </ul>
         </div>

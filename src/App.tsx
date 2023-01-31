@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -33,9 +33,6 @@ export interface Role {
 }
 
 function App() {
-  const retourConnexionfunction = (e: any) => {
-    console.log(e);
-  };
   return (
     // btnPerso = bleu : navigation
     // btnDirection = noir : validation
@@ -48,16 +45,7 @@ function App() {
             <NavBar />
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route
-                path='/connect'
-                element={
-                  <Connect
-                    retourConnexion={(retour) =>
-                      retourConnexionfunction(retour)
-                    }
-                  />
-                }
-              />
+              <Route path='/connect' element={<Connect />} />
               <Route path='/subscribe' element={<Subscribe />} />
 
               {/* protected route User */}
