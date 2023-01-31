@@ -33,21 +33,27 @@ const Subscribe = () => {
       <div className='d-flex text-center justify-content-center'>
         <div>
           <NavLink to='/connect' className='nav-link'>
-            <button type='submit' className='btn btn-primary btnPerso mt-3'>
+            <button
+              type='submit'
+              className='btn btn-primary btnPerso mt-5 mb-4'
+            >
               Page de connexion
             </button>
           </NavLink>
         </div>
 
         <div>
-          <button type='submit' className='btn btn-primary btnPerso mt-3'>
+          <button type='submit' className='btn btn-primary btnPerso mt-5 mb-4'>
             <NavLink to='/' className='nav-link'>
               Page d'inscription
             </NavLink>
           </button>
         </div>
       </div>
-      <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard'>
+      <div
+        className='d-flex flex-wrap justify-content-around m-3 border rounded shadow-lg p-3 mb-5 bgCard'
+        style={{ backgroundColor: '#585B5E40', minHeight: '50vh' }}
+      >
         <form className='text-center'>
           <h3 className='p-3 font-weight-bold'> Page d'inscription</h3>
           <div className='form-group mb-3 mt-3'>
@@ -74,7 +80,7 @@ const Subscribe = () => {
 
           <button
             type='submit'
-            className='btn btn-primary btnDirection mt-3'
+            className='btn btn-primary btnDirection mt-5'
             onClick={handleSubmit}
           >
             S'inscrire

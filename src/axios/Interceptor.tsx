@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { LoadingContext } from '../context/loading-spinner';
 import { ToastContext } from '../context/toast-context';
 import { instanceAxios } from './instance-axios';
@@ -36,14 +36,23 @@ const Interceptor = ({ children }: InterceptorProps) => {
         return response;
       },
       (error) => {
+        // 401 : pas connecté ou expiré
+        // 403 : pas acces a cette donnée (pas bon role)
         if (error.response.data.statusCode === 401) {
-          //   navigate('/connect', { replace: true });
-          onLoadingChange(false);
-          localStorage.removeItem('accessToken');
           onToastChange(true);
-          messageToast('Session expiré. Veuillez vous reconnecté plsssssss');
+          messageToast('Session expirée. Veuillez vous reconnecter');
           colorToast('danger');
+          onLoadingChange(false);
         }
+
+        // if (error.response.data.statusCode === 403) {
+        //   //   navigate('/connect', { replace: true });
+        //   localStorage.removeItem('accessToken');
+        //   onToastChange(true);
+        //   messageToast(`Vous n'avez pas accès à ce contenu`);
+        //   colorToast('danger');
+        //   onLoadingChange(false);
+        // }
       }
     );
   }, []);

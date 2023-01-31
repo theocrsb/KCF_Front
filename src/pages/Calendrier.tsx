@@ -108,7 +108,7 @@ const Calendrier = () => {
         if (error.response.data.statusCode === 401) {
           navigate('/connect', { replace: true });
           onToastChange(true);
-          messageToast('Session expiré. Veuillez vous reconnecté');
+          messageToast('Session expirée. Veuillez vous reconnecter');
           colorToast('danger');
         }
       });
