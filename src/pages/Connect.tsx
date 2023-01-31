@@ -43,6 +43,7 @@ const Connect = () => {
       .catch((error) => {
         onToastChange(true);
         messageToast(error.response.data.message);
+        colorToast('danger');
         console.log('connexion impossible', error.response.data.message);
       });
 

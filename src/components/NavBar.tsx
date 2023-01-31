@@ -11,6 +11,8 @@ const NavBar = () => {
   const { colorToast } = useContext(ToastContext);
   //
 
+  // mettre affichage conditionnel pour les roles.
+
   const handleDeco = () => {
     localStorage.removeItem('accessToken');
     onToastChange(true);
@@ -18,7 +20,10 @@ const NavBar = () => {
     colorToast('danger');
   };
   return (
-    <nav className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow opacity-75'>
+    <nav
+      className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow'
+      style={{ opacity: '90%' }}
+    >
       <div className='container-fluid'>
         <div className='navbar-brand'>
           <NavLink to='/' className='nav-link'>
@@ -46,7 +51,7 @@ const NavBar = () => {
             </li>
             <li className='nav-item'>
               <NavLink to='calendrier' className='nav-link'>
-                <div className='nav-link'>Cours</div>
+                <div className='nav-link'>Planning</div>
               </NavLink>
             </li>
             <li className='nav-item'>
@@ -54,16 +59,11 @@ const NavBar = () => {
                 <div className='nav-link'>Profil</div>
               </NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink to='connect' className='nav-link'>
-                <div className='nav-link'>Se connecter</div>
-              </NavLink>
-            </li>
             {/* mettre affichage conditionnel pour admin et superadmin */}
             {/* admin */}
             <li className='nav-item'>
               <NavLink to='admin' className='nav-link'>
-                <div className='nav-link'>Sensei</div>
+                <div className='nav-link'>Professeur</div>
               </NavLink>
             </li>
             {/* superadmin */}
@@ -72,12 +72,23 @@ const NavBar = () => {
                 <div className='nav-link'>Administrateur</div>
               </NavLink>
             </li>
+            <li className='nav-item'>
+              <NavLink to='connect' className='nav-link'>
+                <div className='nav-link'>Connexion</div>
+              </NavLink>
+            </li>
             {/* deconnexion */}
             <li className='nav-item'>
               <NavLink to='connect' className='nav-link'>
-                <div onClick={handleDeco} className='nav-link'>
+                {/* <div className='nav-link'> */}
+                <button
+                  className='btn btn-primary btnPerso'
+                  style={{ margin: '0' }}
+                  onClick={handleDeco}
+                >
                   Déconnexion
-                </div>
+                </button>
+                {/* </div> */}
               </NavLink>
             </li>
           </ul>

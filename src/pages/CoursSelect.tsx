@@ -219,7 +219,8 @@ const CoursSelect = () => {
                 {karatekaId?.includes(x.id) ? (
                   <DeleteOutlined />
                 ) : (
-                  <LockOutlined />
+                  // <LockOutlined />
+                  <div></div>
                 )}
               </button>
             </li>

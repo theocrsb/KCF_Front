@@ -59,7 +59,7 @@ const Home = () => {
             style={{ width: '49%' }}
           />
 
-          <div className='bg-success p-3' style={{ width: '49%' }}>
+          <div className='p-3' style={{ width: '49%' }}>
             INFOS
           </div>
         </div>
@@ -75,7 +75,7 @@ const Home = () => {
             />
           </div>
           <div className='d-flex justify-content-center m-3'>
-            <div className='bg-success' style={{ width: '80%' }}>
+            <div className='' style={{ width: '80%' }}>
               INFOS
             </div>
           </div>

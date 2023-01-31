@@ -24,7 +24,7 @@ export const LoadingContextProvider = ({ children }: LoadingContextProps) => {
 
   return (
     <LoadingContext.Provider value={contextValue}>
-      <Interceptor>
+      {/* <Interceptor> */}
         <>
           {children}
           {show && (
@@ -38,7 +38,7 @@ export const LoadingContextProvider = ({ children }: LoadingContextProps) => {
             </div>
           )}
         </>
-      </Interceptor>
+      {/* </Interceptor> */}
     </LoadingContext.Provider>
   );
 };

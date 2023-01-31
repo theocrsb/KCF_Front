@@ -207,7 +207,7 @@ const AddKarateka = () => {
                   <option>noire</option>
                 </select>
               </div>
-              Valider
+
               <button className='btn btn-primary btnDirection mt-3'>
                 Valider
               </button>
