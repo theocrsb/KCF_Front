@@ -10,16 +10,19 @@ import './styles.css';
 
 import { ToastContextProvider } from './context/toast-context';
 import { LoadingContextProvider } from './context/loading-spinner';
+import { AuthContextProvider } from './context/Auth-context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ToastContextProvider>
-      <LoadingContextProvider>
-        <App />
-      </LoadingContextProvider>
-    </ToastContextProvider>
+    <AuthContextProvider>
+      <ToastContextProvider>
+        <LoadingContextProvider>
+          <App />
+        </LoadingContextProvider>
+      </ToastContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );

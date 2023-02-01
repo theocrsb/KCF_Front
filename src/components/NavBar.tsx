@@ -7,6 +7,8 @@ import { instanceAxios } from '../axios/instance-axios';
 import { Role } from '../pages/Calendrier';
 import axios from 'axios';
 import { AuthContext } from '../context/Auth-context';
+import { PayloadToken } from '../App';
+import jwt_decode from 'jwt-decode';
 
 const NavBar = () => {
   // Lien avec le toast context
@@ -14,19 +16,40 @@ const NavBar = () => {
   const { messageToast } = useContext(ToastContext);
   const { colorToast } = useContext(ToastContext);
   //
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // const handleLogin = () => {
-  //   setIsLoggedIn(true);
-  // };
-  const [label, setLabel] = useState<string>('');
+  const navigate = useNavigate();
+  // const [tokenRole, setTokenRole] = useState<string>();
+  const {
+    savedToken,
+    UpdateToken,
+    tokenExpirationFunction,
+    tokenExpired,
+    role,
+    setRole,
+  } = useContext(AuthContext);
+  //
+  // const [label, setLabel] = useState<string>('');
   const [count, setCount] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // mettre affichage conditionnel pour les roles.
 
   useEffect(() => {
-    setCount(count + 1);
+    UpdateToken(savedToken);
+    tokenExpirationFunction(savedToken);
+    console.log('voici le resultat pour savedToken', savedToken);
+    if (savedToken) {
+      const decoded: PayloadToken = jwt_decode(savedToken);
+      console.log('le payload', decoded.role.label);
+      // setTokenRole(decoded.role.label);
+      console.log("etat d'expiration token dans la navbar", tokenExpired);
+    }
+    if (tokenExpired === 'token expiré') {
+      navigate('/connect');
+    }
+  }, [count]);
+
+  useEffect(() => {
+    // setCount(count + 1);
 
     axios
       .get('http://localhost:8080/api/roles/my/role', {
@@ -36,14 +59,14 @@ const NavBar = () => {
       })
       .then((response) => {
         // console.log(response.data.label, 'dans le useEffect');
-        setLabel(response.data.label);
+        // setLabel(response.data.label);
         setIsLoading(false);
       })
       .catch((error) => {
         // console.log(error);
         setIsLoading(false);
       });
-  }, []);
+  }, [count]);
 
   const handleDeco = () => {
     localStorage.removeItem('accessToken');
@@ -51,8 +74,13 @@ const NavBar = () => {
     messageToast('Vous êtes déconnecté');
     colorToast('danger');
     //
-    setIsLoggedIn(false);
+    // setIsLoggedIn(false);
     setCount(count + 1);
+    // on retire le token du context
+    UpdateToken('');
+    // setLabel('');
+    // setTokenRole('');
+    setRole('');
   };
 
   // return (
@@ -101,7 +129,14 @@ const NavBar = () => {
             </li>
             {/* mettre affichage conditionnel pour admin et superadmin */}
             {/* admin */}
-            {(label === 'admin' || label === 'superadmin') && (
+            {/* {(label === 'admin' || label === 'superadmin') && (
+              <li className='nav-item'>
+                <NavLink to='admin' className='nav-link'>
+                  <div className='nav-link'>Professeur</div>
+                </NavLink>
+              </li>
+            )} */}
+            {(role === 'admin' || role === 'superadmin') && (
               <li className='nav-item'>
                 <NavLink to='admin' className='nav-link'>
                   <div className='nav-link'>Professeur</div>
@@ -109,7 +144,14 @@ const NavBar = () => {
               </li>
             )}
             {/* superadmin */}
-            {(label === 'admin' || label === 'superadmin') && (
+            {/* {(label === 'admin' || label === 'superadmin') && (
+              <li className='nav-item'>
+                <NavLink to='superadmin' className='nav-link'>
+                  <div className='nav-link'>Administrateur</div>
+                </NavLink>
+              </li>
+            )} */}
+            {role === 'superadmin' && (
               <li className='nav-item'>
                 <NavLink to='superadmin' className='nav-link'>
                   <div className='nav-link'>Administrateur</div>
@@ -122,7 +164,7 @@ const NavBar = () => {
               </NavLink>
             </li> */}
             {/* deconnexion */}
-            {!isLoggedIn === true ? (
+            {savedToken ? (
               <li className='nav-item'>
                 <NavLink to='connect' className='nav-link'>
                   {/* <div className='nav-link'> */}

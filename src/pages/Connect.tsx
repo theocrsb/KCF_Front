@@ -2,8 +2,7 @@ import React, { FormEvent, useContext, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContext } from '../context/toast-context';
-
-
+import { AuthContext } from '../context/Auth-context';
 
 const Connect = () => {
   // Lien avec le toast context
@@ -15,6 +14,7 @@ const Connect = () => {
   const passwordElement = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string>();
   const navigate = useNavigate();
+  const { UpdateToken, tokenExpirationFunction } = useContext(AuthContext);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(emailElement.current?.value);
@@ -27,21 +27,16 @@ const Connect = () => {
         password: passwordElement.current?.value,
       })
       .then((response) => {
-       
         console.log(response);
         const token = response.data.accessToken;
-        // console.log('token lors de la connexion', token);
-        //Mettre le token dans le local storage
         localStorage.setItem('accessToken', token);
-        //Futur mettre token dans context + TOAST
         onToastChange(true);
         messageToast('Connexion réussie !');
         colorToast('success');
-        // Redirection vers Calendrier
-        // setTimeout(() => {
         navigate('/calendrier');
-        // }, 0);
         setMessage('Connexion réussie !');
+        UpdateToken(token);
+        tokenExpirationFunction(token);
       })
       .catch((error) => {
         onToastChange(true);
