@@ -84,9 +84,10 @@ const NavBar = () => {
   };
 
   // return (
-  return isLoading ? (
-    <div>Chargement...</div>
-  ) : (
+  // return isLoading ? (
+  //   <div>Chargement...</div>
+  // ) : (
+  return (
     <nav
       className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow'
       style={{ opacity: '90%' }}
@@ -117,25 +118,23 @@ const NavBar = () => {
                 <div className='nav-link'>Acceuil</div>
               </NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink to='calendrier' className='nav-link'>
-                <div className='nav-link'>Planning</div>
-              </NavLink>
-            </li>
-            <li className='nav-item'>
-              <NavLink to='profil/all/karateka' className='nav-link'>
-                <div className='nav-link'>Profil</div>
-              </NavLink>
-            </li>
-            {/* mettre affichage conditionnel pour admin et superadmin */}
-            {/* admin */}
-            {/* {(label === 'admin' || label === 'superadmin') && (
+            {/* --------------------------- user ou admin ou superadmin connecté --------------------------- */}
+            {(role === 'admin' || role === 'superadmin' || role === 'user') && (
               <li className='nav-item'>
-                <NavLink to='admin' className='nav-link'>
-                  <div className='nav-link'>Professeur</div>
+                <NavLink to='calendrier' className='nav-link'>
+                  <div className='nav-link'>Planning</div>
                 </NavLink>
               </li>
-            )} */}
+            )}
+            {/* --------------------------- user ou admin ou superadmin connecté --------------------------- */}
+            {(role === 'admin' || role === 'superadmin' || role === 'user') && (
+              <li className='nav-item'>
+                <NavLink to='profil/all/karateka' className='nav-link'>
+                  <div className='nav-link'>Profil</div>
+                </NavLink>
+              </li>
+            )}
+            {/* --------------------------- admin ou superadmin connecté --------------------------- */}
             {(role === 'admin' || role === 'superadmin') && (
               <li className='nav-item'>
                 <NavLink to='admin' className='nav-link'>
@@ -143,14 +142,7 @@ const NavBar = () => {
                 </NavLink>
               </li>
             )}
-            {/* superadmin */}
-            {/* {(label === 'admin' || label === 'superadmin') && (
-              <li className='nav-item'>
-                <NavLink to='superadmin' className='nav-link'>
-                  <div className='nav-link'>Administrateur</div>
-                </NavLink>
-              </li>
-            )} */}
+            {/* --------------------------- superadmin connecté --------------------------- */}
             {role === 'superadmin' && (
               <li className='nav-item'>
                 <NavLink to='superadmin' className='nav-link'>
@@ -158,16 +150,10 @@ const NavBar = () => {
                 </NavLink>
               </li>
             )}
-            {/* <li className='nav-item'>
-              <NavLink to='connect' className='nav-link'>
-                <div className='nav-link'>Connexion</div>
-              </NavLink>
-            </li> */}
-            {/* deconnexion */}
+            {/* --------------------------- setSavedToken mis à jour dans le connect --------------------------- */}
             {savedToken ? (
               <li className='nav-item'>
                 <NavLink to='connect' className='nav-link'>
-                  {/* <div className='nav-link'> */}
                   <button
                     className='btn btn-primary btnPerso'
                     style={{ margin: '0' }}
@@ -175,7 +161,6 @@ const NavBar = () => {
                   >
                     Déconnexion
                   </button>
-                  {/* </div> */}
                 </NavLink>
               </li>
             ) : (
@@ -185,6 +170,7 @@ const NavBar = () => {
                 </NavLink>
               </li>
             )}
+            {/* --------------------------- setSavedToken mis à jour dans le handleDeco --------------------------- */}
           </ul>
         </div>
       </div>
