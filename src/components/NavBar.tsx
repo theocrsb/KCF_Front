@@ -26,12 +26,6 @@ const NavBar = () => {
     role,
     setRole,
   } = useContext(AuthContext);
-  //
-  // const [label, setLabel] = useState<string>('');
-  const [count, setCount] = useState(0);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  // mettre affichage conditionnel pour les roles.
 
   useEffect(() => {
     UpdateToken(savedToken);
@@ -46,27 +40,7 @@ const NavBar = () => {
     if (tokenExpired === 'token expiré') {
       navigate('/connect');
     }
-  }, [count]);
-
-  useEffect(() => {
-    // setCount(count + 1);
-
-    axios
-      .get('http://localhost:8080/api/roles/my/role', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
-      .then((response) => {
-        // console.log(response.data.label, 'dans le useEffect');
-        // setLabel(response.data.label);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // console.log(error);
-        setIsLoading(false);
-      });
-  }, [count]);
+  }, []);
 
   const handleDeco = () => {
     localStorage.removeItem('accessToken');
@@ -74,19 +48,10 @@ const NavBar = () => {
     messageToast('Vous êtes déconnecté');
     colorToast('danger');
     //
-    // setIsLoggedIn(false);
-    setCount(count + 1);
-    // on retire le token du context
     UpdateToken('');
-    // setLabel('');
-    // setTokenRole('');
     setRole('');
   };
 
-  // return (
-  // return isLoading ? (
-  //   <div>Chargement...</div>
-  // ) : (
   return (
     <nav
       className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow'

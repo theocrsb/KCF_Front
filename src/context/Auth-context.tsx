@@ -14,18 +14,23 @@ export interface AuthContextInterface {
   //
   role: string;
   setRole: (role: string) => void;
+  member: boolean;
+  setMember: (member: boolean) => void;
 }
 export const AuthContext = createContext<AuthContextInterface>({
   savedToken: null,
-  UpdateToken: (token: string | null) => {},
-  tokenExpirationFunction: (token: string | null) => {},
+  UpdateToken: () => {},
+  tokenExpirationFunction: () => {},
   tokenExpired: null,
   //
   role: '',
   setRole: () => {},
+  member: true,
+  setMember: () => {},
 });
 export const AuthContextProvider = ({ children }: AuthContextProps) => {
   const [role, setRole] = useState<string>('');
+  const [member, setMember] = useState<boolean>(true);
   /**
    * Mise en place de la logique interne de notre context
    * Cela permet de mettre à dispo une fonction pour mettre
@@ -34,6 +39,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
    */
   let recupToken: string | null;
   recupToken = localStorage.getItem('accessToken');
+  //   valeur localstorage ou null
   const [token, setToken] = useState<string | null>(
     recupToken ? recupToken : null
   );
@@ -41,11 +47,15 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
   const updateToken = (token: string | null) => {
     setToken(token);
   };
+
   // Fonction contextuelle permettant de vérifier l'expiration d'un token
   const tokenExpirationFunction = (token: string | null) => {
     if (token) {
       const decoded: PayloadToken = jwt_decode(token);
+      //
       setRole(decoded.role.label);
+      setMember(decoded.member);
+      //
       if (Date.now() <= decoded.exp * 1000) {
         setTokenExpired('token non expiré');
         return true;
@@ -62,8 +72,11 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
     UpdateToken: updateToken,
     tokenExpirationFunction: tokenExpirationFunction,
     tokenExpired: tokenExpired,
+    //
     role: role,
     setRole: setRole,
+    member: member,
+    setMember: setMember,
   };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

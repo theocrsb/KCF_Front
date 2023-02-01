@@ -62,6 +62,7 @@ function App() {
                 <Route path='/profil/' element={<Profil />}>
                   {/* sous routes */}
                   <Route path='update' element={<Update />} />
+                  
                   <Route path='add/karateka' element={<AddKarateka />} />
                   <Route path='all/karateka' element={<AllKarateka />} />
                   {/* fin sous routes */}
