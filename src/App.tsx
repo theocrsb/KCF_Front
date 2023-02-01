@@ -18,6 +18,7 @@ import AddKarateka from './pages/AddKarateka';
 import AllKarateka from './pages/AllKarateka';
 import RequireAuth from './components/RequireAuth';
 import Interceptor from './axios/Interceptor';
+import NotFound from './pages/NotFound';
 
 export interface PayloadToken {
   exp: number;
@@ -43,6 +44,7 @@ function App() {
             {/* On utilise notre composant dans notre JSX */}
             <NavBar />
             <Routes>
+              <Route path='*' element={<NotFound />} />
               <Route path='/' element={<Home />} />
               <Route path='/connect' element={<Connect />} />
               <Route path='/subscribe' element={<Subscribe />} />
