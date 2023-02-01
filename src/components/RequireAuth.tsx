@@ -14,6 +14,8 @@ const RequireAuth = ({ roles }: RequireAuthProps) => {
   //
 
   const [label, setLabel] = useState<string>('');
+  // setIsLoading permet d'afficher le continu de mes routes protected une fois qu'elles sont chargées.
+  // sans ce state la condition est testé avant et refuse l'acces a une admin à la page admin
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
