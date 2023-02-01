@@ -129,7 +129,7 @@ const NavBar = () => {
             {/* --------------------------- user ou admin ou superadmin connecté --------------------------- */}
             {(role === 'admin' || role === 'superadmin' || role === 'user') && (
               <li className='nav-item'>
-                <NavLink to='profil/all/karateka' className='nav-link'>
+                <NavLink to='profil/update' className='nav-link'>
                   <div className='nav-link'>Profil</div>
                 </NavLink>
               </li>
