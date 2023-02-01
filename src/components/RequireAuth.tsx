@@ -24,12 +24,10 @@ const RequireAuth = ({ roles }: RequireAuthProps) => {
         },
       })
       .then((response) => {
-        // console.log(response.data.label, 'dans le useEffect');
         setLabel(response.data.label);
         setIsLoading(false);
       })
       .catch((error) => {
-        // console.log(error);
         setIsLoading(false);
       });
   }, []);
@@ -55,25 +53,6 @@ const RequireAuth = ({ roles }: RequireAuthProps) => {
       )}
     </div>
   );
-  // if (roles.includes(label)) {
-  //   return <Outlet />;
-  // } else {
-  //   // onToastChange(true);
-  //   // messageToast(`Vous n'avez pas les droits pour acceder a cette page !`);
-  //   // colorToast('danger');
-  //   return <Navigate to='/' />;
-  // }
-  //   return isLoading ? (
-  //     <div>Chargement...</div>
-  //   ) : (
-  //     <div>
-  //       {label !== null && roles.includes(label) ? (
-  //         <Outlet />
-  //       ) : (
-  //         <Navigate to='/' />
-  //       )}
-  //     </div>
-  //   );
 };
 
 export default RequireAuth;

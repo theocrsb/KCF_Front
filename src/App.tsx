@@ -41,7 +41,6 @@ function App() {
         <Interceptor>
           <>
             {/* On utilise notre composant dans notre JSX */}
-            {/* recuper info connexion dans navbar et injecté dans connexion */}
             <NavBar />
             <Routes>
               <Route path='/' element={<Home />} />
