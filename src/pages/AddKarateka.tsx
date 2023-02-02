@@ -22,7 +22,11 @@ const AddKarateka = () => {
   //   note: '',
   // };
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
-  const [oneKarateka, SetOneKarateka] = useState<Karateka>();
+  const [oneKaratekaNom, SetOneKaratekaNom] = useState<string>('');
+  const [oneKaratekaPrenom, SetOneKaratekaPrenom] = useState<string>('');
+  const [oneKaratekaAge, SetOneKaratekaAge] = useState<number>(0);
+  const [oneKaratekaSexe, SetOneKaratekaSexe] = useState<string>('');
+  const [oneKaratekaCeinture, SetOneKaratekaCeinture] = useState<string>('');
   const [id, setId] = useState<string>('');
   // Lien avec le toast context
   const { onToastChange } = useContext(ToastContext);
@@ -98,6 +102,7 @@ const AddKarateka = () => {
   /////////////////////////////////////////////// MODAL UPDATE ///////////////////////////////////////////////
 
   const [isOpenUpdate, setIsOpenUpdate] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.value, 'showModalUpdate');
@@ -111,10 +116,18 @@ const AddKarateka = () => {
       })
       .then((response) => {
         // console.log('Get All karateka', response);
-        SetOneKarateka(response.data);
-        setId(e.currentTarget.value);
+        console.log(response.data.nom, 'à louverture de la modale');
+        // setId(e.currentTarget.value);
+        SetOneKaratekaNom(response.data.nom);
+        SetOneKaratekaPrenom(response.data.prenom);
+        SetOneKaratekaAge(response.data.age);
+        SetOneKaratekaSexe(response.data.sexe);
+        SetOneKaratekaCeinture(response.data.ceinture);
+        setId(response.data.id);
+        setIsLoading(false);
       })
       .catch((error) => {
+        setIsLoading(false);
         // console.log('Get All Cours Error', error);
       });
   };
@@ -195,7 +208,7 @@ const AddKarateka = () => {
       });
   };
 
-  console.log(oneKarateka, 'OneKarateka');
+  console.log(oneKaratekaNom, 'oneKaratekaNom valeur avant remplissage');
   return (
     <div style={{ minHeight: '100vh' }} className='list-group '>
       <ul className='list-group pt-3'>
@@ -244,7 +257,6 @@ const AddKarateka = () => {
           </button>
         </li>
       </ul>
-
       <Modal show={isOpen} onHide={hideModal}>
         <Modal.Header>
           <Modal.Title>Création d'un karatéka</Modal.Title>
@@ -327,106 +339,111 @@ const AddKarateka = () => {
           </button>
         </Modal.Footer>
       </Modal>
-
       {/* modale update */}
-      <Modal show={isOpenUpdate} onHide={hideModalUpdate}>
-        <Modal.Header>
-          <Modal.Title>Modification d'un karatéka</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <form onSubmit={handleUpdate}>
-              <div className='form-group'>
-                <label htmlFor='Nom'>Nom</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  id='Nom'
-                  placeholder='Nom'
-                  required
-                  ref={nomUpdate}
-                  value={oneKarateka?.nom}
-                  onChange={}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='Prénom'>Prénom</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  id='Prénom'
-                  placeholder='Prénom'
-                  required
-                  ref={prenomUpdate}
-                  value={oneKarateka?.prenom}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='Age'>Age</label>
-                <input
-                  type='number'
-                  className='form-control'
-                  id='Age'
-                  placeholder='Age'
-                  required
-                  ref={ageUpdate}
-                  value={oneKarateka?.age}
-                />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='Sexe'>Sexe</label>
-                <select
-                  className='form-control'
-                  id='Sexe'
-                  required
-                  ref={sexeUpdate}
-                  value={oneKarateka?.sexe}
-                >
-                  <option>homme</option>
-                  <option>femme</option>
-                </select>
-              </div>
-              <div className='form-group'>
-                <label htmlFor='Ceinture'>Ceinture</label>
-                <select
-                  className='form-control'
-                  id='Ceinture'
-                  required
-                  ref={ceintureUpdate}
-                  value={oneKarateka?.ceinture}
-                >
-                  <option>blanche</option>
-                  <option>blanche/jaune</option>
-                  <option>jaune</option>
-                  <option>jaune/orange</option>
-                  <option>orange</option>
-                  <option>orange/verte</option>
-                  <option>verte</option>
-                  <option>verte/bleu</option>
-                  <option>bleue</option>
-                  <option>bleue/marron</option>
-                  <option>marron</option>
-                  <option>noire</option>
-                </select>
-              </div>
+      {isLoading ? (
+        <div>Chargement...</div>
+      ) : (
+        <Modal show={isOpenUpdate} onHide={hideModalUpdate}>
+          <Modal.Header>
+            <Modal.Title>Modification d'un karatéka</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <form onSubmit={handleUpdate}>
+                <div className='form-group'>
+                  <label htmlFor='Nom'>Nom</label>
+                  <input
+                    type='text'
+                    className='form-control'
+                    id='Nom'
+                    placeholder='Nom'
+                    required
+                    // ref={nomUpdate}
+                    value={oneKaratekaNom}
+                    onChange={(e) => SetOneKaratekaNom(e.target.value)}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='Prénom'>Prénom</label>
+                  <input
+                    type='text'
+                    className='form-control'
+                    id='Prénom'
+                    placeholder='Prénom'
+                    required
+                    // ref={prenomUpdate}
+                    value={oneKaratekaPrenom}
+                    onChange={(e) => SetOneKaratekaPrenom(e.target.value)}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='Age'>Age</label>
+                  <input
+                    type='number'
+                    className='form-control'
+                    id='Age'
+                    placeholder='Age'
+                    required
+                    // ref={ageUpdate}
+                    value={oneKaratekaAge}
+                    onChange={(e) => SetOneKaratekaAge(e.target.valueAsNumber)}
+                  />
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='Sexe'>Sexe</label>
+                  <select
+                    className='form-control'
+                    id='Sexe'
+                    required
+                    // ref={sexeUpdate}
+                    value={oneKaratekaSexe}
+                    onChange={(e) => SetOneKaratekaSexe(e.target.value)}
+                  >
+                    <option>homme</option>
+                    <option>femme</option>
+                  </select>
+                </div>
+                <div className='form-group'>
+                  <label htmlFor='Ceinture'>Ceinture</label>
+                  <select
+                    className='form-control'
+                    id='Ceinture'
+                    required
+                    // ref={ceintureUpdate}
+                    value={oneKaratekaCeinture}
+                    onChange={(e) => SetOneKaratekaCeinture(e.target.value)}
+                  >
+                    <option>blanche</option>
+                    <option>blanche/jaune</option>
+                    <option>jaune</option>
+                    <option>jaune/orange</option>
+                    <option>orange</option>
+                    <option>orange/verte</option>
+                    <option>verte</option>
+                    <option>verte/bleu</option>
+                    <option>bleue</option>
+                    <option>bleue/marron</option>
+                    <option>marron</option>
+                    <option>noire</option>
+                  </select>
+                </div>
 
-              <button className='btn btn-primary btnDirection mt-3'>
-                Valider
-              </button>
-            </form>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <button
-            onClick={hideModalUpdate}
-            className='btn btn-primary btnPerso'
-          >
-            Fermer
-          </button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* fin modal ajout karateka */}
+                <button className='btn btn-primary btnDirection mt-3'>
+                  Valider
+                </button>
+              </form>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              onClick={hideModalUpdate}
+              className='btn btn-primary btnPerso'
+            >
+              Fermer
+            </button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </div>
   );
 };
