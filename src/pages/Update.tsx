@@ -8,34 +8,73 @@ import { User } from './Calendrier';
 
 const Update = () => {
   // Lien avec le toast context
-  const { onToastChange } = useContext(ToastContext);
-  const { messageToast } = useContext(ToastContext);
-  const { colorToast } = useContext(ToastContext);
+  const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   //
-  const emailElement = useRef<HTMLInputElement>(null);
+  const [userEmail, setUserEmail] = useState<string>('');
   const passwordElement = useRef<HTMLInputElement>(null);
-  const [message, setMessage] = useState<string>();
+  const passwordElementConfirm = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const { onLoadingChange } = useContext(LoadingContext);
+
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
-    console.log(e);
+    e.preventDefault();
+
+    // console.log(userEmail, 'userEmail dans le submit');
+    // console.log(
+    //   passwordElement.current?.value,
+    //   'passwordElement dans le submit'
+    // );
+    // console.log(
+    //   passwordElementConfirm.current?.value,
+    //   'passwordElementConfirm dans le submit'
+    // );
+
+    if (
+      passwordElement?.current?.value !== passwordElementConfirm?.current?.value
+    ) {
+      onToastChange(true);
+      messageToast('Le mot de passe et la confirmation ne correspondent pas');
+      colorToast('danger');
+      return;
+    }
+
+    // confition si MDP est remplis :
+
+    let patchData: { email: string; password?: string } = {
+      email: userEmail,
+    };
+
+    if (
+      passwordElement?.current?.value !== '' &&
+      passwordElement?.current?.value !== null &&
+      passwordElement?.current?.value !== undefined
+    ) {
+      patchData.password = passwordElement?.current?.value;
+    }
+
+    axios
+      .patch(`http://localhost:8080/api/users/id/perso`, patchData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        onToastChange(true);
+        messageToast('Vos informations ont bien été mises à jour !');
+        colorToast('success');
+        navigate('/calendrier');
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.data.statusCode === 400) {
+          onToastChange(true);
+          messageToast(error.response.data.message[0]);
+          colorToast('danger');
+        }
+      });
   };
 
   useEffect(() => {
-    // get avec axios standard
-    // axios
-    //   .get('http://localhost:8080/api/users/id/perso', {
-    //     headers: {
-    //       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log('Recuperation user impossible', error);
-    //   });
-    // get avec instance axios pour le spinner
     instanceAxios
       .get<User>('/users/id/perso', {
         headers: {
@@ -44,12 +83,14 @@ const Update = () => {
       })
       .then((response) => {
         console.log(response.data);
+        setUserEmail(response.data.email);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  console.log(userEmail, 'user dans update');
   return (
     <div style={{ minHeight: '50vh' }}>
       <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard mt-5'>
@@ -65,7 +106,9 @@ const Update = () => {
               id='exampleInputEmail1'
               aria-describedby='emailHelp'
               placeholder='votre.email@mail.fr'
-              ref={emailElement}
+              // ref={emailElement}
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
             />
           </div>
           {/* password */}
@@ -87,7 +130,7 @@ const Update = () => {
               className='form-control'
               id='exampleInputPassword1'
               placeholder='Votre mot de passe'
-              ref={passwordElement}
+              ref={passwordElementConfirm}
             />
           </div>
 

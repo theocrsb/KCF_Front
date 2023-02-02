@@ -38,12 +38,13 @@ export interface Karateka {
   age: number;
   sexe: string;
   ceinture: string;
-  membre: boolean;
+  note: string;
 }
 
 export interface User {
   id: string;
   email: string;
+  member: boolean;
 }
 
 export interface Role {
@@ -117,11 +118,11 @@ const Calendrier = () => {
 
   /////////////////////////////////////////////// AFFICHAGE JOURS SELECT ///////////////////////////////////////////////
 
-  const footer = selectedDay ? (
-    <p>Vous avez choisi le {selectedDay.toLocaleDateString('fr')}.</p>
-  ) : (
-    <p>Veuillez choisir un jour.</p>
-  );
+  // const footer = selectedDay ? (
+  //   <p>Vous avez choisi le {selectedDay.toLocaleDateString('fr')}.</p>
+  // ) : (
+  //   <p>Veuillez choisir un jour.</p>
+  // );
 
   console.log('coursAffiche', coursAffiche);
 
@@ -219,184 +220,211 @@ const Calendrier = () => {
       </h3>
 
       {/* ------------------ SWIPPER ORDI ------------------ */}
-      {isBigScreen && (
-        <div
-          style={{ paddingBottom: '30px', borderRadius: '0px 0px 10px 10px' }}
-        >
-          <Swiper
-            slidesPerView={2}
-            spaceBetween={0}
-            slidesPerGroup={2}
-            loop={true}
-            loopFillGroupWithBlank={true}
-            pagination={{
-              clickable: true,
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className='mySwiper'
+
+      {coursAfficheTop?.length !== 0 ? (
+        isBigScreen && (
+          <div
+            style={{ paddingBottom: '30px', borderRadius: '0px 0px 10px 10px' }}
           >
-            {/* MAP du tableau des prochains jours */}
-            {coursAfficheTop?.map((x, i) => (
-              <SwiperSlide key={x.id}>
-                <div className='card text-center'>
-                  <div className='card-header'>
-                    Cours de {x.type} | Sensei : {x.sensei}
-                  </div>
-                  <div className='card-body'>
-                    {/* <p className='card-text'>{x.note}</p> */}
-                    <NavLink to={x.id}>
+            <Swiper
+              slidesPerView={2}
+              spaceBetween={0}
+              slidesPerGroup={2}
+              loop={true}
+              loopFillGroupWithBlank={true}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className='mySwiper'
+            >
+              {/* MAP du tableau des prochains jours */}
+              {coursAfficheTop?.map((x, i) => (
+                <SwiperSlide key={x.id}>
+                  <div className='card text-center'>
+                    <div className='card-header'>
+                      Cours de {x.type} | Sensei : {x.sensei}
+                    </div>
+                    <div className='card-body'>
+                      {/* <p className='card-text'>{x.note}</p> */}
+                      <NavLink to={x.id}>
+                        <button
+                          className='btn btn-primary btnDirection btn-sm'
+                          value={x.id}
+                        >
+                          S'inscrire
+                        </button>
+                      </NavLink>
+                      {/* modal */}
+                      {/* <div className='pt-2'> */}
                       <button
-                        className='btn btn-primary btnDirection btn-sm'
+                        onClick={showModal}
+                        className='btn btn-primary btnPerso btn-sm'
                         value={x.id}
                       >
-                        S'inscrire
+                        Participants
                       </button>
-                    </NavLink>
-                    {/* modal */}
-                    {/* <div className='pt-2'> */}
-                    <button
-                      onClick={showModal}
-                      className='btn btn-primary btnPerso btn-sm'
-                      value={x.id}
-                    >
-                      Participants
-                    </button>
 
-                    <Modal show={isOpen} onHide={hideModal}>
-                      <Modal.Header>
-                        <Modal.Title>
-                          Liste des personnes inscrites au cours :
-                        </Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <ul>
-                          {oneCours?.karateka.map((x, i) => (
-                            <li
-                              key={'swipper ordi karateka' + i}
-                              style={{ listStyleType: 'none' }}
-                            >
-                              {x.prenom} {x.nom}
-                            </li>
-                          ))}
-                        </ul>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <button
-                          onClick={hideModal}
-                          className='btn btn-primary btnPerso'
-                        >
-                          Fermer
-                        </button>
-                      </Modal.Footer>
-                    </Modal>
-                    {/* </div> */}
-                    {/* fin modal */}
+                      <Modal show={isOpen} onHide={hideModal}>
+                        <Modal.Header>
+                          <Modal.Title>
+                            Liste des personnes inscrites au cours :
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <ul>
+                            {oneCours?.karateka.map((x, i) => (
+                              <li
+                                key={'swipper ordi karateka' + i}
+                                style={{ listStyleType: 'none' }}
+                              >
+                                {x.prenom} {x.nom}
+                              </li>
+                            ))}
+                          </ul>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <button
+                            onClick={hideModal}
+                            className='btn btn-primary btnPerso'
+                          >
+                            Fermer
+                          </button>
+                        </Modal.Footer>
+                      </Modal>
+                      {/* </div> */}
+                      {/* fin modal */}
+                    </div>
+                    <div
+                      className='card-footer'
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: 'bolder',
+                        color: 'black',
+                      }}
+                    >
+                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getMinutes()} /{' '}
+                      {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin).getMinutes()} le{' '}
+                      {new Date(x.date).toLocaleDateString('fr')}
+                    </div>
                   </div>
-                  <div
-                    className='card-footer text-muted'
-                    style={{ fontSize: '0.7rem' }}
-                  >
-                    {new Date(x.heureDebut).getHours()}H
-                    {new Date(x.heureDebut).getMinutes()} /{' '}
-                    {new Date(x.heureFin).getHours()}H
-                    {new Date(x.heureFin).getMinutes()} le{' '}
-                    {new Date(x.date).toLocaleDateString('fr')}
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}{' '}
-          </Swiper>
+                </SwiperSlide>
+              ))}{' '}
+            </Swiper>
+          </div>
+        )
+      ) : (
+        <div
+          className='text-center p-3'
+          style={{
+            fontSize: '1.3rem',
+            backgroundColor: '#323131',
+            color: 'white',
+          }}
+        >
+          Aucun cours n'est planifié pour le moment.
         </div>
       )}
 
       {/* ------------------ SWIPPER MOBILE ------------------ */}
-      {isTabletOrMobile && (
-        <div
-          style={{ paddingBottom: '30px', borderRadius: '0px 0px 10px 10px' }}
-        >
-          <p className='text-center'>
-            <MdOutlineSwipe /> faites glisser les cours pour acceder aux
-            prochains cours <MdOutlineSwipe />
-          </p>
-          <Swiper
-            effect={'cards'}
-            grabCursor={true}
-            modules={[EffectCards]}
-            className='mySwiper'
+      {coursAfficheTop?.length !== 0 ? (
+        isTabletOrMobile && (
+          <div
+            style={{ paddingBottom: '30px', borderRadius: '0px 0px 10px 10px' }}
           >
-            {/* MAP du tableau des prochains jours */}
-            {coursAfficheTop?.map((x, i) => (
-              <SwiperSlide key={x.id}>
-                <div className='card text-center'>
-                  <div className='card-header'>
-                    Cours de {x.type} | Sensei : {x.sensei}
-                  </div>
-                  <div className='card-body'>
-                    {/* <p className='card-text'>{x.note}</p> */}
-                    <NavLink to={x.id}>
+            <p className='text-center'>
+              <MdOutlineSwipe /> faites glisser les cours pour acceder aux
+              prochains cours <MdOutlineSwipe />
+            </p>
+            <Swiper
+              effect={'cards'}
+              grabCursor={true}
+              modules={[EffectCards]}
+              loop={true}
+              className='mySwiper'
+            >
+              {/* MAP du tableau des prochains jours */}
+              {coursAfficheTop?.map((x, i) => (
+                <SwiperSlide key={x.id}>
+                  <div className='card text-center'>
+                    <div className='card-header'>
+                      Cours de {x.type} | Sensei : {x.sensei}
+                    </div>
+                    <div className='card-body'>
+                      {/* <p className='card-text'>{x.note}</p> */}
+                      <NavLink to={x.id}>
+                        <button
+                          className='btn btn-primary btnDirection btn-sm'
+                          value={x.id}
+                        >
+                          S'inscrire
+                        </button>
+                      </NavLink>
+                      {/* modal */}
+                      {/* <div className='pt-2'> */}
                       <button
-                        className='btn btn-primary btnDirection btn-sm'
+                        onClick={showModal}
+                        className='btn btn-primary btnPerso btn-sm'
                         value={x.id}
                       >
-                        S'inscrire
+                        Participants
                       </button>
-                    </NavLink>
-                    {/* modal */}
-                    {/* <div className='pt-2'> */}
-                    <button
-                      onClick={showModal}
-                      className='btn btn-primary btnPerso btn-sm'
-                      value={x.id}
-                    >
-                      Participants
-                    </button>
 
-                    <Modal show={isOpen} onHide={hideModal}>
-                      <Modal.Header>
-                        <Modal.Title>
-                          Liste des personnes inscrites au cours :
-                        </Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <ul>
-                          {oneCours?.karateka.map((x, i) => (
-                            <li
-                              key={'swipper mobile karateka' + i}
-                              style={{ listStyleType: 'none' }}
-                            >
-                              {x.prenom} {x.nom}
-                            </li>
-                          ))}
-                        </ul>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <button
-                          onClick={hideModal}
-                          className='btn btn-primary btnPerso'
-                        >
-                          Fermer
-                        </button>
-                      </Modal.Footer>
-                    </Modal>
-                    {/* </div> */}
-                    {/* fin modal */}
+                      <Modal show={isOpen} onHide={hideModal}>
+                        <Modal.Header>
+                          <Modal.Title>
+                            Liste des personnes inscrites au cours :
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <ul>
+                            {oneCours?.karateka.map((x, i) => (
+                              <li
+                                key={'swipper mobile karateka' + i}
+                                style={{ listStyleType: 'none' }}
+                              >
+                                {x.prenom} {x.nom}
+                              </li>
+                            ))}
+                          </ul>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <button
+                            onClick={hideModal}
+                            className='btn btn-primary btnPerso'
+                          >
+                            Fermer
+                          </button>
+                        </Modal.Footer>
+                      </Modal>
+                      {/* </div> */}
+                      {/* fin modal */}
+                    </div>
+                    <div
+                      className='card-footer'
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: 'bolder',
+                        color: 'black',
+                      }}
+                    >
+                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getMinutes()} /{' '}
+                      {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin).getMinutes()} le{' '}
+                      {new Date(x.date).toLocaleDateString('fr')}
+                    </div>
                   </div>
-                  <div
-                    className='card-footer text-muted'
-                    style={{ fontSize: '0.7rem' }}
-                  >
-                    {new Date(x.heureDebut).getHours()}H
-                    {new Date(x.heureDebut).getMinutes()} /{' '}
-                    {new Date(x.heureFin).getHours()}H
-                    {new Date(x.heureFin).getMinutes()} le{' '}
-                    {new Date(x.date).toLocaleDateString('fr')}
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}{' '}
-          </Swiper>
-        </div>
+                </SwiperSlide>
+              ))}{' '}
+            </Swiper>
+          </div>
+        )
+      ) : (
+        <div></div>
       )}
 
       {/* ------------------ ORDI ------------------ */}
@@ -430,7 +458,7 @@ const Calendrier = () => {
                 required
                 selected={selectedDay}
                 onSelect={setSelectedDay}
-                footer={footer}
+                // footer={footer}
               />
             </div>
 
@@ -505,12 +533,16 @@ const Calendrier = () => {
                       {/* fin modal */}
                     </div>
                     <div
-                      className='card-footer text-muted'
-                      style={{ fontSize: '0.7rem' }}
+                      className='card-footer'
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: 'bolder',
+                        color: 'black',
+                      }}
                     >
-                      {new Date(x.heureDebut).getHours()}H
+                      {new Date(x.heureDebut).getHours()}h
                       {new Date(x.heureDebut).getMinutes()} /{' '}
-                      {new Date(x.heureFin).getHours()}H
+                      {new Date(x.heureFin).getHours()}h
                       {new Date(x.heureFin).getMinutes()} le{' '}
                       {new Date(x.date).toLocaleDateString('fr')}
                     </div>
@@ -583,7 +615,7 @@ const Calendrier = () => {
                 required
                 selected={selectedDay}
                 onSelect={setSelectedDay}
-                footer={footer}
+                // footer={footer}
               />
             </div>
 
@@ -658,12 +690,16 @@ const Calendrier = () => {
                       {/* fin modal */}
                     </div>
                     <div
-                      className='card-footer text-muted'
-                      style={{ fontSize: '0.7rem' }}
+                      className='card-footer'
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: 'bolder',
+                        color: 'black',
+                      }}
                     >
-                      {new Date(x.heureDebut).getHours()}H
+                      {new Date(x.heureDebut).getHours()}h
                       {new Date(x.heureDebut).getMinutes()} /{' '}
-                      {new Date(x.heureFin).getHours()}H
+                      {new Date(x.heureFin).getHours()}h
                       {new Date(x.heureFin).getMinutes()} le{' '}
                       {new Date(x.date).toLocaleDateString('fr')}
                     </div>

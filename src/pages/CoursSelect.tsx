@@ -189,12 +189,16 @@ const CoursSelect = () => {
             {/* fin form */}
           </div>
           <div
-            className='card-footer text-muted'
-            style={{ fontSize: '0.7rem' }}
+            className='card-footer'
+            style={{
+              fontSize: '0.9rem',
+              fontWeight: 'bolder',
+              color: 'black',
+            }}
           >
-            {oneCours && new Date(oneCours.heureDebut).getHours()}H
+            {oneCours && new Date(oneCours.heureDebut).getHours()}h
             {oneCours && new Date(oneCours.heureDebut).getMinutes()} /{' '}
-            {oneCours && new Date(oneCours?.heureFin).getHours()}H
+            {oneCours && new Date(oneCours?.heureFin).getHours()}h
             {oneCours && new Date(oneCours?.heureFin).getMinutes()} le{' '}
             {oneCours && new Date(oneCours?.date).toLocaleDateString('fr')}
           </div>
