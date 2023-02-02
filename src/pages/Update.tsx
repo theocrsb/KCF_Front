@@ -51,8 +51,8 @@ const Update = () => {
       patchData.password = passwordElement?.current?.value;
     }
 
-    axios
-      .patch(`http://localhost:8080/api/users/id/perso`, patchData, {
+    instanceAxios
+      .patch(`/users/id/perso`, patchData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },

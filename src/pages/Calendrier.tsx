@@ -19,6 +19,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { ToastContext } from '../context/toast-context';
+import { Popover } from 'react-bootstrap';
+import { instanceAxios } from '../axios/instance-axios';
 
 export interface Cours {
   id: string;
@@ -55,15 +57,15 @@ export interface Role {
 const Calendrier = () => {
   const today = new Date();
   const navigate = useNavigate();
-  const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' });
+  const isBigScreen = useMediaQuery({ query: '(min-width: 750.1px)' });
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 750px)' });
   const [allCours, SetAllCours] = useState<Cours[]>();
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(today);
   const [coursAffiche, setCoursAffiche] = useState<Cours[] | undefined>([]);
   const [coursAfficheTop, setCoursAfficheTop] = useState<Cours[] | undefined>(
     []
   );
-  const [oneCours, SetOneCOurs] = useState<Cours>();
+
   // Lien avec le toast context
   const { onToastChange } = useContext(ToastContext);
   const { messageToast } = useContext(ToastContext);
@@ -94,14 +96,14 @@ const Calendrier = () => {
 
   // Requete pour afficher les cours select
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/cours/`, {
+    instanceAxios
+      .get<Cours[]>(`/cours/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
       })
       .then((response) => {
-        // console.log('Get All Cours', response);
+        console.log('Get All Cours', response);
         SetAllCours(response.data);
       })
       .catch((error) => {
@@ -113,7 +115,8 @@ const Calendrier = () => {
           colorToast('danger');
         }
       });
-  }, [selectedDay]);
+  }, []);
+  //  }, [selectedDay]);
   // Fin requete get
 
   /////////////////////////////////////////////// AFFICHAGE JOURS SELECT ///////////////////////////////////////////////
@@ -125,34 +128,6 @@ const Calendrier = () => {
   // );
 
   console.log('coursAffiche', coursAffiche);
-
-  /////////////////////////////////////////////// MODAL ///////////////////////////////////////////////
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.value);
-    setIsOpen(true);
-    console.log('get les karataka du cours');
-    axios
-      .get(`http://localhost:8080/api/cours/${e.currentTarget.value}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        SetOneCOurs(response.data);
-      })
-      .catch((error) => {
-        // console.log('Get All Cours Error', error);
-      });
-  };
-
-  const hideModal = () => {
-    setIsOpen(false);
-  };
-  // console.log(oneCours, 'karateka avant map');
 
   /////////////////////////////////////////////// AFFICHAGE DES 10 PROCHAINS COURS ///////////////////////////////////////////////
 
@@ -256,45 +231,6 @@ const Calendrier = () => {
                           S'inscrire
                         </button>
                       </NavLink>
-                      {/* modal */}
-                      {/* <div className='pt-2'> */}
-                      <button
-                        onClick={showModal}
-                        className='btn btn-primary btnPerso btn-sm'
-                        value={x.id}
-                      >
-                        Participants
-                      </button>
-
-                      <Modal show={isOpen} onHide={hideModal}>
-                        <Modal.Header>
-                          <Modal.Title>
-                            Liste des personnes inscrites au cours :
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <ul>
-                            {oneCours?.karateka.map((x, i) => (
-                              <li
-                                key={'swipper ordi karateka' + i}
-                                style={{ listStyleType: 'none' }}
-                              >
-                                {x.prenom} {x.nom}
-                              </li>
-                            ))}
-                          </ul>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <button
-                            onClick={hideModal}
-                            className='btn btn-primary btnPerso'
-                          >
-                            Fermer
-                          </button>
-                        </Modal.Footer>
-                      </Modal>
-                      {/* </div> */}
-                      {/* fin modal */}
                     </div>
                     <div
                       className='card-footer'
@@ -363,45 +299,6 @@ const Calendrier = () => {
                           S'inscrire
                         </button>
                       </NavLink>
-                      {/* modal */}
-                      {/* <div className='pt-2'> */}
-                      <button
-                        onClick={showModal}
-                        className='btn btn-primary btnPerso btn-sm'
-                        value={x.id}
-                      >
-                        Participants
-                      </button>
-
-                      <Modal show={isOpen} onHide={hideModal}>
-                        <Modal.Header>
-                          <Modal.Title>
-                            Liste des personnes inscrites au cours :
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <ul>
-                            {oneCours?.karateka.map((x, i) => (
-                              <li
-                                key={'swipper mobile karateka' + i}
-                                style={{ listStyleType: 'none' }}
-                              >
-                                {x.prenom} {x.nom}
-                              </li>
-                            ))}
-                          </ul>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <button
-                            onClick={hideModal}
-                            className='btn btn-primary btnPerso'
-                          >
-                            Fermer
-                          </button>
-                        </Modal.Footer>
-                      </Modal>
-                      {/* </div> */}
-                      {/* fin modal */}
                     </div>
                     <div
                       className='card-footer'
@@ -465,9 +362,12 @@ const Calendrier = () => {
             {/* Affichage cours ordi */}
 
             <div
-              style={{
-                height: '400px',
-              }}
+              style={
+                {
+                  // height: '400px',
+                  // width: '400px',
+                }
+              }
               className='overflow-auto mt-5 bg-white p-4 rounded'
             >
               {coursAffiche !== undefined && coursAffiche.length > 0 ? (
@@ -475,6 +375,9 @@ const Calendrier = () => {
                   <div
                     key={'calendrier ordi' + i}
                     className='card text-center mb-3'
+                    style={{
+                      width: '350px',
+                    }}
                   >
                     <div
                       className='card-header'
@@ -494,43 +397,6 @@ const Calendrier = () => {
                       </NavLink>
                       {/* modal */}
                       {/* <div className='pt-2'> */}
-                      <button
-                        onClick={showModal}
-                        className='btn btn-primary btnPerso btn-sm'
-                        value={x.id}
-                      >
-                        Participants
-                      </button>
-
-                      <Modal show={isOpen} onHide={hideModal}>
-                        <Modal.Header>
-                          <Modal.Title>
-                            Liste des personnes inscrites au cours :
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <ul>
-                            {oneCours?.karateka.map((x, i) => (
-                              <li
-                                key={'calendrier ordi karateka' + i}
-                                style={{ listStyleType: 'none' }}
-                              >
-                                {x.prenom} {x.nom}
-                              </li>
-                            ))}
-                          </ul>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <button
-                            onClick={hideModal}
-                            className='btn btn-primary btnPerso'
-                          >
-                            Fermer
-                          </button>
-                        </Modal.Footer>
-                      </Modal>
-                      {/* </div> */}
-                      {/* fin modal */}
                     </div>
                     <div
                       className='card-footer'
@@ -550,33 +416,33 @@ const Calendrier = () => {
                 ))
               ) : (
                 // Si pas de cours a afficher :
-                <div
-                  className='card text-center'
-                  style={{ width: '300px', marginTop: '10%' }}
-                >
-                  <div className='card-header'></div>
+
+                <div className='card d-flex' style={{ width: '18rem' }}>
+                  <img
+                    src={LogoMicka}
+                    className='card-img-top mx-auto d-block'
+                    alt='karateka dessiné'
+                    style={{
+                      paddingTop: '20px',
+                      width: '30%',
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
+                  />
                   <div className='card-body'>
-                    <p
-                      style={{
-                        backgroundColor: 'rgba(226, 226, 226, 0.75)',
-                        width: '150px',
-                        marginLeft: '50%',
-                        transform: 'translate(-50%,50%)',
-                        marginBottom: '20px',
-                        textAlign: 'center',
-                        borderRadius: '10px',
-                        border: '2px solid black',
-                      }}
+                    <h5
                       className='card-title'
+                      style={{
+                        fontSize: '0.8rem',
+                        textAlign: 'center',
+                        fontWeight: 'bolder',
+                      }}
                     >
-                      Aucun cours !{' '}
-                    </p>
-                    <img src={LogoMicka} alt='karateka dessiné' width='80px' />
-                    <p className='card-text'>
-                      pour le : {selectedDay?.toLocaleDateString('fr')}
-                    </p>
+                      Aucun cours pour le :{' '}
+                      {selectedDay?.toLocaleDateString('fr')}
+                    </h5>
                   </div>
-                  <div className='card-footer text-muted'></div>
                 </div>
               )}
             </div>
@@ -651,43 +517,6 @@ const Calendrier = () => {
                       </NavLink>
                       {/* modal */}
                       {/* <div className='pt-2'> */}
-                      <button
-                        onClick={showModal}
-                        className='btn btn-primary btnPerso btn-sm'
-                        value={x.id}
-                      >
-                        Participants
-                      </button>
-
-                      <Modal show={isOpen} onHide={hideModal}>
-                        <Modal.Header>
-                          <Modal.Title>
-                            Liste des personnes inscrites au cours :
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <ul>
-                            {oneCours?.karateka.map((x, i) => (
-                              <li
-                                key={'calendrier mobile karateka' + i}
-                                style={{ listStyleType: 'none' }}
-                              >
-                                {x.prenom} {x.nom}
-                              </li>
-                            ))}
-                          </ul>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <button
-                            onClick={hideModal}
-                            className='btn btn-primary btnPerso'
-                          >
-                            Fermer
-                          </button>
-                        </Modal.Footer>
-                      </Modal>
-                      {/* </div> */}
-                      {/* fin modal */}
                     </div>
                     <div
                       className='card-footer'
@@ -707,33 +536,32 @@ const Calendrier = () => {
                 ))
               ) : (
                 // Si pas de cours a afficher :
-                <div
-                  className='card text-center'
-                  style={{ width: '300px', marginTop: '10%' }}
-                >
-                  <div className='card-header'></div>
+                <div className='card d-flex' style={{ width: '18rem' }}>
+                  <img
+                    src={LogoMicka}
+                    className='card-img-top mx-auto d-block'
+                    alt='karateka dessiné'
+                    style={{
+                      paddingTop: '20px',
+                      width: '30%',
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
+                  />
                   <div className='card-body'>
-                    <p
-                      style={{
-                        backgroundColor: 'rgba(226, 226, 226, 0.75)',
-                        width: '150px',
-                        marginLeft: '50%',
-                        transform: 'translate(-50%,50%)',
-                        marginBottom: '20px',
-                        textAlign: 'center',
-                        borderRadius: '10px',
-                        border: '2px solid black',
-                      }}
+                    <h5
                       className='card-title'
+                      style={{
+                        fontSize: '0.8rem',
+                        textAlign: 'center',
+                        fontWeight: 'bolder',
+                      }}
                     >
-                      Aucun cours !{' '}
-                    </p>
-                    <img src={LogoMicka} alt='karateka dessiné' width='80px' />
-                    <p className='card-text'>
-                      pour le : {selectedDay?.toLocaleDateString('fr')}
-                    </p>
+                      Aucun cours pour le :{' '}
+                      {selectedDay?.toLocaleDateString('fr')}
+                    </h5>
                   </div>
-                  <div className='card-footer text-muted'></div>
                 </div>
               )}
             </div>

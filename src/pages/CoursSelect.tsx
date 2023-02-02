@@ -2,6 +2,7 @@ import { DeleteOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
 import { Cours, Karateka } from './Calendrier';
 const CoursSelect = () => {
@@ -22,8 +23,8 @@ const CoursSelect = () => {
   // Requete pour afficher les cours select
   useEffect(() => {
     // get le cours par l'id
-    axios
-      .get(`http://localhost:8080/api/cours/${coursId.id}`, {
+    instanceAxios
+      .get<Cours>(`/cours/${coursId.id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
@@ -37,8 +38,8 @@ const CoursSelect = () => {
       });
 
     //get les karateka du user
-    axios
-      .get(`http://localhost:8080/api/karatekas/`, {
+    instanceAxios
+      .get<Karateka[]>(`/karatekas/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         },
@@ -66,9 +67,9 @@ const CoursSelect = () => {
     // console.log('id du karateka select', checkCategories);
 
     //Requete ajout karateka a un cours
-    axios
+    instanceAxios
       .patch(
-        `http://localhost:8080/api/cours/${coursId.id}/add`,
+        `/cours/${coursId.id}/add`,
         {
           karateka: [{ id: checkCategories }],
         },
@@ -104,9 +105,9 @@ const CoursSelect = () => {
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     // console.log(e.currentTarget.value);
 
-    axios
+    instanceAxios
       .patch(
-        `http://localhost:8080/api/cours/${coursId.id}/delete`,
+        `/cours/${coursId.id}/delete`,
         {
           karateka: [{ id: e.currentTarget.value }],
         },
@@ -183,11 +184,10 @@ const CoursSelect = () => {
                 </>
               ) : (
                 <div>
-                  {' '}
                   <p className='card-text'>
-                    Vous n'avez aucune personne à ajouter au cours :
+                    Vous n'avez aucune personne à ajouter au cours
                   </p>
-                  <NavLink to='/add/karateka' className='nav-link'>
+                  <NavLink to='/profil/add/karateka' className='nav-link'>
                     <button className='btn btn-primary btnDirection mt-3'>
                       Ajouter un karateka à mon compte
                     </button>
@@ -196,7 +196,7 @@ const CoursSelect = () => {
               )}
               {/*  fin select */}
 
-              <NavLink to='/profil/add/karateka' className='nav-link'>
+              <NavLink to='/calendrier' replace={true} className='nav-link'>
                 <button
                   className='btn btn-primary btnPerso mt-3'
                   // value={oneCours?.id}
@@ -224,8 +224,11 @@ const CoursSelect = () => {
         </div>
       </div>
       {/* personnes inscrites au cours */}
-      <div className='pt-3 pb-5'>
-        <h4 className='px-2'>Listes inscrits :</h4>
+      <div
+        className='card'
+        style={{ width: '18rem', margin: '0 auto', marginTop: '10px' }}
+      >
+        <div className='card-header'>Liste inscrits : </div>
         <ul className='list-group list-group-flush'>
           {oneCours?.karateka.map((x, i) => (
             <li
@@ -250,6 +253,33 @@ const CoursSelect = () => {
           ))}
         </ul>
       </div>
+      {/* fin liste */}
+      {/* <div className='pt-3 pb-5'>
+        <h4 className='px-2'>Listes inscrits :</h4>
+        <ul className='list-group list-group-flush'>
+          {oneCours?.karateka.map((x, i) => (
+            <li
+              key={x.id}
+              style={{ listStyleType: 'none' }}
+              className='list-group-item'
+            >
+              {x.prenom} {x.nom}{' '}
+              <button
+                onClick={handleDelete}
+                value={x.id}
+                style={{ backgroundColor: 'transparent', border: 'none' }}
+              >
+                {karatekaId?.includes(x.id) ? (
+                  <DeleteOutlined />
+                ) : (
+                  // <LockOutlined />
+                  <div></div>
+                )}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div> */}
     </div>
   );
 };

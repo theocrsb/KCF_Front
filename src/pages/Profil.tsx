@@ -20,13 +20,13 @@ const Profil = () => {
 
         <li className='nav-item'>
           <NavLink to='add/karateka' className='nav-link' aria-current='page'>
-            Ajouter/supprimer karatéka
+            Gestion karatéka
           </NavLink>
         </li>
 
         <li className='nav-item'>
           <NavLink to='all/karateka' className='nav-link' aria-current='page'>
-            Gestion cours/karatéka
+            Gestion cours
           </NavLink>
         </li>
       </ul>

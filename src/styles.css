@@ -125,3 +125,7 @@ body {
   width: 100%;
   z-index: 9000;
 }
+
+.modal-backdrop {
+  opacity: 0.5 !important;
+}
