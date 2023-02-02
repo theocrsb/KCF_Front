@@ -19,6 +19,7 @@ import AllKarateka from './pages/AllKarateka';
 import RequireAuth from './components/RequireAuth';
 import Interceptor from './axios/Interceptor';
 import NotFound from './pages/NotFound';
+import MemberAuth from './components/RequireMember';
 
 export interface PayloadToken {
   exp: number;
@@ -42,7 +43,6 @@ function App() {
       <BrowserRouter>
         <Interceptor>
           <>
-            {/* On utilise notre composant dans notre JSX */}
             <NavBar />
             <Routes>
               <Route path='*' element={<NotFound />} />
@@ -50,7 +50,7 @@ function App() {
               <Route path='/connect' element={<Connect />} />
               <Route path='/subscribe' element={<Subscribe />} />
 
-              {/* protected route User */}
+              {/* -protected route User */}
               <Route
                 element={
                   <RequireAuth roles={['user', 'admin', 'superadmin']} />
@@ -58,29 +58,32 @@ function App() {
               >
                 <Route path='/calendrier' element={<Calendrier />} />
                 <Route path='/calendrier/:id' element={<CoursSelect />} />
-                {/* Routes du profil */}
+                {/* --Routes du profil */}
                 <Route path='/profil/' element={<Profil />}>
-                  {/* sous routes */}
+                  {/* ---sous routes */}
                   <Route path='update' element={<Update />} />
-                  
-                  <Route path='add/karateka' element={<AddKarateka />} />
-                  <Route path='all/karateka' element={<AllKarateka />} />
-                  {/* fin sous routes */}
+                  {/* ----protected route member */}
+                  <Route element={<MemberAuth member={['member']} />}>
+                    <Route path='add/karateka' element={<AddKarateka />} />
+                    <Route path='all/karateka' element={<AllKarateka />} />
+                  </Route>
+                  {/* ---- */}
+                  {/* ---fin sous routes */}
                 </Route>
               </Route>
-              {/* fin protected route User */}
+              {/* -fin protected route User */}
 
-              {/* protected route Admin */}
+              {/* -protected route Admin */}
               <Route element={<RequireAuth roles={['admin', 'superadmin']} />}>
                 <Route path='/admin' element={<Admin />} />
               </Route>
-              {/* fin protected route Admin */}
+              {/* -fin protected route Admin */}
 
-              {/* protected route super Admin */}
+              {/* -protected route super Admin */}
               <Route element={<RequireAuth roles={['superadmin']} />}>
                 <Route path='/superadmin' element={<SuperAdmin />} />
               </Route>
-              {/* fin protected route super Admin */}
+              {/* -fin protected route super Admin */}
             </Routes>
             <Footer />
           </>
