@@ -4,6 +4,16 @@
   border-color: #383b87;
   margin-left: 2rem;
   margin-right: 2rem;
+  --bs-btn-bg: #383b87;
+  --bs-btn-border-color: #383b87;
+  --bs-btn-hover-bg: #383b87;
+  --bs-btn-hover-border-color: #383b87;
+  --bs-btn-active-bg: #383b87;
+  --bs-btn-active-border-color: #383b87;
+  --bs-btn-disabled-bg: #383b87;
+  --bs-btn-disabled-border-color: #383b87;
+  --bs-link-color: #383b87;
+  --bs-link-hover-color: #383b87;
 }
 
 .btn:hover {
@@ -22,6 +32,16 @@
   border-color: #323131;
   margin-left: 2rem;
   margin-right: 2rem;
+  --bs-btn-bg: #323131;
+  --bs-btn-border-color: #323131;
+  --bs-btn-hover-bg: #323131;
+  --bs-btn-hover-border-color: #323131;
+  --bs-btn-active-bg: #323131;
+  --bs-btn-active-border-color: #323131;
+  --bs-btn-disabled-bg: #323131;
+  --bs-btn-disabled-border-color: #323131;
+  --bs-link-color: #323131;
+  --bs-link-hover-color: #323131;
 }
 
 .btnDirection:hover {

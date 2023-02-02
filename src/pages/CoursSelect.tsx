@@ -148,36 +148,55 @@ const CoursSelect = () => {
               className='card-body'
               style={{ backgroundColor: '#e2e2e2', borderRadius: '10px' }}
             >
-              <p className='card-text'>Selectionner la personne à inscrire :</p>
-            </div>
-            {/* debut form */}
-            <div className='form-check mt-3'>
-              <form onSubmit={handleSubmit}>
-                {allKarateka?.map((x, i) => (
-                  <div key={i + x.id}>
-                    <label className='form-check-label' htmlFor={x.id}>
-                      {x.prenom} {x.nom}
-                      <input
-                        name='RadioButton'
-                        type='radio'
-                        className='form-check-input'
-                        id={x.id}
-                        value={x.id}
-                        onChange={handleCheck}
-                      />
-                    </label>
-                  </div>
-                ))}
+              {/* si il y a un karateka sur le compte : */}
+              {allKarateka && allKarateka.length > 0 ? (
+                <>
+                  <p className='card-text'>
+                    Selectionner la personne à inscrire :
+                  </p>
+                  <div className='form-check mt-3'>
+                    <form onSubmit={handleSubmit}>
+                      {allKarateka?.map((x, i) => (
+                        <div key={i + x.id}>
+                          <label className='form-check-label' htmlFor={x.id}>
+                            {x.prenom} {x.nom}
+                            <input
+                              name='RadioButton'
+                              type='radio'
+                              className='form-check-input'
+                              id={x.id}
+                              value={x.id}
+                              onChange={handleCheck}
+                            />
+                          </label>
+                        </div>
+                      ))}
 
-                {/* fin des karatekas */}
-                <button
-                  className='btn btn-primary btnDirection mt-3'
-                  // value={oneCours?.id}
-                >
-                  Valider l'inscription
-                </button>
-              </form>
-              <NavLink to='/calendrier' className='nav-link'>
+                      <button
+                        className='btn btn-primary btnDirection mt-3'
+                        // value={oneCours?.id}
+                      >
+                        Valider l'inscription
+                      </button>
+                    </form>
+                  </div>
+                </>
+              ) : (
+                <div>
+                  {' '}
+                  <p className='card-text'>
+                    Vous n'avez aucune personne à ajouter au cours :
+                  </p>
+                  <NavLink to='/add/karateka' className='nav-link'>
+                    <button className='btn btn-primary btnDirection mt-3'>
+                      Ajouter un karateka à mon compte
+                    </button>
+                  </NavLink>
+                </div>
+              )}
+              {/*  fin select */}
+
+              <NavLink to='/profil/add/karateka' className='nav-link'>
                 <button
                   className='btn btn-primary btnPerso mt-3'
                   // value={oneCours?.id}
