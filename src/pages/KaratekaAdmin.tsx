@@ -1,7 +1,7 @@
 import React from 'react';
 
-const karatekaAdmin = () => {
+const KaratekaAdmin = () => {
   return <div>karateka admin</div>;
 };
 
-export default karatekaAdmin;
+export default KaratekaAdmin;
