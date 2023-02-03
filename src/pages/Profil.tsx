@@ -24,11 +24,12 @@ const Profil = () => {
           </NavLink>
         </li>
 
-        <li className='nav-item'>
+        {/* <li className='nav-item'>
           <NavLink to='all/karateka' className='nav-link' aria-current='page'>
             Gestion cours
           </NavLink>
-        </li>
+        </li> */}
+
       </ul>
       <div className='d-flex justify-content-center'></div>
       {/* OUTLET PERMET D'AFFICHER SELON L'URL */}

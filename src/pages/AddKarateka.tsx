@@ -1,8 +1,12 @@
 import {
   DeleteOutlined,
   EditOutlined,
+  InfoCircleOutlined,
   UserAddOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
+import { Avatar, Card, Skeleton } from 'antd';
+import Meta from 'antd/es/card/Meta';
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
@@ -12,7 +16,6 @@ import { ToastContext } from '../context/toast-context';
 import { Karateka } from './Calendrier';
 
 const AddKarateka = () => {
-
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
   const [oneKaratekaNom, SetOneKaratekaNom] = useState<string>('');
   const [oneKaratekaPrenom, SetOneKaratekaPrenom] = useState<string>('');
@@ -90,7 +93,8 @@ const AddKarateka = () => {
 
   const [isOpenUpdate, setIsOpenUpdate] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  // info
+  const [info, setInfo] = useState<string>('');
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.value, 'showModalUpdate');
     setIsOpenUpdate(true);
@@ -193,7 +197,37 @@ const AddKarateka = () => {
       });
   };
 
-  console.log(oneKaratekaNom, 'oneKaratekaNom valeur avant remplissage');
+  /////////////////////////////////////////////// MODAL INDO ///////////////////////////////////////////////
+
+  const [isOpenInfo, setIsOpenInfo] = useState<boolean>(false);
+
+  const showModalInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(e.currentTarget.value);
+    instanceAxios
+      .get<Karateka>(`/karatekas/${e.currentTarget.value}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        // console.log('Get All karateka', response);
+        console.log(response.data.note, 'à louverture de la modale');
+        setInfo(response.data.note);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        // console.log('Get All Cours Error', error);
+      });
+    setIsOpenInfo(true);
+  };
+
+  const hideModalInfo = () => {
+    setIsOpenInfo(false);
+  };
+
+  console.log(info, 'info valeur avant remplissage');
+  // console.log(oneKaratekaNom, 'oneKaratekaNom valeur avant remplissage');
   return (
     <div style={{ minHeight: '100vh' }} className='list-group '>
       <ul className='list-group pt-3'>
@@ -203,38 +237,107 @@ const AddKarateka = () => {
             className='list-group-item'
             style={{
               display: 'flex',
-              justifyContent: 'space-between',
-              paddingLeft: '5%',
-              width: '80%',
-              marginLeft: '10%',
+              justifyContent: 'center',
+              // paddingLeft: '5%',
+              // marginLeft: '10%',
+              backgroundColor: '#32313180',
             }}
           >
-            <div>
-              {x.prenom} {x.nom} : {x.age} ans. Ceinture {x.ceinture}
-            </div>
-            <div>
-              <button
-                onClick={showModalUpdate}
-                value={x.id}
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                }}
-              >
-                <EditOutlined />
-              </button>
-              <button
-                onClick={handleDelete}
-                value={x.id}
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                }}
-              >
-                <DeleteOutlined />
-              </button>
-            </div>
+            <Card
+              style={{ width: 300, marginTop: 16, marginBottom: 16 }}
+              actions={[
+                <button
+                  onClick={showModalInfo}
+                  value={x.id}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontSize: '150%',
+                  }}
+                >
+                  <InfoCircleOutlined />
+                </button>,
+                <button
+                  onClick={showModalUpdate}
+                  value={x.id}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontSize: '150%',
+                  }}
+                >
+                  <EditOutlined />
+                </button>,
+                <button
+                  onClick={handleDelete}
+                  value={x.id}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontSize: '150%',
+                  }}
+                >
+                  <DeleteOutlined />
+                </button>,
+              ]}
+            >
+              <Meta
+                avatar={<Avatar size={64} icon={<UserOutlined />} />}
+                title={`${x.prenom} ${x.nom}, ${x.age} ans`}
+                description={`ceinture ${x.ceinture}`}
+              />
+            </Card>
           </li>
+          // <li
+          //   key={i}
+          //   className='list-group-item'
+          //   style={{
+          //     display: 'flex',
+          //     justifyContent: 'space-between',
+          //     paddingLeft: '5%',
+          //     width: '80%',
+          //     marginLeft: '10%',
+          //   }}
+          // >
+          //   <div>
+          //     {x.prenom} {x.nom} : {x.age} ans. Ceinture {x.ceinture}
+          //   </div>
+          //   <div>
+          //     <button
+          //       onClick={showModalUpdate}
+          //       value={x.id}
+          //       style={{
+          //         backgroundColor: 'transparent',
+          //         border: 'none',
+          //         fontSize: '150%',
+          //       }}
+          //     >
+          //       <InfoCircleOutlined />
+          //     </button>
+          //     <button
+          //       onClick={showModalUpdate}
+          //       value={x.id}
+          //       style={{
+          //         backgroundColor: 'transparent',
+          //         border: 'none',
+          //         fontSize: '150%',
+          //       }}
+          //     >
+          //       <EditOutlined />
+          //     </button>
+          //     <button
+          //       onClick={handleDelete}
+          //       value={x.id}
+          //       style={{
+          //         backgroundColor: 'transparent',
+          //         border: 'none',
+          //         fontSize: '150%',
+          //       }}
+          //     >
+          //       <DeleteOutlined />
+          //     </button>
+          //   </div>
+          // </li>
         ))}
         <li className='list-group-item text-center'>
           <button className='btn btn-primary btnDirection' onClick={showModal}>
@@ -422,6 +525,30 @@ const AddKarateka = () => {
           <Modal.Footer>
             <button
               onClick={hideModalUpdate}
+              className='btn btn-primary btnPerso'
+            >
+              Fermer
+            </button>
+          </Modal.Footer>
+        </Modal>
+      )}
+
+      {/* info */}
+      {isLoading ? (
+        <div>Chargement...</div>
+      ) : (
+        <Modal show={isOpenInfo} onHide={hideModalInfo}>
+          <Modal.Header>
+            <Modal.Title>Note du Professeur :</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {info !== null
+              ? info
+              : `Aucune note n'a été saisie par un professeur pour le moment.`}
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              onClick={hideModalInfo}
               className='btn btn-primary btnPerso'
             >
               Fermer

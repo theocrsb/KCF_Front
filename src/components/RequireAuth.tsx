@@ -33,7 +33,7 @@ const RequireAuth = ({ roles }: RequireAuthProps) => {
         setIsLoading(false);
       });
   }, []);
-  console.log('roles dans le RequireAuth', roles);
+  // console.log('roles dans le RequireAuth', roles);
 
   return isLoading ? (
     <div>Chargement...</div>

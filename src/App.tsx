@@ -15,12 +15,12 @@ import SuperAdmin from './pages/SuperAdmin';
 import Profil from './pages/Profil';
 import Update from './pages/Update';
 import AddKarateka from './pages/AddKarateka';
-import AllKarateka from './pages/AllKarateka';
+import AllKarateka from './pages/futur/AllKarateka';
 import RequireAuth from './components/RequireAuth';
 import Interceptor from './axios/Interceptor';
 import NotFound from './pages/NotFound';
 import MemberAuth from './components/RequireMember';
-import CoursByKarateka from './pages/CoursByKarateka';
+import CoursByKarateka from './pages/futur/CoursByKarateka';
 
 export interface PayloadToken {
   exp: number;
