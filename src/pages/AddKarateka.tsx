@@ -12,15 +12,7 @@ import { ToastContext } from '../context/toast-context';
 import { Karateka } from './Calendrier';
 
 const AddKarateka = () => {
-  // let emptyKarateka: Karateka = {
-  //   id: '',
-  //   nom: '',
-  //   prenom: '',
-  //   age: 0,
-  //   sexe: '',
-  //   ceinture: '',
-  //   note: '',
-  // };
+
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
   const [oneKaratekaNom, SetOneKaratekaNom] = useState<string>('');
   const [oneKaratekaPrenom, SetOneKaratekaPrenom] = useState<string>('');
@@ -40,11 +32,6 @@ const AddKarateka = () => {
   const sexe = useRef<HTMLSelectElement>(null);
   const ceinture = useRef<HTMLSelectElement>(null);
 
-  // const nomUpdate = useRef<HTMLInputElement>(null);
-  // const prenomUpdate = useRef<HTMLInputElement>(null);
-  // const ageUpdate = useRef<HTMLInputElement>(null);
-  // const sexeUpdate = useRef<HTMLSelectElement>(null);
-  // const ceintureUpdate = useRef<HTMLSelectElement>(null);
   useEffect(() => {
     //get les karateka
     instanceAxios
@@ -117,7 +104,6 @@ const AddKarateka = () => {
       .then((response) => {
         // console.log('Get All karateka', response);
         console.log(response.data.nom, 'à louverture de la modale');
-        // setId(e.currentTarget.value);
         SetOneKaratekaNom(response.data.nom);
         SetOneKaratekaPrenom(response.data.prenom);
         SetOneKaratekaAge(response.data.age);

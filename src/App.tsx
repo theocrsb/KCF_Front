@@ -20,6 +20,7 @@ import RequireAuth from './components/RequireAuth';
 import Interceptor from './axios/Interceptor';
 import NotFound from './pages/NotFound';
 import MemberAuth from './components/RequireMember';
+import CoursByKarateka from './pages/CoursByKarateka';
 
 export interface PayloadToken {
   exp: number;
@@ -66,6 +67,10 @@ function App() {
                   <Route element={<MemberAuth member={['member']} />}>
                     <Route path='add/karateka' element={<AddKarateka />} />
                     <Route path='all/karateka' element={<AllKarateka />} />
+                    <Route
+                      path='all/karateka/:id'
+                      element={<CoursByKarateka />}
+                    />
                   </Route>
                   {/* ---- */}
                   {/* ---fin sous routes */}

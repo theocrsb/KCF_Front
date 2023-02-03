@@ -65,7 +65,8 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
       }
     }
   };
-  // Récupération d'une variable utilisable de token expiré
+  
+  // Définition des valeurs accessibles via le context
   console.log("état d'expiration du token", tokenExpired);
   const contextValue = {
     savedToken: token,
@@ -79,6 +80,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
     setMember: setMember,
   };
   return (
+    // Mise en place du fournisseur de context avec les valeurs définies
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };

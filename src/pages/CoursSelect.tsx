@@ -11,7 +11,7 @@ const CoursSelect = () => {
   const { messageToast } = useContext(ToastContext);
   const { colorToast } = useContext(ToastContext);
   //
-  let coursId = useParams();
+  const coursId = useParams();
   //   console.log(coursId.id);
   const [oneCours, SetOneCours] = useState<Cours>();
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
@@ -30,9 +30,10 @@ const CoursSelect = () => {
         },
       })
       .then((response) => {
-        // console.log('Get All Cours', response);
+        console.log('Get All Cours', response);
         SetOneCours(response.data);
       })
+
       .catch((error) => {
         // console.log('Get All Cours Error', error);
       });
@@ -81,10 +82,10 @@ const CoursSelect = () => {
       )
       .then((response) => {
         console.log('response', response);
-        setCount(count + 1);
         onToastChange(true);
         messageToast('Karatéka ajouté avec succès');
         colorToast('success');
+        setCount(count + 1);
         if (
           response.data ===
           'Ce karatéka est déjà inscrit dans le cours selectionné'
@@ -95,6 +96,7 @@ const CoursSelect = () => {
           );
           colorToast('success');
         }
+        // console.log('response', response);
       })
       .catch((error) => {
         console.log('Error', error);
@@ -119,10 +121,10 @@ const CoursSelect = () => {
       )
       .then((response) => {
         // console.log('response', response);
-        setCount(count + 1);
         onToastChange(true);
         messageToast('Karatéka retiré avec succès');
         colorToast('success');
+        setCount(count + 1);
       })
       .catch((error) => {
         console.log('Error', error);

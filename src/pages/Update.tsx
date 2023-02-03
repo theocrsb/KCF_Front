@@ -18,16 +18,6 @@ const Update = () => {
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // console.log(userEmail, 'userEmail dans le submit');
-    // console.log(
-    //   passwordElement.current?.value,
-    //   'passwordElement dans le submit'
-    // );
-    // console.log(
-    //   passwordElementConfirm.current?.value,
-    //   'passwordElementConfirm dans le submit'
-    // );
-
     if (
       passwordElement?.current?.value !== passwordElementConfirm?.current?.value
     ) {
