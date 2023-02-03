@@ -40,11 +40,11 @@ const AddKarateka = () => {
   const sexe = useRef<HTMLSelectElement>(null);
   const ceinture = useRef<HTMLSelectElement>(null);
 
-  const nomUpdate = useRef<HTMLInputElement>(null);
-  const prenomUpdate = useRef<HTMLInputElement>(null);
-  const ageUpdate = useRef<HTMLInputElement>(null);
-  const sexeUpdate = useRef<HTMLSelectElement>(null);
-  const ceintureUpdate = useRef<HTMLSelectElement>(null);
+  // const nomUpdate = useRef<HTMLInputElement>(null);
+  // const prenomUpdate = useRef<HTMLInputElement>(null);
+  // const ageUpdate = useRef<HTMLInputElement>(null);
+  // const sexeUpdate = useRef<HTMLSelectElement>(null);
+  // const ceintureUpdate = useRef<HTMLSelectElement>(null);
   useEffect(() => {
     //get les karateka
     instanceAxios
@@ -143,12 +143,11 @@ const AddKarateka = () => {
       .patch(
         `/karatekas/${id}`,
         {
-          nom: nomUpdate.current?.value,
-          prenom: prenomUpdate.current?.value,
-          age: ageUpdate.current?.value,
-          sexe: sexeUpdate.current?.value,
-          ceinture: ceintureUpdate.current?.value,
-          membre: true,
+          nom: oneKaratekaNom,
+          prenom: oneKaratekaPrenom,
+          age: oneKaratekaAge,
+          sexe: oneKaratekaSexe,
+          ceinture: oneKaratekaCeinture,
         },
         {
           headers: {
@@ -157,12 +156,12 @@ const AddKarateka = () => {
         }
       )
       .then((response) => {
-        // console.log('response', response);
+        console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Karatéka modifié`);
         colorToast('success');
-        setIsOpen(false);
+        setIsOpenUpdate(false);
       })
       .catch((error) => {
         console.log('Error', error);
