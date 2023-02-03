@@ -5,10 +5,39 @@ import { NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useContext, useEffect } from 'react';
 import { ToastContext } from '../context/toast-context';
+import { AuthContext } from '../context/Auth-context';
+import { PayloadToken } from '../App';
+import jwt_decode from 'jwt-decode';
 
 const Home = () => {
+  const {
+    savedToken,
+    UpdateToken,
+    tokenExpirationFunction,
+    tokenExpired,
+    role,
+    setRole,
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    UpdateToken(savedToken);
+    tokenExpirationFunction(savedToken);
+    console.log('voici le resultat pour savedToken', savedToken);
+    if (savedToken) {
+      const decoded: PayloadToken = jwt_decode(savedToken);
+      console.log('le payload', decoded.role.label);
+      // setTokenRole(decoded.role.label);
+      console.log("etat d'expiration token dans la navbar", tokenExpired);
+    }
+    if (tokenExpired === 'token expiré') {
+      //  navigate('/connect');
+      setRole('');
+      UpdateToken('');
+    }
+  }, []);
   const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' });
+
   return (
     <div style={{ minHeight: '100vh' }}>
       <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard'>
