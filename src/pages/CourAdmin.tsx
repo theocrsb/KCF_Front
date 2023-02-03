@@ -10,9 +10,9 @@ const CourAdmin = () => {
   const [count, setCount] = useState<number>(0);
   const sensei = useRef<HTMLInputElement>(null);
   const date = useRef<HTMLInputElement>(null);
-  const age = useRef<HTMLInputElement>(null);
-  const sexe = useRef<HTMLSelectElement>(null);
-  const ceinture = useRef<HTMLSelectElement>(null);
+  const type = useRef<HTMLInputElement>(null);
+  const note = useRef<HTMLInputElement>(null);
+
   // const [isLoading, setIsLoading] = useState<boolean>(false);
   const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.value);
@@ -63,7 +63,7 @@ const CourAdmin = () => {
                 />
               </div>
               <div className='form-group'>
-                <label htmlFor='date'>Date</label>
+                <label htmlFor='date'>Date / Heure</label>
                 <input
                   type='datetime-local'
                   className='form-control'
@@ -71,6 +71,28 @@ const CourAdmin = () => {
                   placeholder='date'
                   required
                   ref={date}
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='type'>Type de cours</label>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='type'
+                  placeholder='type'
+                  required
+                  ref={type}
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='note'>Commentaire</label>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='note'
+                  placeholder='note'
+                  required
+                  ref={note}
                 />
               </div>
 
