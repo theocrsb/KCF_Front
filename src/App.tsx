@@ -22,6 +22,9 @@ import NotFound from './pages/NotFound';
 import MemberAuth from './components/RequireMember';
 import CoursByKarateka from './pages/futur/CoursByKarateka';
 
+import KaratekaAdmin from './pages/KaratekaAdmin';
+import CourAdmin from './pages/CourAdmin';
+
 export interface PayloadToken {
   exp: number;
   iat: number;
@@ -80,7 +83,10 @@ function App() {
 
               {/* -protected route Admin */}
               <Route element={<RequireAuth roles={['admin', 'superadmin']} />}>
-                <Route path='/admin' element={<Admin />} />
+                <Route path='/admin/' element={<Admin />}>
+                  <Route path='cours' element={<CourAdmin />} />
+                  <Route path='karatekas' element={<KaratekaAdmin />} />
+                </Route>
               </Route>
               {/* -fin protected route Admin */}
 
