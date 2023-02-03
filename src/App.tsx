@@ -66,11 +66,11 @@ function App() {
                   {/* ----protected route member */}
                   <Route element={<MemberAuth member={['member']} />}>
                     <Route path='add/karateka' element={<AddKarateka />} />
-                    <Route path='all/karateka' element={<AllKarateka />} />
+                    {/* <Route path='all/karateka' element={<AllKarateka />} />
                     <Route
                       path='all/karateka/:id'
                       element={<CoursByKarateka />}
-                    />
+                    /> */}
                   </Route>
                   {/* ---- */}
                   {/* ---fin sous routes */}
