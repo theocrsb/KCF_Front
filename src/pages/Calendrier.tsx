@@ -217,7 +217,7 @@ const Calendrier = () => {
               {/* MAP du tableau des prochains jours */}
               <ul>
                 {coursAfficheTop?.map((x, i) => (
-                  <li key={x.id}>
+                  <li key={`coursAfficheTop-${x.id}`}>
                     <SwiperSlide key={x.id}>
                       <div className='card text-center'>
                         <div className='card-header'>
@@ -289,7 +289,7 @@ const Calendrier = () => {
               {/* MAP du tableau des prochains jours */}
               <ul>
                 {coursAfficheTop?.map((x, i) => (
-                  <li key={x.id}>
+                  <li key={`coursAfficheTop-${x.id}`}>
                     <SwiperSlide key={x.id}>
                       <div className='card text-center'>
                         <div className='card-header'>
@@ -381,7 +381,7 @@ const Calendrier = () => {
               {coursAffiche !== undefined && coursAffiche.length > 0 ? (
                 coursAffiche?.map((x, i) => (
                   <div
-                    key={'calendrier ordi' + i}
+                    key={`coursAffiche-${x.id}`}
                     className='card text-center mb-3'
                     style={{
                       width: '350px',
@@ -504,7 +504,7 @@ const Calendrier = () => {
               {coursAffiche !== undefined && coursAffiche.length > 0 ? (
                 coursAffiche?.map((x, i) => (
                   <div
-                    key={'calendrier mobile' + i}
+                    key={`coursAffiche-${x.id}`}
                     className='card text-center mb-3'
                   >
                     <div

@@ -240,7 +240,7 @@ const AddKarateka = () => {
               justifyContent: 'center',
               // paddingLeft: '5%',
               // marginLeft: '10%',
-              backgroundColor: '#32313180',
+              backgroundColor: '#32313140',
             }}
           >
             <Card
@@ -288,59 +288,12 @@ const AddKarateka = () => {
               />
             </Card>
           </li>
-          // <li
-          //   key={i}
-          //   className='list-group-item'
-          //   style={{
-          //     display: 'flex',
-          //     justifyContent: 'space-between',
-          //     paddingLeft: '5%',
-          //     width: '80%',
-          //     marginLeft: '10%',
-          //   }}
-          // >
-          //   <div>
-          //     {x.prenom} {x.nom} : {x.age} ans. Ceinture {x.ceinture}
-          //   </div>
-          //   <div>
-          //     <button
-          //       onClick={showModalUpdate}
-          //       value={x.id}
-          //       style={{
-          //         backgroundColor: 'transparent',
-          //         border: 'none',
-          //         fontSize: '150%',
-          //       }}
-          //     >
-          //       <InfoCircleOutlined />
-          //     </button>
-          //     <button
-          //       onClick={showModalUpdate}
-          //       value={x.id}
-          //       style={{
-          //         backgroundColor: 'transparent',
-          //         border: 'none',
-          //         fontSize: '150%',
-          //       }}
-          //     >
-          //       <EditOutlined />
-          //     </button>
-          //     <button
-          //       onClick={handleDelete}
-          //       value={x.id}
-          //       style={{
-          //         backgroundColor: 'transparent',
-          //         border: 'none',
-          //         fontSize: '150%',
-          //       }}
-          //     >
-          //       <DeleteOutlined />
-          //     </button>
-          //   </div>
-          // </li>
         ))}
         <li className='list-group-item text-center'>
-          <button className='btn btn-primary btnDirection' onClick={showModal}>
+          <button
+            className='btn btn-primary btnDirection m-3'
+            onClick={showModal}
+          >
             Ajouter un karatéka <UserAddOutlined />
           </button>
         </li>
