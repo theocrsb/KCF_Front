@@ -5,7 +5,7 @@ import {
   UserAddOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Avatar, Card, Skeleton } from 'antd';
+import { Avatar, Card, Popconfirm, Skeleton } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -34,6 +34,19 @@ const AddKarateka = () => {
   const age = useRef<HTMLInputElement>(null);
   const sexe = useRef<HTMLSelectElement>(null);
   const ceinture = useRef<HTMLSelectElement>(null);
+  // Confirmation
+  const [isConfirm, setIsConfirm] = useState<boolean>(false);
+  const text = 'Voulez vous vraiment supprimer ce karatéka ?';
+  const description = 'Supprimer le karatéka';
+  const [idDelete, setIdDelete] = useState<string>('');
+
+  const confirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // // message.info('Clicked on Yes.');
+    e.preventDefault();
+    setIdDelete(e.currentTarget.value);
+    setIsConfirm(true);
+  };
+  //
 
   useEffect(() => {
     //get les karateka
@@ -52,28 +65,28 @@ const AddKarateka = () => {
       });
   }, [count]);
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDelete = () => {
     // console.log(e.currentTarget.value);
-    e.preventDefault();
+    // e.preventDefault();
 
-    if (window.confirm('Voulez vous vraiment supprimer ce karatéka ?')) {
-      instanceAxios
-        .delete(`/karatekas/${e.currentTarget.value}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        })
-        .then((response) => {
-          // console.log('response', response);
-          setCount(count + 1);
-          onToastChange(true);
-          messageToast(`Karatéka supprimé`);
-          colorToast('success');
-        })
-        .catch((error) => {
-          console.log('Error', error);
-        });
-    }
+    // if (window.confirm('Voulez vous vraiment supprimer ce karatéka ?')) {
+    instanceAxios
+      .delete(`/karatekas/${idDelete}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        // console.log('response', response);
+        setCount(count + 1);
+        onToastChange(true);
+        messageToast(`Karatéka supprimé`);
+        colorToast('success');
+      })
+      .catch((error) => {
+        console.log('Error', error);
+      });
+    // }
   };
 
   /////////////////////////////////////////////// MODAL CREATE ///////////////////////////////////////////////
@@ -268,17 +281,26 @@ const AddKarateka = () => {
                 >
                   <EditOutlined />
                 </button>,
-                <button
-                  onClick={handleDelete}
-                  value={x.id}
-                  style={{
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    fontSize: '150%',
-                  }}
+                <Popconfirm
+                  placement='top'
+                  title={text}
+                  description={description}
+                  onConfirm={handleDelete}
+                  okText='Oui'
+                  cancelText='Non'
                 >
-                  <DeleteOutlined />
-                </button>,
+                  <button
+                    onClick={confirm}
+                    value={x.id}
+                    style={{
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      fontSize: '150%',
+                    }}
+                  >
+                    <DeleteOutlined />
+                  </button>
+                </Popconfirm>,
               ]}
             >
               <Meta
