@@ -215,44 +215,44 @@ const Calendrier = () => {
               className='mySwiper'
             >
               {/* MAP du tableau des prochains jours */}
-              <ul>
-                {coursAfficheTop?.map((x, i) => (
-                  <li key={`coursAfficheTop-${x.id}`}>
-                    <SwiperSlide key={x.id}>
-                      <div className='card text-center'>
-                        <div className='card-header'>
-                          Cours de {x.type} | Sensei : {x.sensei}
-                        </div>
-                        <div className='card-body'>
-                          {/* <p className='card-text'>{x.note}</p> */}
-                          <NavLink to={x.id}>
-                            <button
-                              className='btn btn-primary btnDirection btn-sm'
-                              value={x.id}
-                            >
-                              S'inscrire
-                            </button>
-                          </NavLink>
-                        </div>
-                        <div
-                          className='card-footer'
-                          style={{
-                            fontSize: '0.9rem',
-                            fontWeight: 'bolder',
-                            color: 'black',
-                          }}
+              {/* <ul> */}
+              {coursAfficheTop?.map((x, i) => (
+                // <li key={`coursAfficheTop-${x.id}`}>
+                <SwiperSlide key={`coursAfficheTop-${x.id}`}>
+                  <div className='card text-center'>
+                    <div className='card-header'>
+                      Cours de {x.type} | Sensei : {x.sensei}
+                    </div>
+                    <div className='card-body'>
+                      {/* <p className='card-text'>{x.note}</p> */}
+                      <NavLink to={x.id}>
+                        <button
+                          className='btn btn-primary btnDirection btn-sm'
+                          value={x.id}
                         >
-                          {new Date(x.heureDebut).getHours()}h
-                          {new Date(x.heureDebut).getMinutes()} /{' '}
-                          {new Date(x.heureFin).getHours()}h
-                          {new Date(x.heureFin).getMinutes()} le{' '}
-                          {new Date(x.date).toLocaleDateString('fr')}
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  </li>
-                ))}
-              </ul>
+                          S'inscrire
+                        </button>
+                      </NavLink>
+                    </div>
+                    <div
+                      className='card-footer'
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: 'bolder',
+                        color: 'black',
+                      }}
+                    >
+                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getMinutes()} /{' '}
+                      {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin).getMinutes()} le{' '}
+                      {new Date(x.date).toLocaleDateString('fr')}
+                    </div>
+                  </div>
+                </SwiperSlide>
+                // </li>
+              ))}
+              {/* </ul> */}
             </Swiper>
           </div>
         )
@@ -287,44 +287,44 @@ const Calendrier = () => {
               className='mySwiper'
             >
               {/* MAP du tableau des prochains jours */}
-              <ul>
-                {coursAfficheTop?.map((x, i) => (
-                  <li key={`coursAfficheTop-${x.id}`}>
-                    <SwiperSlide key={x.id}>
-                      <div className='card text-center'>
-                        <div className='card-header'>
-                          Cours de {x.type} | Sensei : {x.sensei}
-                        </div>
-                        <div className='card-body'>
-                          {/* <p className='card-text'>{x.note}</p> */}
-                          <NavLink to={x.id}>
-                            <button
-                              className='btn btn-primary btnDirection btn-sm'
-                              value={x.id}
-                            >
-                              S'inscrire
-                            </button>
-                          </NavLink>
-                        </div>
-                        <div
-                          className='card-footer'
-                          style={{
-                            fontSize: '0.9rem',
-                            fontWeight: 'bolder',
-                            color: 'black',
-                          }}
+              {/* <ul> */}
+              {coursAfficheTop?.map((x, i) => (
+                // <li key={`coursAfficheTop-${x.id}`}>
+                <SwiperSlide key={`coursAfficheTop-${x.id}`}>
+                  <div className='card text-center'>
+                    <div className='card-header'>
+                      Cours de {x.type} | Sensei : {x.sensei}
+                    </div>
+                    <div className='card-body'>
+                      {/* <p className='card-text'>{x.note}</p> */}
+                      <NavLink to={x.id}>
+                        <button
+                          className='btn btn-primary btnDirection btn-sm'
+                          value={x.id}
                         >
-                          {new Date(x.heureDebut).getHours()}h
-                          {new Date(x.heureDebut).getMinutes()} /{' '}
-                          {new Date(x.heureFin).getHours()}h
-                          {new Date(x.heureFin).getMinutes()} le{' '}
-                          {new Date(x.date).toLocaleDateString('fr')}
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  </li>
-                ))}
-              </ul>
+                          S'inscrire
+                        </button>
+                      </NavLink>
+                    </div>
+                    <div
+                      className='card-footer'
+                      style={{
+                        fontSize: '0.9rem',
+                        fontWeight: 'bolder',
+                        color: 'black',
+                      }}
+                    >
+                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getMinutes()} /{' '}
+                      {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin).getMinutes()} le{' '}
+                      {new Date(x.date).toLocaleDateString('fr')}
+                    </div>
+                  </div>
+                </SwiperSlide>
+                // </li>
+              ))}
+              {/* </ul> */}
             </Swiper>
           </div>
         )

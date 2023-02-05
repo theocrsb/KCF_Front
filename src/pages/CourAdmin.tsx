@@ -1,4 +1,9 @@
-import { DeleteOutlined, EditOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  BookOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -6,9 +11,10 @@ import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
 import { Cours } from './Calendrier';
-
+import LogoMicka from '../images/logoMickRetouch.png';
 const CourAdmin = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   // Lien avec le toast context
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   //
@@ -21,6 +27,7 @@ const CourAdmin = () => {
   const [Oneend, setOneend] = useState<string>('');
   const [Onetype, setOnetype] = useState<string>('');
   const [Onenote, setOnenote] = useState<string>('');
+  const [id, setId] = useState<string>('');
   //
   const sensei = useRef<HTMLInputElement>(null);
   const date = useRef<HTMLInputElement>(null);
@@ -28,8 +35,28 @@ const CourAdmin = () => {
   const end = useRef<HTMLInputElement>(null);
   const type = useRef<HTMLInputElement>(null);
   const note = useRef<HTMLInputElement>(null);
-  let newStart = `${date.current?.value}T${start.current?.value}`;
-  let newEnd = `${date.current?.value}T${end.current?.value}`;
+
+  useEffect(() => {
+    instanceAxios
+      .get<Cours[]>(
+        `/cours/`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        setCours(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [count]);
+
+  // fin get ALL cours
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,14 +79,15 @@ const CourAdmin = () => {
     // console.log(newEnd);
     // console.log(type.current?.value);
     // console.log(note.current?.value);
+
     instanceAxios
       .post(
         `/cours/`,
         {
           sensei: sensei.current?.value,
           date: date.current?.value,
-          heureDebut: newStart,
-          heureFin: newEnd,
+          heureDebut: `${date.current?.value}T${start.current?.value}`,
+          heureFin: `${date.current?.value}T${end.current?.value}`,
           type: type.current?.value,
           note: note.current?.value,
         },
@@ -72,72 +100,21 @@ const CourAdmin = () => {
       .then((response) => {
         console.log(response);
         setCount(count + 1);
+        onToastChange(true);
+        messageToast(`Cours Créer`);
+        colorToast('success');
+        setIsOpen(false);
       })
       .catch((error) => {
         console.log(error);
+        onToastChange(true);
+        messageToast(`Erreur lors de la création du cours`);
+        colorToast('danger');
       });
   };
-
-  useEffect(() => {
-    instanceAxios
-      .get<Cours[]>(
-        `/cours/`,
-
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        setCours(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [count]);
 
   // ----------------------------- UPDATE -----------------------------
   const [isOpenUpdate, setIsOpenUpdate] = useState<boolean>(false);
-  const hideModalUpdate = () => {
-    setIsOpenUpdate(false);
-  };
-
-  const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
-    console.log(e.currentTarget.value);
-    e.preventDefault();
-    // instanceAxios
-    //   .patch(
-    //     `/cours/${id}`,
-    //     {
-    //       //  nom: oneKaratekaNom,
-    //       //  prenom: oneKaratekaPrenom,
-    //       //  age: oneKaratekaAge,
-    //       //  sexe: oneKaratekaSexe,
-    //       //  ceinture: oneKaratekaCeinture,
-    //     },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-    //       },
-    //     }
-    //   )
-    //   .then((response) => {
-    //     console.log('response', response);
-    //     setCount(count + 1);
-    //     onToastChange(true);
-    //     messageToast(`Cours modifié`);
-    //     colorToast('success');
-    //     setIsOpenUpdate(false);
-    //   })
-    //   .catch((error) => {
-    //     console.log('Error', error);
-    //     onToastChange(true);
-    //     messageToast(`Erreur lors de la création du cours`);
-    //     colorToast('danger');
-    //   });
-  };
 
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.value, 'showModalUpdate');
@@ -153,16 +130,80 @@ const CourAdmin = () => {
         console.log(response.data, 'à louverture de la modale');
 
         setOnesensei(response.data.sensei);
-        setOnedate(response.data.date);
-        setOnestart(response.data.heureDebut);
-        setOneend(response.data.heureFin);
+        // MISE AU FORMAT POUR LA DATE
+        let date = new Date(response.data.date);
+        date.setDate(date.getDate() + 1);
+        let newDateString = date.toISOString().split('T')[0];
+        setOnedate(newDateString);
+        // MISE AU FORMAT POUR L'HEURE
+        const dateHeure = new Date(response.data.heureDebut);
+        const hours = dateHeure.getHours();
+        const minutes = dateHeure.getMinutes().toString().padStart(2, '0');
+        const formattedTime = `${hours}:${minutes}`;
+        setOnestart(formattedTime);
+        const dateHeureFin = new Date(response.data.heureFin);
+        const hoursFin = dateHeureFin.getHours();
+        const minutesFin = dateHeureFin
+          .getMinutes()
+          .toString()
+          .padStart(2, '0');
+        const formattedTimeFin = `${hoursFin}:${minutesFin}`;
+        setOneend(formattedTimeFin);
+        // FIN MISE AU FORMAT POUR L'HEURE
         setOnetype(response.data.type);
         setOnenote(response.data.note);
+        setId(response.data.id);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
         // console.log(error);
+      });
+  };
+
+  const hideModalUpdate = () => {
+    setIsOpenUpdate(false);
+  };
+
+  console.log(Onedate, 'DATE');
+  console.log(Onestart, 'START');
+  console.log(Oneend, 'END');
+
+  // console.log(newString, 'newDateString');
+  const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
+    console.log(e.currentTarget.value);
+    e.preventDefault();
+
+    instanceAxios
+      .patch(
+        `/cours/${id}/admin`,
+        {
+          sensei: sensei.current?.value,
+          date: date.current?.value,
+          heureDebut: `${date.current?.value}T${start.current?.value}`,
+          heureFin: `${date.current?.value}T${end.current?.value}`,
+          type: type.current?.value,
+          note: note.current?.value,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log('response', response);
+        setCount(count + 1);
+        onToastChange(true);
+        messageToast(`Cours modifié avec succès`);
+        colorToast('success');
+        setIsOpenUpdate(false);
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        onToastChange(true);
+        messageToast(`Erreur lors de la création du cours`);
+        colorToast('danger');
       });
   };
 
@@ -172,9 +213,9 @@ const CourAdmin = () => {
     // console.log(e.currentTarget.value);
     e.preventDefault();
 
-    if (window.confirm('Voulez vous vraiment supprimer ce karatéka ?')) {
+    if (window.confirm('Voulez vous vraiment supprimer ce cours ?')) {
       instanceAxios
-        .delete(`/cours/${e.currentTarget.value}`, {
+        .delete(`/cours/${e.currentTarget.value}/admin`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
@@ -183,14 +224,18 @@ const CourAdmin = () => {
           // console.log('response', response);
           setCount(count + 1);
           onToastChange(true);
-          messageToast(`Karatéka supprimé`);
+          messageToast(`cours supprimé`);
           colorToast('success');
         })
         .catch((error) => {
           console.log('Error', error);
+          onToastChange(true);
+          messageToast(`Erreur lors de suppression du cours`);
+          colorToast('danger');
         });
     }
   };
+
   return (
     <div>
       <div className='d-flex justify-content-center border-bottom'>
@@ -342,17 +387,21 @@ const CourAdmin = () => {
                 ]}
               >
                 <Meta
-                  avatar={<Avatar size={64} icon={<UserOutlined />} />}
+                  avatar={<Avatar size={64} icon={<BookOutlined />} />}
                   title={`${x?.sensei} | ${x?.type}`}
                   description={`${new Date(x.heureDebut).getHours()}h${new Date(
                     x.heureDebut
-                  ).getMinutes()}/${new Date(
+                  )
+                    .getMinutes()
+                    .toString()
+                    .padStart(2, '0')}/${new Date(
                     x?.heureFin
-                  ).getHours()}h${new Date(
-                    x?.heureFin
-                  ).getMinutes()} le ${new Date(x?.date).toLocaleDateString(
-                    'fr'
-                  )}`}
+                  ).getHours()}h${new Date(x?.heureFin)
+                    .getMinutes()
+                    .toString()
+                    .padStart(2, '0')} le ${new Date(
+                    x?.date
+                  ).toLocaleDateString('fr')}`}
                 />
               </Card>
             </li>
