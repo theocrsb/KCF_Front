@@ -6,9 +6,7 @@ import { AuthContext } from '../context/Auth-context';
 
 const Connect = () => {
   // Lien avec le toast context
-  const { onToastChange } = useContext(ToastContext);
-  const { messageToast } = useContext(ToastContext);
-  const { colorToast } = useContext(ToastContext);
+  const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   //
   const emailElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);

@@ -1,12 +1,15 @@
 import axios from 'axios';
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useContext, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { ToastContext } from '../context/toast-context';
 
 const Subscribe = () => {
   const emailElement = useRef<HTMLInputElement>(null);
   const passwordElement = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [message, setMessage] = useState<string>();
+  // Lien avec le toast context
+  const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
+  //
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(emailElement.current?.value);
@@ -21,11 +24,16 @@ const Subscribe = () => {
       .then((response) => {
         console.log(response);
         // Futur TOAST
+        onToastChange(true);
+        messageToast('Inscription réussie ! Veuillez vous connecter.');
+        colorToast('success');
         navigate('/connect');
-        setMessage('Inscription réussie !');
       })
       .catch((error) => {
         console.log('Inscription impossible', error);
+        onToastChange(true);
+        messageToast(error.response.data.message);
+        colorToast('danger');
       });
   };
   return (

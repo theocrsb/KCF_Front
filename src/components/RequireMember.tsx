@@ -52,7 +52,7 @@ const MemberAuth = ({ member }: MemberAuthProps) => {
           {
             (onToastChange(true),
             messageToast(
-              `Désolé, vous n'avez pas l'autorisation. Vous devez être membre du club pour y acceder à cette page.`
+              `Désolé, vous n'avez pas l'autorisation. Vous devez être membre du club pour acceder à cette page.`
             ),
             colorToast('danger'))
           }

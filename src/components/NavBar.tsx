@@ -80,7 +80,7 @@ const NavBar = () => {
             {/* --------------------------- debut LI --------------------------- */}
             <li className='nav-item'>
               <NavLink to='/' end className='nav-link'>
-                <div className='nav-link'>Acceuil</div>
+                <div className='nav-link'>Accueil</div>
               </NavLink>
             </li>
             {/* --------------------------- user ou admin ou superadmin connecté --------------------------- */}
