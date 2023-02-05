@@ -92,14 +92,14 @@ const KaratekaAdmin = () => {
         console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
-        messageToast(`karateka modifié avec succès`);
+        messageToast(`Commentaire modifié avec succès`);
         colorToast('success');
         setIsOpenUpdate(false);
       })
       .catch((error) => {
         console.log('Error', error);
         onToastChange(true);
-        messageToast(`Erreur lors de la création du karateka`);
+        messageToast(`Erreur lors de la modification du commentaire`);
         colorToast('danger');
         setIsOpenUpdate(false);
       });
@@ -145,7 +145,7 @@ const KaratekaAdmin = () => {
                 <Meta
                   avatar={<Avatar size={64} icon={<UserOutlined />} />}
                   title={`${x?.prenom} | ${x?.nom}`}
-                  description={``}
+                  description={`ceinture : ${x.ceinture}`}
                 />
               </Card>
             </li>

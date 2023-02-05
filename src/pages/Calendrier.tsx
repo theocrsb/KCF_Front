@@ -47,6 +47,7 @@ export interface User {
   id: string;
   email: string;
   member: boolean;
+  role: Role;
 }
 
 export interface Role {
