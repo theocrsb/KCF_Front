@@ -4,7 +4,7 @@ import {
   EditOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Avatar, Card } from 'antd';
+import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
@@ -35,7 +35,19 @@ const CourAdmin = () => {
   const end = useRef<HTMLInputElement>(null);
   const type = useRef<HTMLInputElement>(null);
   const note = useRef<HTMLInputElement>(null);
+  // Confirmation
+  const [isConfirm, setIsConfirm] = useState<boolean>(false);
+  const text = 'Voulez vous vraiment supprimer ce cours ?';
+  const description = 'Supprimer le cours';
+  const [idDelete, setIdDelete] = useState<string>('');
 
+  const confirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // // message.info('Clicked on Yes.');
+    e.preventDefault();
+    setIdDelete(e.currentTarget.value);
+    setIsConfirm(true);
+  };
+  //
   useEffect(() => {
     instanceAxios
       .get<Cours[]>(
@@ -209,13 +221,14 @@ const CourAdmin = () => {
 
   // ----------------------------- DELETE -----------------------------
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDelete = () => {
     // console.log(e.currentTarget.value);
-    e.preventDefault();
+    // e.preventDefault();
 
-    if (window.confirm('Voulez vous vraiment supprimer ce cours ?')) {
+    // if (window.confirm('Voulez vous vraiment supprimer ce cours ?')) {
+    if (isConfirm === true) {
       instanceAxios
-        .delete(`/cours/${e.currentTarget.value}/admin`, {
+        .delete(`/cours/${idDelete}/admin`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
@@ -226,6 +239,7 @@ const CourAdmin = () => {
           onToastChange(true);
           messageToast(`cours supprimé`);
           colorToast('success');
+          setIsConfirm(false);
         })
         .catch((error) => {
           console.log('Error', error);
@@ -373,17 +387,26 @@ const CourAdmin = () => {
                   >
                     <EditOutlined />
                   </button>,
-                  <button
-                    onClick={handleDelete}
-                    value={x.id}
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      fontSize: '150%',
-                    }}
+                  <Popconfirm
+                    placement='top'
+                    title={text}
+                    description={description}
+                    onConfirm={handleDelete}
+                    okText='Oui'
+                    cancelText='Non'
                   >
-                    <DeleteOutlined />
-                  </button>,
+                    <button
+                      onClick={confirm}
+                      value={x.id}
+                      style={{
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        fontSize: '150%',
+                      }}
+                    >
+                      <DeleteOutlined />
+                    </button>
+                  </Popconfirm>,
                 ]}
               >
                 <Meta
