@@ -7,13 +7,13 @@ const Admin = () => {
       <ul className='nav nav-pills nav-fill border-bottom border-secondary p-2'>
         <li className='nav-item'>
           <NavLink to='cours' className='nav-link' aria-disabled='true'>
-            Cours
+            Gestion cours
           </NavLink>
         </li>
 
         <li className='nav-item'>
           <NavLink to='karatekas' className='nav-link' aria-current='page'>
-            Karatékas
+            Commentaire karatékas
           </NavLink>
         </li>
       </ul>

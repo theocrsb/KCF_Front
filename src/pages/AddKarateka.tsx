@@ -187,6 +187,7 @@ const AddKarateka = () => {
           sexe: sexe.current?.value,
           ceinture: ceinture.current?.value,
           membre: true,
+          note: '',
         },
         {
           headers: {
@@ -517,7 +518,7 @@ const AddKarateka = () => {
             <Modal.Title>Note du Professeur :</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {info !== null
+            {info !== ''
               ? info
               : `Aucune note n'a été saisie par un professeur pour le moment.`}
           </Modal.Body>

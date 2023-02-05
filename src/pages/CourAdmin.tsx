@@ -260,7 +260,7 @@ const CourAdmin = () => {
           Ajouter un cours
         </button>
       </div>
-      <div></div>
+
       {/* info */}
       {/* {isLoading ? (
         <div>Chargement...</div>
