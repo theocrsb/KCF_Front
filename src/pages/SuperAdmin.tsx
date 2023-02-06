@@ -1,11 +1,11 @@
 import { BookOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { User } from './Calendrier';
+import { Role, User } from './Calendrier';
 
 const SuperAdmin = () => {
   // Lien avec le toast context
@@ -37,6 +37,12 @@ const SuperAdmin = () => {
   const [idDelete, setIdDelete] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  //
+  const [oneRole, setOneRole] = useState<string>('');
+  const [oneMember, setOneMember] = useState<string>('');
+  const theMember = useRef<HTMLInputElement>(null);
+  const theRole = useRef<HTMLInputElement>(null);
+  //
   const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.value);
     setIsOpen(true);
@@ -77,8 +83,12 @@ const SuperAdmin = () => {
       })
       .then((response) => {
         console.log(response.data, 'à louverture de la modale');
-        // setOneRole(response.data.role.label)
-        // setOneMember(response.data.member)
+        setOneRole(response.data.role.label);
+        if (response.data.member === true) {
+          setOneMember('oui');
+        } else {
+          setOneMember('non');
+        }
         setIsLoading(false);
       })
       .catch((error) => {
@@ -100,8 +110,8 @@ const SuperAdmin = () => {
       .patch(
         `/users/${id}/admin`,
         {
-          // role : role.current?.value
-          //     member : member.current?.value
+          role: oneRole,
+          member: oneMember,
         },
         {
           headers: {
@@ -216,7 +226,9 @@ const SuperAdmin = () => {
                 <Meta
                   avatar={<Avatar size={64} icon={<BookOutlined />} />}
                   title={`${x?.email}`}
-                  description={`${x?.member}`}
+                  description={`${
+                    x?.member === true ? 'Membre' : 'Non membre'
+                  }`}
                 />
               </Card>
             </li>
@@ -229,36 +241,39 @@ const SuperAdmin = () => {
       ) : (
         <Modal show={isOpenUpdate} onHide={hideModalUpdate}>
           <Modal.Header>
-            <Modal.Title>Modification d'un karatéka</Modal.Title>
+            <Modal.Title>Modification d'un utilisateur</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div>
               <form onSubmit={handleUpdate}>
                 <div className='form-group'>
                   <label htmlFor='role'>Role</label>
-                  <input
-                    type='text'
+                  <select
                     className='form-control'
                     id='role'
-                    placeholder='role'
                     required
-                    // ref={sensei}
-                    // value={Onesensei}
-                    // onChange={(e) => setOnesensei(e.target.value)}
-                  />
+                    // ref={sexeUpdate}
+                    value={oneRole}
+                    onChange={(e) => setOneRole(e.target.value)}
+                  >
+                    <option>user</option>
+                    <option>admin</option>
+                    <option>super</option>
+                  </select>
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='membre'>Membre</label>
-                  <input
-                    type='text'
+                  <label htmlFor='member'>Membre ?</label>
+                  <select
                     className='form-control'
-                    id='membre'
-                    placeholder='membre'
+                    id='member'
                     required
-                    // ref={date}
-                    // value={Onedate}
-                    // onChange={(e) => setOnedate(e.target.value)}
-                  />
+                    // ref={ceintureUpdate}
+                    value={oneMember}
+                    onChange={(e) => setOneMember(e.target.value)}
+                  >
+                    <option>oui</option>
+                    <option>non</option>
+                  </select>
                 </div>
 
                 <button className='btn btn-primary btnDirection mt-3'>
