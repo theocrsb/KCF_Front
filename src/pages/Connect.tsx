@@ -101,6 +101,11 @@ const Connect = () => {
           </button>
         </form>
       </div>
+      <div className='pt-0 text-center'>
+        <NavLink to='/subscribe' className='nav-link'>
+          Pas de compte ?
+        </NavLink>
+      </div>
     </div>
   );
 };

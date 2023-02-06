@@ -35,7 +35,7 @@ const SuperAdmin = () => {
   }, [count]);
 
   // /-------------------------------------------------------------------------------------------------------------------------------------------------------
-  const [isConfirm, setIsConfirm] = useState<boolean>(false);
+
   const [id, setId] = useState<string>('');
 
   const text = 'Voulez vous vraiment supprimer cet utilisateur ?';
@@ -51,7 +51,6 @@ const SuperAdmin = () => {
     // // message.info('Clicked on Yes.');
     e.preventDefault();
     setIdDelete(e.currentTarget.value);
-    setIsConfirm(true);
   };
 
   // console.log(sensei.current?.value);
@@ -166,7 +165,6 @@ const SuperAdmin = () => {
         onToastChange(true);
         messageToast(`Utilisateur supprimé`);
         colorToast('success');
-        setIsConfirm(false);
       })
       .catch((error) => {
         console.log('Error', error);

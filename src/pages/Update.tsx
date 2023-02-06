@@ -1,3 +1,4 @@
+import { Popconfirm } from 'antd';
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,16 @@ const Update = () => {
   const passwordElement = useRef<HTMLInputElement>(null);
   const passwordElementConfirm = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  // delete
+  const text = 'Voulez vous vraiment supprimer votre compte ?';
+  const description = `Supprimer votre compte`;
+  const [count, setCount] = useState<number>(0);
+  //
+
+  const confirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // // message.info('Clicked on Yes.');
+    e.preventDefault();
+  };
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -78,7 +89,29 @@ const Update = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [count]);
+
+  const handleDelete = () => {
+    instanceAxios
+      .delete(`/users/id/perso`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        // console.log('response', response);
+        onToastChange(true);
+        messageToast(`Vous venez de supprimer votre compte`);
+        colorToast('success');
+        setCount(count + 1);
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        onToastChange(true);
+        messageToast(`Erreur lors de la suppresion de votre compte`);
+        colorToast('danger');
+      });
+  };
 
   console.log(userEmail, 'user dans update');
   return (
@@ -128,6 +161,26 @@ const Update = () => {
             Mettre à jour
           </button>
         </form>
+      </div>
+      <div className='pt-5 text-center'>
+        <Popconfirm
+          placement='top'
+          title={text}
+          description={description}
+          onConfirm={handleDelete}
+          okText='Oui'
+          cancelText='Non'
+        >
+          <button
+            onClick={confirm}
+            style={{
+              backgroundColor: 'transparent',
+              border: 'none',
+            }}
+          >
+            Supprimer mon compte ?
+          </button>
+        </Popconfirm>
       </div>
     </div>
   );
