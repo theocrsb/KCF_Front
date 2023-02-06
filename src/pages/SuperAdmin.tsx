@@ -11,6 +11,7 @@ const SuperAdmin = () => {
   // Lien avec le toast context
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   //
+  const [count, setCount] = useState<number>(0);
   const [allUser, setAllUser] = useState<User[]>([]);
   useEffect(() => {
     instanceAxios
@@ -26,12 +27,12 @@ const SuperAdmin = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [count]);
 
   // /-------------------------------------------------------------------------------------------------------------------------------------------------------
   const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [id, setId] = useState<string>('');
-  const [count, setCount] = useState<number>(0);
+
   const text = 'Voulez vous vraiment supprimer cet utilisateur ?';
   const description = `Supprimer l'utilisateur`;
   const [idDelete, setIdDelete] = useState<string>('');
@@ -40,8 +41,9 @@ const SuperAdmin = () => {
   //
   const [oneRole, setOneRole] = useState<string>('');
   const [oneMember, setOneMember] = useState<string>('');
-  const theMember = useRef<HTMLInputElement>(null);
-  const theRole = useRef<HTMLInputElement>(null);
+  // const theMember = useRef<HTMLInputElement>(null);
+  // const theRole = useRef<HTMLInputElement>(null);
+
   //
   const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.value);
@@ -89,6 +91,8 @@ const SuperAdmin = () => {
         } else {
           setOneMember('non');
         }
+        setId(response.data.id);
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -100,18 +104,34 @@ const SuperAdmin = () => {
   const hideModalUpdate = () => {
     setIsOpenUpdate(false);
   };
-
+  let valueId: string;
+  let valueMember: boolean;
   // console.log(newString, 'newDateString');
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
     console.log(e.currentTarget.value);
     e.preventDefault();
+    if (oneRole === 'user') {
+      valueId = 'd7c21c44-d565-46d8-a75c-b198a66bfe40';
+    }
+    if (oneRole === 'admin') {
+      valueId = '391cd106-4915-484a-bfb1-d9093cd6ef44';
+    }
+    if (oneRole === 'superadmin') {
+      valueId = 'cb738998-7196-4ff2-b659-bc01e9ef4737';
+    }
 
+    if (oneMember === 'oui') {
+      valueMember = true;
+    } else {
+      valueMember = false;
+    }
+    console.log(valueId, 'id avant le patch');
     instanceAxios
       .patch(
         `/users/${id}/admin`,
         {
-          role: oneRole,
-          member: oneMember,
+          role: { id: valueId },
+          member: valueMember,
         },
         {
           headers: {
@@ -123,14 +143,14 @@ const SuperAdmin = () => {
         console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
-        messageToast(`Cours modifié avec succès`);
+        messageToast(`Utilisateur modifié avec succès`);
         colorToast('success');
         setIsOpenUpdate(false);
       })
       .catch((error) => {
         console.log('Error', error);
         onToastChange(true);
-        messageToast(`Erreur lors de la création du cours`);
+        messageToast(`Erreur lors de la modification de l'utilisateur`);
         colorToast('danger');
       });
   };
@@ -177,9 +197,9 @@ const SuperAdmin = () => {
             backgroundColor: '#32313140',
           }}
         >
-          {allUser?.map((x, i) => (
+          {allUser?.map((x) => (
             <li
-              key={i}
+              key={`alluser-${x.id}`}
               style={{ margin: 16, listStyle: 'none', width: '350px' }}
             >
               <Card
@@ -228,7 +248,7 @@ const SuperAdmin = () => {
                   title={`${x?.email}`}
                   description={`${
                     x?.member === true ? 'Membre' : 'Non membre'
-                  }`}
+                  } | ${x.role.label}`}
                 />
               </Card>
             </li>
@@ -247,27 +267,27 @@ const SuperAdmin = () => {
             <div>
               <form onSubmit={handleUpdate}>
                 <div className='form-group'>
-                  <label htmlFor='role'>Role</label>
+                  <label htmlFor='role'>Role de l'utilisateur :</label>
                   <select
                     className='form-control'
                     id='role'
                     required
-                    // ref={sexeUpdate}
+                    // ref={}
                     value={oneRole}
                     onChange={(e) => setOneRole(e.target.value)}
                   >
                     <option>user</option>
                     <option>admin</option>
-                    <option>super</option>
+                    <option>superadmin</option>
                   </select>
                 </div>
-                <div className='form-group'>
-                  <label htmlFor='member'>Membre ?</label>
+                <div className='form-group pt-3'>
+                  <label htmlFor='member'>Membre du club :</label>
                   <select
                     className='form-control'
                     id='member'
                     required
-                    // ref={ceintureUpdate}
+                    // ref={}
                     value={oneMember}
                     onChange={(e) => setOneMember(e.target.value)}
                   >
