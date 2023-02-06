@@ -59,7 +59,7 @@ const Home = () => {
             <ul className='list-group list-group-flush text-center'>
               <li className='list-group-item'>Responsable : M. Niazul MIAH</li>
               <li className='list-group-item'>
-                Adresse : 25 square du Roussillon 95470 FOSSES
+                Adresse : Avenue de la Haute Grève 95470 FOSSES
               </li>
               <li className='list-group-item'>
                 Kata | Kumite | Baby Karaté | Cardio Training 100% Girls
@@ -80,17 +80,29 @@ const Home = () => {
       {/* calendrier fix + info */}
       {/* ordi */}
       {isBigScreen && (
-        <div className='d-flex justify-content-center m-3 mt-5'>
-          <img
-            className='p-3'
-            src={planning}
-            alt='planning club karaté'
-            style={{ width: '49%' }}
-          />
-
-          <div className='p-3' style={{ width: '49%' }}>
-            INFOS
+        <div>
+          <div className='d-flex justify-content-center m-3 mt-5'>
+            <img
+              src={planning}
+              alt='planning club karaté'
+              style={{ width: '672px' }}
+            />
           </div>
+          <div className='d-flex justify-content-center m-3'>
+            {/* <div className='' style={{ width: '80%' }}> */}
+            <iframe
+              // width='560'
+              // height='315'
+              style={{ width: '672px', height: '378px' }}
+              className='p-3'
+              src='https://www.youtube.com/embed/Hu6muwJNZEg'
+              title='YouTube video : LES KATAS POUR DEBUTANTS'
+              frameBorder='0'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+              allowFullScreen
+            ></iframe>
+          </div>
+          {/* </div> */}
         </div>
       )}
 
@@ -100,14 +112,24 @@ const Home = () => {
             <img
               src={planning}
               alt='planning club karaté'
-              style={{ width: '80%' }}
+              style={{ width: '90%' }}
             />
           </div>
           <div className='d-flex justify-content-center m-3'>
-            <div className='' style={{ width: '80%' }}>
-              INFOS
-            </div>
+            {/* <div className='' style={{ width: '80%' }}> */}
+            <iframe
+              // width='560'
+              // height='315'
+              style={{ width: '448px', height: '252px' }}
+              className='p-3'
+              src='https://www.youtube.com/embed/Hu6muwJNZEg'
+              title='YouTube video : LES KATAS POUR DEBUTANTS'
+              frameBorder='0'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+              allowFullScreen
+            ></iframe>
           </div>
+          {/* </div> */}
         </div>
       )}
     </div>
