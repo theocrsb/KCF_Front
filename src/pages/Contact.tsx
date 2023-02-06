@@ -16,9 +16,14 @@ const Contact = () => {
   };
   return (
     <div style={{ minHeight: '100vh' }}>
+      <div>
+        <h3 className='text-center p-3 pt-4'>
+          Message à l'équipe du karaté club de Fosses
+        </h3>
+      </div>
       <div className='d-flex flex-wrap justify-content-around m-3 mx-auto border rounded shadow-lg p-3 mb-5 bgCard'>
         <form onSubmit={handleSubmit}>
-          <div className='form-group pt-3'>
+          <div className='form-group pt-3 input-group-lg'>
             <label htmlFor='name'>Nom</label>
             <input
               type='text'
@@ -30,7 +35,7 @@ const Contact = () => {
               required
             />
           </div>
-          <div className='form-group'>
+          <div className='form-group '>
             <label htmlFor='email'>Email</label>
             <input
               type='email'
