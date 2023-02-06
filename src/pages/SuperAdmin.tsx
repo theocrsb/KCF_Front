@@ -1,4 +1,9 @@
-import { BookOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import {
+  BookOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useContext, useEffect, useRef, useState } from 'react';
@@ -41,18 +46,6 @@ const SuperAdmin = () => {
   //
   const [oneRole, setOneRole] = useState<string>('');
   const [oneMember, setOneMember] = useState<string>('');
-  // const theMember = useRef<HTMLInputElement>(null);
-  // const theRole = useRef<HTMLInputElement>(null);
-
-  //
-  const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.value);
-    setIsOpen(true);
-  };
-
-  const hideModal = () => {
-    setIsOpen(false);
-  };
 
   const confirm = (e: React.MouseEvent<HTMLButtonElement>) => {
     // // message.info('Clicked on Yes.');
@@ -156,34 +149,31 @@ const SuperAdmin = () => {
   };
 
   // ----------------------------- DELETE -----------------------------
-
+  console.log(idDelete, 'idDelete avant delete');
   const handleDelete = () => {
     // console.log(e.currentTarget.value);
     // e.preventDefault();
 
-    // if (window.confirm('Voulez vous vraiment supprimer ce cours ?')) {
-    if (isConfirm === true) {
-      instanceAxios
-        .delete(`/cours/${idDelete}/admin`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        })
-        .then((response) => {
-          // console.log('response', response);
-          setCount(count + 1);
-          onToastChange(true);
-          messageToast(`cours supprimé`);
-          colorToast('success');
-          setIsConfirm(false);
-        })
-        .catch((error) => {
-          console.log('Error', error);
-          onToastChange(true);
-          messageToast(`Erreur lors de suppression du cours`);
-          colorToast('danger');
-        });
-    }
+    instanceAxios
+      .delete(`/users/${idDelete}/admin`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        // console.log('response', response);
+        setCount(count + 1);
+        onToastChange(true);
+        messageToast(`Utilisateur supprimé`);
+        colorToast('success');
+        setIsConfirm(false);
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        onToastChange(true);
+        messageToast(`Erreur lors de suppression de l'Utilisateur`);
+        colorToast('danger');
+      });
   };
 
   return (
@@ -244,7 +234,7 @@ const SuperAdmin = () => {
                 ]}
               >
                 <Meta
-                  avatar={<Avatar size={64} icon={<BookOutlined />} />}
+                  avatar={<Avatar size={64} icon={<UserOutlined />} />}
                   title={`${x?.email}`}
                   description={`${
                     x?.member === true ? 'Membre' : 'Non membre'
