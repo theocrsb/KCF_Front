@@ -1,65 +1,69 @@
 import React, { useState } from 'react';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [email, setEmail] = useState('');
+  const [nom, setNom] = useState('');
+  const [message, setMessage] = useState('');
 
-  const { name, email, message } = formData;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
+  let contenuMessage = {
+    nom: nom,
+    email: email,
+    message: message,
+  };
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Envoyer l'email ici (nous verrons comment dans la prochaine étape)
-    console.log(formData);
+    console.log(contenuMessage, 'contenu du message');
   };
   return (
     <div style={{ minHeight: '100vh' }}>
-      <form onSubmit={handleSubmit}>
-        <div className='form-group'>
-          <label htmlFor='name'>Nom</label>
-          <input
-            type='text'
-            className='form-control'
-            id='name'
-            name='name'
-            value={name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            className='form-control'
-            id='email'
-            name='email'
-            value={email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='message'>Message</label>
-          <input
-            type='text'
-            className='form-control'
-            id='message'
-            name='message'
-            value={message}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type='submit' className='btn btn-primary'>
-          Envoyer
-        </button>
-      </form>
+      <div className='d-flex flex-wrap justify-content-around m-3 mx-auto border rounded shadow-lg p-3 mb-5 bgCard'>
+        <form onSubmit={handleSubmit}>
+          <div className='form-group pt-3'>
+            <label htmlFor='name'>Nom</label>
+            <input
+              type='text'
+              className='form-control'
+              id='name'
+              name='name'
+              value={nom}
+              onChange={(e) => setNom(e.target.value)}
+              required
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='email'>Email</label>
+            <input
+              type='email'
+              className='form-control'
+              id='email'
+              name='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='message'>Message</label>
+            <textarea
+              className='form-control'
+              id='message'
+              name='message'
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+              style={{ resize: 'none' }}
+            />
+          </div>
+          <div className='form-group d-flex justify-content-center'>
+            <button
+              type='submit'
+              className='btn btn-primary btnDirection mb-3 mt-4'
+            >
+              Envoyer
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

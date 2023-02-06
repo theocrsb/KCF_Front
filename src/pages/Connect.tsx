@@ -68,7 +68,7 @@ const Connect = () => {
         className='d-flex flex-wrap justify-content-around m-3 border rounded shadow-lg p-3 mb-5 bgCard'
         style={{ backgroundColor: '#585B5E40', minHeight: '50vh' }}
       >
-        <form className='text-center'>
+        <form className='text-center' onSubmit={handleSubmit}>
           <h3 className='p-3 font-weight-bold'>Page de connexion</h3>
           <div className='form-group mb-3 mt-3'>
             <label htmlFor='exampleInputEmail1'>Adresse Email :</label>
@@ -95,7 +95,7 @@ const Connect = () => {
           <button
             type='submit'
             className='btn btn-primary btnDirection mt-5'
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
           >
             Se connecter
           </button>
