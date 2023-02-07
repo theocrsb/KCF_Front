@@ -220,7 +220,10 @@ const Calendrier = () => {
               {coursAfficheTop?.map((x, i) => (
                 // <li key={`coursAfficheTop-${x.id}`}>
                 <SwiperSlide key={`coursAfficheTop-${x.id}`}>
-                  <div className='card text-center'>
+                  <div
+                    className='card text-center'
+                    style={{ marginBottom: '15px' }}
+                  >
                     <div className='card-header'>
                       Cours de {x.type} | Sensei : {x.sensei}
                     </div>
@@ -244,10 +247,16 @@ const Calendrier = () => {
                       }}
                     >
                       {new Date(x.heureDebut).getHours()}h
-                      {new Date(x.heureDebut).getMinutes()} /{' '}
-                      {new Date(x.heureFin).getHours()}h
-                      {new Date(x.heureFin).getMinutes()} le{' '}
-                      {new Date(x.date).toLocaleDateString('fr')}
+                      {new Date(x.heureDebut)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      / {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      le {new Date(x.date).toLocaleDateString('fr')}
                     </div>
                   </div>
                 </SwiperSlide>
@@ -316,10 +325,16 @@ const Calendrier = () => {
                       }}
                     >
                       {new Date(x.heureDebut).getHours()}h
-                      {new Date(x.heureDebut).getMinutes()} /{' '}
-                      {new Date(x.heureFin).getHours()}h
-                      {new Date(x.heureFin).getMinutes()} le{' '}
-                      {new Date(x.date).toLocaleDateString('fr')}
+                      {new Date(x.heureDebut)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      / {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      le {new Date(x.date).toLocaleDateString('fr')}
                     </div>
                   </div>
                 </SwiperSlide>
@@ -416,10 +431,16 @@ const Calendrier = () => {
                       }}
                     >
                       {new Date(x.heureDebut).getHours()}h
-                      {new Date(x.heureDebut).getMinutes()} /{' '}
-                      {new Date(x.heureFin).getHours()}h
-                      {new Date(x.heureFin).getMinutes()} le{' '}
-                      {new Date(x.date).toLocaleDateString('fr')}
+                      {new Date(x.heureDebut)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      / {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      le {new Date(x.date).toLocaleDateString('fr')}
                     </div>
                   </div>
                 ))
@@ -536,10 +557,16 @@ const Calendrier = () => {
                       }}
                     >
                       {new Date(x.heureDebut).getHours()}h
-                      {new Date(x.heureDebut).getMinutes()} /{' '}
-                      {new Date(x.heureFin).getHours()}h
-                      {new Date(x.heureFin).getMinutes()} le{' '}
-                      {new Date(x.date).toLocaleDateString('fr')}
+                      {new Date(x.heureDebut)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      / {new Date(x.heureFin).getHours()}h
+                      {new Date(x.heureFin)
+                        .getMinutes()
+                        .toString()
+                        .padStart(2, '0')}{' '}
+                      le {new Date(x.date).toLocaleDateString('fr')}
                     </div>
                   </div>
                 ))

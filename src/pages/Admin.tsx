@@ -16,6 +16,12 @@ const Admin = () => {
             Commentaire karatékas
           </NavLink>
         </li>
+
+        <li className='nav-item'>
+          <NavLink to='messages' className='nav-link' aria-current='page'>
+            Messages
+          </NavLink>
+        </li>
       </ul>
       <div className='d-flex justify-content-center'></div>
       {/* OUTLET PERMET D'AFFICHER SELON L'URL */}

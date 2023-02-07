@@ -176,6 +176,7 @@ const SuperAdmin = () => {
 
   return (
     <div style={{ minHeight: '100vh' }}>
+      <h3 className='pt-4 text-center'>Gestion des utilisateurs</h3>
       <ul className='list-group pt-3'>
         <div
           style={{

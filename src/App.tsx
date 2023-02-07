@@ -25,6 +25,7 @@ import CoursByKarateka from './pages/futur/CoursByKarateka';
 import KaratekaAdmin from './pages/KaratekaAdmin';
 import CourAdmin from './pages/CourAdmin';
 import Contact from './pages/Contact';
+import Messages from './pages/Messages';
 
 export interface PayloadToken {
   exp: number;
@@ -88,6 +89,7 @@ function App() {
                 <Route path='/admin/' element={<Admin />}>
                   <Route path='cours' element={<CourAdmin />} />
                   <Route path='karatekas' element={<KaratekaAdmin />} />
+                  <Route path='messages' element={<Messages />} />
                 </Route>
               </Route>
               {/* -fin protected route Admin */}

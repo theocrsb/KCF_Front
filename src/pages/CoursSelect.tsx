@@ -218,10 +218,18 @@ const CoursSelect = () => {
             }}
           >
             {oneCours && new Date(oneCours.heureDebut).getHours()}h
-            {oneCours && new Date(oneCours.heureDebut).getMinutes()} /{' '}
-            {oneCours && new Date(oneCours?.heureFin).getHours()}h
-            {oneCours && new Date(oneCours?.heureFin).getMinutes()} le{' '}
-            {oneCours && new Date(oneCours?.date).toLocaleDateString('fr')}
+            {oneCours &&
+              new Date(oneCours.heureDebut)
+                .getMinutes()
+                .toString()
+                .padStart(2, '0')}{' '}
+            / {oneCours && new Date(oneCours?.heureFin).getHours()}h
+            {oneCours &&
+              new Date(oneCours?.heureFin)
+                .getMinutes()
+                .toString()
+                .padStart(2, '0')}{' '}
+            le {oneCours && new Date(oneCours?.date).toLocaleDateString('fr')}
           </div>
         </div>
       </div>

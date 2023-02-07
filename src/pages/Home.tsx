@@ -75,7 +75,9 @@ const Home = () => {
             Nous rejoindre
           </button>
         </NavLink>
-        {/* <button className='btn btn-primary btnPerso'>En savoir plus</button> */}
+        <NavLink to='contact' className='nav-link'>
+          <button className='btn btn-primary btnPerso'>Nous contacter</button>
+        </NavLink>
       </div>
       {/* calendrier fix + info */}
       {/* ordi */}
