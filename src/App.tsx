@@ -44,7 +44,7 @@ function App() {
   return (
     // btnPerso = bleu : navigation
     // btnDirection = noir : validation
-    <div>
+    <div style={{ fontFamily: 'Nunito' }}>
       <BrowserRouter>
         <Interceptor>
           <>

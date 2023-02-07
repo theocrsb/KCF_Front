@@ -89,20 +89,8 @@ const Home = () => {
             />
           </div>
           <div className='d-flex justify-content-center m-3'>
-            {/* <div className='' style={{ width: '80%' }}> */}
-            <iframe
-              // width='560'
-              // height='315'
-              style={{ width: '672px', height: '378px' }}
-              className='p-3'
-              src='https://www.youtube.com/embed/Hu6muwJNZEg'
-              title='YouTube video : LES KATAS POUR DEBUTANTS'
-              frameBorder='0'
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-              allowFullScreen
-            ></iframe>
+            {/* <p>info</p> */}
           </div>
-          {/* </div> */}
         </div>
       )}
 
@@ -116,20 +104,8 @@ const Home = () => {
             />
           </div>
           <div className='d-flex justify-content-center m-3'>
-            {/* <div className='' style={{ width: '80%' }}> */}
-            <iframe
-              // width='560'
-              // height='315'
-              style={{ width: '448px', height: '252px' }}
-              className='p-3'
-              src='https://www.youtube.com/embed/Hu6muwJNZEg'
-              title='YouTube video : LES KATAS POUR DEBUTANTS'
-              frameBorder='0'
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-              allowFullScreen
-            ></iframe>
+            {/* <p>info</p> */}
           </div>
-          {/* </div> */}
         </div>
       )}
     </div>

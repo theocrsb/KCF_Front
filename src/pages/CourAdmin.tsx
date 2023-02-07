@@ -437,7 +437,7 @@ const CourAdmin = () => {
       ) : (
         <Modal show={isOpenUpdate} onHide={hideModalUpdate}>
           <Modal.Header>
-            <Modal.Title>Modification d'un karatéka</Modal.Title>
+            <Modal.Title>Modification d'un cours</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div>

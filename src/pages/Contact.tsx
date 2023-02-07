@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { instanceAxios } from '../axios/instance-axios';
+import { ToastContext } from '../context/toast-context';
 
 const Contact = () => {
+  const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
+
   const [email, setEmail] = useState('');
   const [nom, setNom] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   let contenuMessage = {
     nom: nom,
@@ -13,7 +19,25 @@ const Contact = () => {
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(contenuMessage, 'contenu du message');
+    instanceAxios
+      .post(`/messages`, 
+        contenuMessage,
+      )
+      .then((response) => {
+        // console.log('response', response);
+        onToastChange(true);
+        messageToast(`Message envoyé`);
+        colorToast('success');
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log('Error', error);
+        onToastChange(true);
+        messageToast(`Erreur lors de l'envoie du message`);
+        colorToast('danger');
+      });
   };
+
   return (
     <div style={{ minHeight: '100vh' }}>
       <div>
@@ -24,7 +48,7 @@ const Contact = () => {
       <div className='d-flex flex-wrap justify-content-around m-3 mx-auto border rounded shadow-lg p-3 mb-5 bgCard'>
         <form onSubmit={handleSubmit}>
           <div className='form-group pt-3 input-group-lg'>
-            <label htmlFor='name'>Nom</label>
+            <label htmlFor='name'>Nom prénom</label>
             <input
               type='text'
               className='form-control'

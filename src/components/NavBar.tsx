@@ -83,11 +83,7 @@ const NavBar = () => {
                 <div className='nav-link'>Accueil</div>
               </NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink to='/contact' end className='nav-link'>
-                <div className='nav-link'>Contact</div>
-              </NavLink>
-            </li>
+
             {/* --------------------------- user ou admin ou superadmin connecté --------------------------- */}
             {(role === 'admin' || role === 'superadmin' || role === 'user') && (
               <li className='nav-item'>
