@@ -1,8 +1,8 @@
+// import './calendrier.css';
 import React, { useContext, useEffect, useState } from 'react';
 import 'react-day-picker/dist/style.css';
 import { addDays, format, lightFormat } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
-import './calendrier.css';
 import fr from 'date-fns/locale/fr';
 import axios from 'axios';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
