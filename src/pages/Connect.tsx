@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContext } from '../context/toast-context';
 import { AuthContext } from '../context/Auth-context';
+import { useLocation } from 'react-router-dom';
 
 const Connect = () => {
   // Lien avec le toast context
@@ -45,12 +46,13 @@ const Connect = () => {
 
     console.log(message);
   };
+  const location = useLocation();
   return (
     <div style={{ minHeight: '100vh' }}>
       <div className='d-flex text-center justify-content-center'>
         <div>
           <button type='submit' className='btn btn-primary btnPerso mt-5 mb-4'>
-            <NavLink to='' className='nav-link'>
+            <NavLink to='/connect' className='nav-link'>
               Page de connexion
             </NavLink>
           </button>
