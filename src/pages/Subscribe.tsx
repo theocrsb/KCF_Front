@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { FormEvent, useContext, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
 
 const Subscribe = () => {
@@ -16,8 +17,8 @@ const Subscribe = () => {
     console.log(passwordElement.current?.value);
 
     // Requete Sub
-    axios
-      .post('http://localhost:8080/api/auth/register/', {
+    instanceAxios
+      .post('auth/register/', {
         email: emailElement.current?.value,
         password: passwordElement.current?.value,
       })

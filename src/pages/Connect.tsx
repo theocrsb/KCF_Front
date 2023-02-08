@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ToastContext } from '../context/toast-context';
 import { AuthContext } from '../context/Auth-context';
 import { useLocation } from 'react-router-dom';
+import { instanceAxios } from '../axios/instance-axios';
 
 const Connect = () => {
   // Lien avec le toast context
@@ -20,8 +21,8 @@ const Connect = () => {
     console.log(passwordElement.current?.value);
 
     // Requete pour se connecter
-    axios
-      .post('http://localhost:8080/api/auth/login', {
+    instanceAxios
+      .post('auth/login', {
         email: emailElement.current?.value,
         password: passwordElement.current?.value,
       })
