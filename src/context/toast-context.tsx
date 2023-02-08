@@ -42,11 +42,11 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
   let heureNow = `${now.getHours()}:${now.getMinutes()}`;
   // console.log(heureNow, 'now');
   // console.log(color);
-  
+
   return (
     <ToastContext.Provider value={contextValue}>
       {children}
-      <ToastContainer className='p-3' position='top-end'>
+      <ToastContainer className='p-3 position-fixed' position='top-end'>
         <Toast
           show={show}
           onClose={() => setShow(false)}

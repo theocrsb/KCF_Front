@@ -183,7 +183,7 @@ const AddKarateka = () => {
         {
           nom: nom.current?.value,
           prenom: prenom.current?.value,
-          age: age.current?.value,
+          age: age.current?.valueAsNumber,
           sexe: sexe.current?.value,
           ceinture: ceinture.current?.value,
           membre: true,
@@ -306,8 +306,8 @@ const AddKarateka = () => {
             >
               <Meta
                 avatar={<Avatar size={64} icon={<UserOutlined />} />}
-                title={`${x.prenom} ${x.nom}, ${x.age} ans`}
-                description={`ceinture ${x.ceinture}`}
+                title={`${x.prenom} ${x.nom}`}
+                description={`${x.age} ans | ceinture ${x.ceinture}`}
               />
             </Card>
           </li>

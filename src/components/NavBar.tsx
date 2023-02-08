@@ -46,7 +46,7 @@ const NavBar = () => {
     localStorage.removeItem('accessToken');
     onToastChange(true);
     messageToast('Vous êtes déconnecté');
-    colorToast('danger');
+    colorToast('success');
     //
     UpdateToken('');
     setRole('');
