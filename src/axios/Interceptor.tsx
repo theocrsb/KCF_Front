@@ -42,7 +42,7 @@ const Interceptor = ({ children }: InterceptorProps) => {
           onLoadingChange(false);
           navigate('/connect');
         }
-
+        onLoadingChange(false);
         return error;
       }
     );
