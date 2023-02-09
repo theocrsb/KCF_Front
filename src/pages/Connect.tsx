@@ -40,9 +40,9 @@ const Connect = () => {
       })
       .catch((error) => {
         onToastChange(true);
-        messageToast(error.response.data.message);
+        messageToast('Les indentifiants sont incorrect..');
         colorToast('danger');
-        console.log('connexion impossible', error.response.data.message);
+        // console.log('connexion impossible', error.response.data.message);
       });
 
     console.log(message);
