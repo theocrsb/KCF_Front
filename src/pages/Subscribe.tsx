@@ -24,13 +24,13 @@ const Subscribe = () => {
       })
       .then((response) => {
         console.log(response);
-        if (response.data.statusCode === 400) {
-          onToastChange(true);
-          messageToast(
-            `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
-          );
-          colorToast('danger');
-        }
+        // if (response.data.statusCode === 400) {
+        //   onToastChange(true);
+        //   messageToast(
+        //     `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
+        //   );
+        //   colorToast('danger');
+        // }
         onToastChange(true);
         messageToast('Inscription réussie ! Veuillez vous connecter.');
         colorToast('success');
@@ -38,6 +38,19 @@ const Subscribe = () => {
       })
       .catch((error) => {
         //console.log('Inscription impossible', error);
+        if (error.response.data.statusCode === 409) {
+          onToastChange(true);
+          messageToast(`Cet email existe déjà dans notre base de donnée.`);
+          colorToast('danger');
+        }
+
+        if (error.response.data.statusCode === 400) {
+          onToastChange(true);
+          messageToast(
+            `Votre mot de passe doit contenir au moins 6 caractères.`
+          );
+          colorToast('danger');
+        }
         onToastChange(true);
         messageToast(
           `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère et l'adresse email doit être unique.`
