@@ -46,6 +46,7 @@ const Home = () => {
             className='img-responsive'
             src={logo}
             style={{ width: '15rem' }}
+            alt={'logo du club de karaté club de Fosses'}
           />
         </div>
         <div className='align-self-center m-3'>
