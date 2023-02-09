@@ -80,7 +80,13 @@ const NavBar = () => {
             {/* --------------------------- debut LI --------------------------- */}
             <li className='nav-item'>
               <NavLink to='/' end className='nav-link'>
-                <div className='nav-link'>Accueil</div>
+                <div
+                  className='nav-link'
+                  data-bs-toggle='collapse'
+                  data-bs-target='#navbarSupportedContent'
+                >
+                  Accueil
+                </div>
               </NavLink>
             </li>
 
@@ -88,7 +94,13 @@ const NavBar = () => {
             {(role === 'admin' || role === 'superadmin' || role === 'user') && (
               <li className='nav-item'>
                 <NavLink to='calendrier' className='nav-link'>
-                  <div className='nav-link'>Planning</div>
+                  <div
+                    className='nav-link'
+                    data-bs-toggle='collapse'
+                    data-bs-target='#navbarSupportedContent'
+                  >
+                    Planning
+                  </div>
                 </NavLink>
               </li>
             )}
@@ -96,7 +108,13 @@ const NavBar = () => {
             {(role === 'admin' || role === 'superadmin' || role === 'user') && (
               <li className='nav-item'>
                 <NavLink to='profil/update' className='nav-link'>
-                  <div className='nav-link'>Profil</div>
+                  <div
+                    className='nav-link'
+                    data-bs-toggle='collapse'
+                    data-bs-target='#navbarSupportedContent'
+                  >
+                    Profil
+                  </div>
                 </NavLink>
               </li>
             )}
@@ -104,7 +122,13 @@ const NavBar = () => {
             {(role === 'admin' || role === 'superadmin') && (
               <li className='nav-item'>
                 <NavLink to='admin/cours' className='nav-link'>
-                  <div className='nav-link'>Professeur</div>
+                  <div
+                    className='nav-link'
+                    data-bs-toggle='collapse'
+                    data-bs-target='#navbarSupportedContent'
+                  >
+                    Professeur
+                  </div>
                 </NavLink>
               </li>
             )}
@@ -112,7 +136,13 @@ const NavBar = () => {
             {role === 'superadmin' && (
               <li className='nav-item'>
                 <NavLink to='superadmin' className='nav-link'>
-                  <div className='nav-link'>Administrateur</div>
+                  <div
+                    className='nav-link'
+                    data-bs-toggle='collapse'
+                    data-bs-target='#navbarSupportedContent'
+                  >
+                    Administrateur
+                  </div>
                 </NavLink>
               </li>
             )}
@@ -124,6 +154,8 @@ const NavBar = () => {
                     className='btn btn-primary btnPerso'
                     style={{ margin: '0' }}
                     onClick={handleDeco}
+                    data-bs-toggle='collapse'
+                    data-bs-target='#navbarSupportedContent'
                   >
                     Déconnexion
                   </button>
@@ -132,7 +164,13 @@ const NavBar = () => {
             ) : (
               <li className='nav-item'>
                 <NavLink to='connect' className='nav-link'>
-                  <div className='nav-link'>Connexion</div>
+                  <div
+                    className='nav-link'
+                    data-bs-toggle='collapse'
+                    data-bs-target='#navbarSupportedContent'
+                  >
+                    Connexion
+                  </div>
                 </NavLink>
               </li>
             )}
