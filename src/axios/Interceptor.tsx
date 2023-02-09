@@ -31,6 +31,7 @@ const Interceptor = ({ children }: InterceptorProps) => {
         //console.log(error);
         // 401 : pas connecté ou expiré
         // 403 : pas acces a cette donnée (pas bon role)
+
         if (error.response.data.statusCode === 401) {
           onToastChange(true);
           messageToast(
@@ -41,6 +42,8 @@ const Interceptor = ({ children }: InterceptorProps) => {
           onLoadingChange(false);
           navigate('/connect');
         }
+
+        return error;
       }
     );
   }, []);
