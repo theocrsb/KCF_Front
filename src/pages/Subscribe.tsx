@@ -24,13 +24,19 @@ const Subscribe = () => {
       })
       .then((response) => {
         console.log(response);
-        // if (response.data.statusCode === 400) {
-        //   onToastChange(true);
-        //   messageToast(
-        //     `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
-        //   );
-        //   colorToast('danger');
-        // }
+        if (response.data.statusCode === 400) {
+          onToastChange(true);
+          messageToast(
+            `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
+          );
+          colorToast('danger');
+        }
+
+        if (response.data.statusCode === 409) {
+          onToastChange(true);
+          messageToast(`Cet email existe déjà dans notre base de donnée.`);
+          colorToast('danger');
+        }
         onToastChange(true);
         messageToast('Inscription réussie ! Veuillez vous connecter.');
         colorToast('success');
