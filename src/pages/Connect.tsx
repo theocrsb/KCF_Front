@@ -82,6 +82,7 @@ const Connect = () => {
               aria-describedby='emailHelp'
               placeholder='votre.email@mail.fr'
               ref={emailElement}
+              required
             />
           </div>
           <div className='form-group mb-3'>
@@ -92,6 +93,7 @@ const Connect = () => {
               id='exampleInputPassword1'
               placeholder='Votre mot de passe'
               ref={passwordElement}
+              required
             />
           </div>
 
