@@ -24,7 +24,7 @@ const Subscribe = () => {
       })
       .then((response) => {
         console.log(response);
-        if (response.data.statusCode === 400) {
+        if (response.data.status === 400) {
           onToastChange(true);
           messageToast(
             `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
