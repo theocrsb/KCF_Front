@@ -31,16 +31,19 @@ const Interceptor = ({ children }: InterceptorProps) => {
         console.log(error);
         // 401 : pas connecté ou expiré
         // 403 : pas acces a cette donnée (pas bon role)
+
         if (error.response.data.statusCode === 401) {
           onToastChange(true);
           messageToast(
             'Vous devez être connecté pour accéder à cette page. Veuillez vous connecter.'
-          )
+          );
           // messageToast(error.response.data.message);
           colorToast('danger');
           onLoadingChange(false);
           navigate('/connect');
         }
+
+        return error;
       }
     );
   }, []);

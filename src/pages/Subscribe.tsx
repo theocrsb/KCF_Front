@@ -24,7 +24,13 @@ const Subscribe = () => {
       })
       .then((response) => {
         console.log(response);
-        // Futur TOAST
+        if (response.data.statusCode === 400) {
+          onToastChange(true);
+          messageToast(
+            `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
+          );
+          colorToast('danger');
+        }
         onToastChange(true);
         messageToast('Inscription réussie ! Veuillez vous connecter.');
         colorToast('success');
@@ -33,7 +39,10 @@ const Subscribe = () => {
       .catch((error) => {
         console.log('Inscription impossible', error);
         onToastChange(true);
-        messageToast(error.response.data.message);
+        messageToast(
+          `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère et l'adresse email doit être unique.`
+        );
+        // messageToast(error.response.data.message[0]);
         colorToast('danger');
       });
   };
