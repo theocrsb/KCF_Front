@@ -199,7 +199,7 @@ const AddKarateka = () => {
         // //console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
-        messageToast(`Karatéka Créer`);
+        messageToast(`Karatéka créé`);
         colorToast('success');
         setIsOpen(false);
       })
