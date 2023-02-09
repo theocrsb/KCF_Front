@@ -39,10 +39,11 @@ const Interceptor = ({ children }: InterceptorProps) => {
           );
           // messageToast(error.response.data.message);
           colorToast('danger');
+
           onLoadingChange(false);
           navigate('/connect');
         }
-
+        onLoadingChange(false);
         return error;
       }
     );
