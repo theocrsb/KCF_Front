@@ -24,15 +24,15 @@
 //         },
 //       })
 //       .then((response) => {
-//         console.log(response, 'response');
+//         //console.log(response, 'response');
 //         SetAllKarateka(response.data);
 //       })
 //       .catch((error) => {
-//         console.log('error', error);
+//         //console.log('error', error);
 //       });
 //   }, []);
 
-//   console.log(allKarateka, 'karatekassss');
+//   //console.log(allKarateka, 'karatekassss');
 //   return (
 //     <div style={{ minHeight: '100vh' }}>
 //       <div

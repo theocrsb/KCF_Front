@@ -17,7 +17,7 @@ const Interceptor = ({ children }: InterceptorProps) => {
   useEffect(() => {
     instanceAxios.interceptors.request.use((send: any) => {
       // lors de depart de la request
-      console.log('send request START LOADING');
+      //console.log('send request START LOADING');
       onLoadingChange(true);
       return send;
     });
@@ -28,14 +28,14 @@ const Interceptor = ({ children }: InterceptorProps) => {
         return response;
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
         // 401 : pas connecté ou expiré
         // 403 : pas acces a cette donnée (pas bon role)
         if (error.response.data.statusCode === 401) {
           onToastChange(true);
           messageToast(
             'Vous devez être connecté pour accéder à cette page. Veuillez vous connecter.'
-          )
+          );
           // messageToast(error.response.data.message);
           colorToast('danger');
           onLoadingChange(false);

@@ -17,8 +17,8 @@ const Connect = () => {
   const { UpdateToken, tokenExpirationFunction } = useContext(AuthContext);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(emailElement.current?.value);
-    console.log(passwordElement.current?.value);
+    //console.log(emailElement.current?.value);
+    //console.log(passwordElement.current?.value);
 
     // Requete pour se connecter
     instanceAxios
@@ -27,7 +27,7 @@ const Connect = () => {
         password: passwordElement.current?.value,
       })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         const token = response.data.accessToken;
         localStorage.setItem('accessToken', token);
         onToastChange(true);
@@ -42,10 +42,10 @@ const Connect = () => {
         onToastChange(true);
         messageToast('Les indentifiants sont incorrect..');
         colorToast('danger');
-        // console.log('connexion impossible', error.response.data.message);
+        // //console.log('connexion impossible', error.response.data.message);
       });
 
-    console.log(message);
+    //console.log(message);
   };
   const location = useLocation();
   return (

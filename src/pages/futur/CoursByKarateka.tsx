@@ -7,7 +7,7 @@
 
 // const CoursByKarateka = () => {
 //   const paramsId = useParams();
-//   console.log(paramsId, 'paramsID');
+//   //console.log(paramsId, 'paramsID');
 //   const [oneKarateka, setOneKarateka] = useState<Karateka>();
 
 //   useEffect(() => {
@@ -18,11 +18,11 @@
 //         },
 //       })
 //       .then((response) => {
-//         console.log(response, 'response');
+//         //console.log(response, 'response');
 //         setOneKarateka(response.data);
 //       })
 //       .catch((error) => {
-//         console.log('error', error);
+//         //console.log('error', error);
 //       });
 //   }, [paramsId]);
 

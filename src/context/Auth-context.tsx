@@ -65,9 +65,9 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
       }
     }
   };
-  
+
   // Définition des valeurs accessibles via le context
-  console.log("état d'expiration du token", tokenExpired);
+  //console.log("état d'expiration du token", tokenExpired);
   const contextValue = {
     savedToken: token,
     UpdateToken: updateToken,

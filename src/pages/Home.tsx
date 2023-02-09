@@ -22,12 +22,12 @@ const Home = () => {
   useEffect(() => {
     UpdateToken(savedToken);
     tokenExpirationFunction(savedToken);
-    console.log('voici le resultat pour savedToken', savedToken);
+    //console.log('voici le resultat pour savedToken', savedToken);
     if (savedToken) {
       const decoded: PayloadToken = jwt_decode(savedToken);
-      console.log('le payload', decoded.role.label);
+      //console.log('le payload', decoded.role.label);
       // setTokenRole(decoded.role.label);
-      console.log("etat d'expiration token dans la navbar", tokenExpired);
+      //console.log("etat d'expiration token dans la navbar", tokenExpired);
     }
     if (tokenExpired === 'token expiré') {
       //  navigate('/connect');
@@ -46,6 +46,7 @@ const Home = () => {
             className='img-responsive'
             src={logo}
             style={{ width: '15rem' }}
+            alt={'logo du club de karaté club de Fosses'}
           />
         </div>
         <div className='align-self-center m-3'>
@@ -71,12 +72,14 @@ const Home = () => {
       {/* Fin partie logo + info principal */}
       <div className='d-flex flex-wrap justify-content-center m-3'>
         <NavLink to='connect' className='nav-link'>
-          <button className='btn btn-primary btnDirection'>
+          <button className='btn btn-primary btnDirection mt-1'>
             Nous rejoindre
           </button>
         </NavLink>
         <NavLink to='contact' className='nav-link'>
-          <button className='btn btn-primary btnPerso'>Nous contacter</button>
+          <button className='btn btn-primary btnPerso mt-1'>
+            Nous contacter
+          </button>
         </NavLink>
       </div>
       {/* calendrier fix + info */}

@@ -27,7 +27,7 @@ const MemberAuth = ({ member }: MemberAuthProps) => {
         },
       })
       .then((response) => {
-        // console.log(response, 'dans le requireMember');
+        // //console.log(response, 'dans le requireMember');
         if (response.data === true) {
           setReturnMember('member');
         } else {
@@ -39,7 +39,7 @@ const MemberAuth = ({ member }: MemberAuthProps) => {
         setIsLoading(false);
       });
   }, []);
-  // console.log('returnMember dans le MemberAuth', returnMember);
+  // //console.log('returnMember dans le MemberAuth', returnMember);
 
   return isLoading ? (
     <div>Chargement...</div>

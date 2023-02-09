@@ -13,8 +13,8 @@ const Subscribe = () => {
   //
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(emailElement.current?.value);
-    console.log(passwordElement.current?.value);
+    //console.log(emailElement.current?.value);
+    //console.log(passwordElement.current?.value);
 
     // Requete Sub
     instanceAxios
@@ -23,7 +23,7 @@ const Subscribe = () => {
         password: passwordElement.current?.value,
       })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         // Futur TOAST
         onToastChange(true);
         messageToast('Inscription réussie ! Veuillez vous connecter.');
@@ -31,7 +31,7 @@ const Subscribe = () => {
         navigate('/connect');
       })
       .catch((error) => {
-        console.log('Inscription impossible', error);
+        //console.log('Inscription impossible', error);
         onToastChange(true);
         messageToast(error.response.data.message);
         colorToast('danger');

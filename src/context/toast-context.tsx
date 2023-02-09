@@ -40,8 +40,8 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
 
   let now = new Date();
   let heureNow = `${now.getHours()}:${now.getMinutes()}`;
-  // console.log(heureNow, 'now');
-  // console.log(color);
+  // //console.log(heureNow, 'now');
+  // //console.log(color);
 
   return (
     <ToastContext.Provider value={contextValue}>
