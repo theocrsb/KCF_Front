@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/Auth-context';
 import { LoadingContext } from '../context/loading-spinner';
 import { ToastContext } from '../context/toast-context';
 import { instanceAxios } from './instance-axios';
@@ -13,6 +14,10 @@ const Interceptor = ({ children }: InterceptorProps) => {
   const { messageToast } = useContext(ToastContext);
   const { colorToast } = useContext(ToastContext);
   const navigate = useNavigate();
+   const {
+     UpdateToken,
+     setRole,
+   } = useContext(AuthContext);
 
   useEffect(() => {
     instanceAxios.interceptors.request.use((send: any) => {
@@ -33,12 +38,15 @@ const Interceptor = ({ children }: InterceptorProps) => {
         // 403 : pas acces a cette donnée (pas bon role)
 
         if (error.response.data.statusCode === 401) {
+          localStorage.removeItem('accessToken');
           onToastChange(true);
           messageToast(
             'Vous devez être connecté pour accéder à cette page. Veuillez vous connecter.'
           );
           // messageToast(error.response.data.message);
           colorToast('danger');
+          UpdateToken('');
+          setRole('');
           onLoadingChange(false);
           navigate('/connect');
         }
