@@ -104,11 +104,11 @@ const Calendrier = () => {
         },
       })
       .then((response) => {
-        console.log('Get All Cours', response);
+        //console.log('Get All Cours', response);
         SetAllCours(response.data);
       })
       .catch((error) => {
-        console.log('Get All Cours Error', error);
+        //console.log('Get All Cours Error', error);
         if (error.response.data.statusCode === 401) {
           navigate('/connect', { replace: true });
           onToastChange(true);
@@ -128,15 +128,15 @@ const Calendrier = () => {
   //   <p>Veuillez choisir un jour.</p>
   // );
 
-  console.log('coursAffiche', coursAffiche);
+  //console.log('coursAffiche', coursAffiche);
 
   /////////////////////////////////////////////// AFFICHAGE DES 10 PROCHAINS COURS ///////////////////////////////////////////////
 
   let dateAjd = Date.now();
-  // console.log(dateAjd);
+  // //console.log(dateAjd);
   //1 jour = 86400000 millisecondes
   let dateAjdPlus1 = dateAjd + 86400000;
-  // console.log(new Date(dateAjdPlus1));
+  // //console.log(new Date(dateAjdPlus1));
   let dateAjdPlus2 = dateAjdPlus1 + 86400000;
   let dateAjdPlus3 = dateAjdPlus2 + 86400000;
   let dateAjdPlus4 = dateAjdPlus3 + 86400000;
@@ -151,7 +151,7 @@ const Calendrier = () => {
     new Date(dateAjdPlus5).toLocaleDateString('fr'),
   ];
 
-  console.log('coursAfficheTop', coursAfficheTop);
+  //console.log('coursAfficheTop', coursAfficheTop);
 
   // Affichage des cours proposer en fonction des jours
   useEffect(() => {
@@ -162,7 +162,7 @@ const Calendrier = () => {
         let dateCoursFormater = new Date(allCours[pas].date).toLocaleDateString(
           'fr'
         );
-        // console.log(dateCoursFormater, 'dateCoursFormater');
+        // //console.log(dateCoursFormater, 'dateCoursFormater');
 
         // tabDate boucle for pour recuperer chaque element
         for (let i = 0; i < tabDate.length; i++) {

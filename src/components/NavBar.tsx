@@ -30,12 +30,12 @@ const NavBar = () => {
   useEffect(() => {
     UpdateToken(savedToken);
     tokenExpirationFunction(savedToken);
-    console.log('voici le resultat pour savedToken', savedToken);
+    //console.log('voici le resultat pour savedToken', savedToken);
     if (savedToken) {
       const decoded: PayloadToken = jwt_decode(savedToken);
-      console.log('le payload', decoded.role.label);
+      //console.log('le payload', decoded.role.label);
       // setTokenRole(decoded.role.label);
-      console.log("etat d'expiration token dans la navbar", tokenExpired);
+      //console.log("etat d'expiration token dans la navbar", tokenExpired);
     }
     if (tokenExpired === 'token expiré') {
       navigate('/connect');

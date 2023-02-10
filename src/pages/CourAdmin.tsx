@@ -60,11 +60,11 @@ const CourAdmin = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setCours(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   }, [count]);
 
@@ -72,7 +72,7 @@ const CourAdmin = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.value);
+    //console.log(e.currentTarget.value);
     setIsOpen(true);
   };
 
@@ -83,14 +83,14 @@ const CourAdmin = () => {
   // fonction création
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(sensei.current?.value);
-    // console.log(date.current?.value);
-    // console.log(start.current?.value);
-    // console.log(newStart);
-    // console.log(end.current?.value);
-    // console.log(newEnd);
-    // console.log(type.current?.value);
-    // console.log(note.current?.value);
+    // //console.log(sensei.current?.value);
+    // //console.log(date.current?.value);
+    // //console.log(start.current?.value);
+    // //console.log(newStart);
+    // //console.log(end.current?.value);
+    // //console.log(newEnd);
+    // //console.log(type.current?.value);
+    // //console.log(note.current?.value);
 
     instanceAxios
       .post(
@@ -110,7 +110,7 @@ const CourAdmin = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Cours Créer`);
@@ -118,7 +118,7 @@ const CourAdmin = () => {
         setIsOpen(false);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
         onToastChange(true);
         messageToast(`Erreur lors de la création du cours`);
         colorToast('danger');
@@ -129,7 +129,7 @@ const CourAdmin = () => {
   const [isOpenUpdate, setIsOpenUpdate] = useState<boolean>(false);
 
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.value, 'showModalUpdate');
+    //console.log(e.currentTarget.value, 'showModalUpdate');
     setIsOpenUpdate(true);
 
     instanceAxios
@@ -139,7 +139,7 @@ const CourAdmin = () => {
         },
       })
       .then((response) => {
-        console.log(response.data, 'à louverture de la modale');
+        //console.log(response.data, 'à louverture de la modale');
 
         setOnesensei(response.data.sensei);
         // MISE AU FORMAT POUR LA DATE
@@ -169,7 +169,7 @@ const CourAdmin = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        // console.log(error);
+        // //console.log(error);
       });
   };
 
@@ -177,13 +177,13 @@ const CourAdmin = () => {
     setIsOpenUpdate(false);
   };
 
-  console.log(Onedate, 'DATE');
-  console.log(Onestart, 'START');
-  console.log(Oneend, 'END');
+  //console.log(Onedate, 'DATE');
+  //console.log(Onestart, 'START');
+  //console.log(Oneend, 'END');
 
-  // console.log(newString, 'newDateString');
+  // //console.log(newString, 'newDateString');
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
-    console.log(e.currentTarget.value);
+    //console.log(e.currentTarget.value);
     e.preventDefault();
 
     instanceAxios
@@ -204,7 +204,7 @@ const CourAdmin = () => {
         }
       )
       .then((response) => {
-        console.log('response', response);
+        //console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Cours modifié avec succès`);
@@ -212,7 +212,7 @@ const CourAdmin = () => {
         setIsOpenUpdate(false);
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de la création du cours`);
         colorToast('danger');
@@ -222,7 +222,7 @@ const CourAdmin = () => {
   // ----------------------------- DELETE -----------------------------
 
   const handleDelete = () => {
-    // console.log(e.currentTarget.value);
+    // //console.log(e.currentTarget.value);
     // e.preventDefault();
 
     // if (window.confirm('Voulez vous vraiment supprimer ce cours ?')) {
@@ -234,7 +234,7 @@ const CourAdmin = () => {
           },
         })
         .then((response) => {
-          // console.log('response', response);
+          // //console.log('response', response);
           setCount(count + 1);
           onToastChange(true);
           messageToast(`cours supprimé`);
@@ -242,7 +242,7 @@ const CourAdmin = () => {
           setIsConfirm(false);
         })
         .catch((error) => {
-          console.log('Error', error);
+          //console.log('Error', error);
           onToastChange(true);
           messageToast(`Erreur lors de suppression du cours`);
           colorToast('danger');

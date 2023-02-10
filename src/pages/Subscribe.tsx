@@ -13,8 +13,8 @@ const Subscribe = () => {
   //
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(emailElement.current?.value);
-    console.log(passwordElement.current?.value);
+    //console.log(emailElement.current?.value);
+    //console.log(passwordElement.current?.value);
 
     // Requete Sub
     instanceAxios
@@ -24,11 +24,30 @@ const Subscribe = () => {
       })
       .then((response) => {
         console.log(response);
+        if (response.status === 400) {
+          onToastChange(true);
+          messageToast(
+            `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
+          );
+          colorToast('danger');
+        }
+
         if (response.data.statusCode === 400) {
           onToastChange(true);
           messageToast(
             `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
           );
+          colorToast('danger');
+        }
+        if (response.status === 409) {
+          onToastChange(true);
+          messageToast(`Cet email existe déjà dans notre base de donnée.`);
+          colorToast('danger');
+        }
+
+        if (response.data.statusCode === 409) {
+          onToastChange(true);
+          messageToast(`Cet email existe déjà dans notre base de donnée.`);
           colorToast('danger');
         }
         onToastChange(true);
@@ -37,7 +56,20 @@ const Subscribe = () => {
         navigate('/connect');
       })
       .catch((error) => {
-        console.log('Inscription impossible', error);
+        //console.log('Inscription impossible', error);
+        if (error.response.data.statusCode === 409) {
+          onToastChange(true);
+          messageToast(`Cet email existe déjà dans notre base de donnée.`);
+          colorToast('danger');
+        }
+
+        if (error.response.data.statusCode === 400) {
+          onToastChange(true);
+          messageToast(
+            `Votre mot de passe doit contenir au moins 6 caractères.`
+          );
+          colorToast('danger');
+        }
         onToastChange(true);
         messageToast(
           `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère et l'adresse email doit être unique.`
@@ -83,6 +115,7 @@ const Subscribe = () => {
               aria-describedby='emailHelp'
               placeholder='votre.email@mail.fr'
               ref={emailElement}
+              required
             />
           </div>
           <div className='form-group mb-3'>
@@ -93,6 +126,7 @@ const Subscribe = () => {
               id='exampleInputPassword1'
               placeholder='Votre mot de passe'
               ref={passwordElement}
+              required
             />
           </div>
 
