@@ -39,7 +39,10 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
   };
 
   let now = new Date();
-  let heureNow = `${now.getHours()}:${now.getMinutes()}`;
+  let heureNow = `${now.getHours()}:${now
+    .getMinutes()
+    .toString()
+    .padStart(2, '0')}`;
   // console.log(heureNow, 'now');
   // console.log(color);
 
