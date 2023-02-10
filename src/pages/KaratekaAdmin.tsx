@@ -116,40 +116,42 @@ const KaratekaAdmin = () => {
             backgroundColor: '#32313140',
           }}
         >
-          {karateka?.map((x, i) => (
-            <li
-              key={i}
-              style={{ margin: 16, listStyle: 'none', width: '350px' }}
-            >
-              <Card
-                style={{
-                  width: '100%',
-                  marginTop: 16,
-                  marginBottom: 16,
-                  minWidth: '100px',
-                }}
-                actions={[
-                  <button
-                    onClick={showModalUpdate}
-                    value={x.id}
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      fontSize: '150%',
-                    }}
-                  >
-                    <EditOutlined />
-                  </button>,
-                ]}
+          {karateka
+            ?.sort((a, b) => (a.prenom > b.prenom ? 1 : -1))
+            .map((x, i) => (
+              <li
+                key={i}
+                style={{ margin: 16, listStyle: 'none', width: '350px' }}
               >
-                <Meta
-                  avatar={<Avatar size={64} icon={<UserOutlined />} />}
-                  title={`${x?.prenom} | ${x?.nom}`}
-                  description={`ceinture : ${x.ceinture}`}
-                />
-              </Card>
-            </li>
-          ))}
+                <Card
+                  style={{
+                    width: '100%',
+                    marginTop: 16,
+                    marginBottom: 16,
+                    minWidth: '100px',
+                  }}
+                  actions={[
+                    <button
+                      onClick={showModalUpdate}
+                      value={x.id}
+                      style={{
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        fontSize: '150%',
+                      }}
+                    >
+                      <EditOutlined />
+                    </button>,
+                  ]}
+                >
+                  <Meta
+                    avatar={<Avatar size={64} icon={<UserOutlined />} />}
+                    title={`${x?.prenom} | ${x?.nom}`}
+                    description={`ceinture : ${x.ceinture}`}
+                  />
+                </Card>
+              </li>
+            ))}
         </div>
       </ul>
       {isLoading ? (

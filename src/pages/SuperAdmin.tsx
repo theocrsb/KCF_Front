@@ -186,40 +186,23 @@ const SuperAdmin = () => {
             backgroundColor: '#32313140',
           }}
         >
-          {allUser?.map((x) => (
-            <li
-              key={`alluser-${x.id}`}
-              style={{ margin: 16, listStyle: 'none', width: '350px' }}
-            >
-              <Card
-                style={{
-                  width: '100%',
-                  marginTop: 16,
-                  marginBottom: 16,
-                  minWidth: '100px',
-                }}
-                actions={[
-                  <button
-                    onClick={showModalUpdate}
-                    value={x.id}
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      fontSize: '150%',
-                    }}
-                  >
-                    <EditOutlined />
-                  </button>,
-                  <Popconfirm
-                    placement='top'
-                    title={text}
-                    description={description}
-                    onConfirm={handleDelete}
-                    okText='Oui'
-                    cancelText='Non'
-                  >
+          {allUser
+            ?.sort((a, b) => (a.email > b.email ? 1 : -1))
+            .map((x) => (
+              <li
+                key={`alluser-${x.id}`}
+                style={{ margin: 16, listStyle: 'none', width: '350px' }}
+              >
+                <Card
+                  style={{
+                    width: '100%',
+                    marginTop: 16,
+                    marginBottom: 16,
+                    minWidth: '100px',
+                  }}
+                  actions={[
                     <button
-                      onClick={confirm}
+                      onClick={showModalUpdate}
                       value={x.id}
                       style={{
                         backgroundColor: 'transparent',
@@ -227,21 +210,40 @@ const SuperAdmin = () => {
                         fontSize: '150%',
                       }}
                     >
-                      <DeleteOutlined />
-                    </button>
-                  </Popconfirm>,
-                ]}
-              >
-                <Meta
-                  avatar={<Avatar size={64} icon={<UserOutlined />} />}
-                  title={`${x?.email}`}
-                  description={`${
-                    x?.member === true ? 'Membre' : 'Non membre'
-                  } | ${x.role.label}`}
-                />
-              </Card>
-            </li>
-          ))}
+                      <EditOutlined />
+                    </button>,
+                    <Popconfirm
+                      placement='top'
+                      title={text}
+                      description={description}
+                      onConfirm={handleDelete}
+                      okText='Oui'
+                      cancelText='Non'
+                    >
+                      <button
+                        onClick={confirm}
+                        value={x.id}
+                        style={{
+                          backgroundColor: 'transparent',
+                          border: 'none',
+                          fontSize: '150%',
+                        }}
+                      >
+                        <DeleteOutlined />
+                      </button>
+                    </Popconfirm>,
+                  ]}
+                >
+                  <Meta
+                    avatar={<Avatar size={64} icon={<UserOutlined />} />}
+                    title={`${x?.email}`}
+                    description={`${
+                      x?.member === true ? 'Membre' : 'Non membre'
+                    } | ${x.role.label}`}
+                  />
+                </Card>
+              </li>
+            ))}
         </div>
       </ul>
       {/* modale update */}

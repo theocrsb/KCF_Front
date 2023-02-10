@@ -363,40 +363,25 @@ const CourAdmin = () => {
             backgroundColor: '#32313140',
           }}
         >
-          {cours?.map((x, i) => (
-            <li
-              key={i}
-              style={{ margin: 16, listStyle: 'none', width: '350px' }}
-            >
-              <Card
-                style={{
-                  width: '100%',
-                  marginTop: 16,
-                  marginBottom: 16,
-                  minWidth: '100px',
-                }}
-                actions={[
-                  <button
-                    onClick={showModalUpdate}
-                    value={x.id}
-                    style={{
-                      backgroundColor: 'transparent',
-                      border: 'none',
-                      fontSize: '150%',
-                    }}
-                  >
-                    <EditOutlined />
-                  </button>,
-                  <Popconfirm
-                    placement='top'
-                    title={text}
-                    description={description}
-                    onConfirm={handleDelete}
-                    okText='Oui'
-                    cancelText='Non'
-                  >
+          {cours
+            ?.sort(
+              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+            )
+            .map((x, i) => (
+              <li
+                key={i}
+                style={{ margin: 16, listStyle: 'none', width: '350px' }}
+              >
+                <Card
+                  style={{
+                    width: '100%',
+                    marginTop: 16,
+                    marginBottom: 16,
+                    minWidth: '100px',
+                  }}
+                  actions={[
                     <button
-                      onClick={confirm}
+                      onClick={showModalUpdate}
                       value={x.id}
                       style={{
                         backgroundColor: 'transparent',
@@ -404,31 +389,50 @@ const CourAdmin = () => {
                         fontSize: '150%',
                       }}
                     >
-                      <DeleteOutlined />
-                    </button>
-                  </Popconfirm>,
-                ]}
-              >
-                <Meta
-                  avatar={<Avatar size={64} icon={<BookOutlined />} />}
-                  title={`${x?.sensei} | ${x?.type}`}
-                  description={`${new Date(x.heureDebut).getHours()}h${new Date(
-                    x.heureDebut
-                  )
-                    .getMinutes()
-                    .toString()
-                    .padStart(2, '0')}/${new Date(
-                    x?.heureFin
-                  ).getHours()}h${new Date(x?.heureFin)
-                    .getMinutes()
-                    .toString()
-                    .padStart(2, '0')} le ${new Date(
-                    x?.date
-                  ).toLocaleDateString('fr')}`}
-                />
-              </Card>
-            </li>
-          ))}
+                      <EditOutlined />
+                    </button>,
+                    <Popconfirm
+                      placement='top'
+                      title={text}
+                      description={description}
+                      onConfirm={handleDelete}
+                      okText='Oui'
+                      cancelText='Non'
+                    >
+                      <button
+                        onClick={confirm}
+                        value={x.id}
+                        style={{
+                          backgroundColor: 'transparent',
+                          border: 'none',
+                          fontSize: '150%',
+                        }}
+                      >
+                        <DeleteOutlined />
+                      </button>
+                    </Popconfirm>,
+                  ]}
+                >
+                  <Meta
+                    avatar={<Avatar size={64} icon={<BookOutlined />} />}
+                    title={`${x?.sensei} | ${x?.type}`}
+                    description={`${new Date(
+                      x.heureDebut
+                    ).getHours()}h${new Date(x.heureDebut)
+                      .getMinutes()
+                      .toString()
+                      .padStart(2, '0')}/${new Date(
+                      x?.heureFin
+                    ).getHours()}h${new Date(x?.heureFin)
+                      .getMinutes()
+                      .toString()
+                      .padStart(2, '0')} le ${new Date(
+                      x?.date
+                    ).toLocaleDateString('fr')}`}
+                  />
+                </Card>
+              </li>
+            ))}
         </div>
       </ul>
       {/* modale update */}
