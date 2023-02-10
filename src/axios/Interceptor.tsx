@@ -14,15 +14,12 @@ const Interceptor = ({ children }: InterceptorProps) => {
   const { messageToast } = useContext(ToastContext);
   const { colorToast } = useContext(ToastContext);
   const navigate = useNavigate();
-   const {
-     UpdateToken,
-     setRole,
-   } = useContext(AuthContext);
+  const { UpdateToken, setRole } = useContext(AuthContext);
 
   useEffect(() => {
     instanceAxios.interceptors.request.use((send: any) => {
       // lors de depart de la request
-      //console.log('send request START LOADING');
+      console.log('send request START LOADING');
       onLoadingChange(true);
       return send;
     });
@@ -33,7 +30,7 @@ const Interceptor = ({ children }: InterceptorProps) => {
         return response;
       },
       (error) => {
-        //console.log(error);
+        console.log(error);
         // 401 : pas connecté ou expiré
         // 403 : pas acces a cette donnée (pas bon role)
 

@@ -26,11 +26,11 @@ const SuperAdmin = () => {
         },
       })
       .then((response) => {
-        //console.log(response);
+        console.log(response);
         setAllUser(response.data);
       })
       .catch((error) => {
-        //console.log(error);
+        console.log(error);
       });
   }, [count]);
 
@@ -53,20 +53,20 @@ const SuperAdmin = () => {
     setIdDelete(e.currentTarget.value);
   };
 
-  // //console.log(sensei.current?.value);
-  // //console.log(date.current?.value);
-  // //console.log(start.current?.value);
-  // //console.log(newStart);
-  // //console.log(end.current?.value);
-  // //console.log(newEnd);
-  // //console.log(type.current?.value);
-  // //console.log(note.current?.value);
+  // console.log(sensei.current?.value);
+  // console.log(date.current?.value);
+  // console.log(start.current?.value);
+  // console.log(newStart);
+  // console.log(end.current?.value);
+  // console.log(newEnd);
+  // console.log(type.current?.value);
+  // console.log(note.current?.value);
 
   // ----------------------------- UPDATE -----------------------------
   const [isOpenUpdate, setIsOpenUpdate] = useState<boolean>(false);
 
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //console.log(e.currentTarget.value, 'showModalUpdate');
+    console.log(e.currentTarget.value, 'showModalUpdate');
     setIsOpenUpdate(true);
 
     instanceAxios
@@ -76,7 +76,7 @@ const SuperAdmin = () => {
         },
       })
       .then((response) => {
-        //console.log(response.data, 'à louverture de la modale');
+        console.log(response.data, 'à louverture de la modale');
         setOneRole(response.data.role.label);
         if (response.data.member === true) {
           setOneMember('oui');
@@ -89,7 +89,7 @@ const SuperAdmin = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        // //console.log(error);
+        // console.log(error);
       });
   };
 
@@ -98,9 +98,9 @@ const SuperAdmin = () => {
   };
   let valueId: string;
   let valueMember: boolean;
-  // //console.log(newString, 'newDateString');
+  // console.log(newString, 'newDateString');
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
-    //console.log(e.currentTarget.value);
+    console.log(e.currentTarget.value);
     e.preventDefault();
     if (oneRole === 'user') {
       valueId = 'd7c21c44-d565-46d8-a75c-b198a66bfe40';
@@ -117,7 +117,7 @@ const SuperAdmin = () => {
     } else {
       valueMember = false;
     }
-    //console.log(valueId, 'id avant le patch');
+    console.log(valueId, 'id avant le patch');
     instanceAxios
       .patch(
         `/users/${id}/admin`,
@@ -132,7 +132,7 @@ const SuperAdmin = () => {
         }
       )
       .then((response) => {
-        //console.log('response', response);
+        console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Utilisateur modifié avec succès`);
@@ -140,7 +140,7 @@ const SuperAdmin = () => {
         setIsOpenUpdate(false);
       })
       .catch((error) => {
-        //console.log('Error', error);
+        console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de la modification de l'utilisateur`);
         colorToast('danger');
@@ -148,9 +148,9 @@ const SuperAdmin = () => {
   };
 
   // ----------------------------- DELETE -----------------------------
-  //console.log(idDelete, 'idDelete avant delete');
+  console.log(idDelete, 'idDelete avant delete');
   const handleDelete = () => {
-    // //console.log(e.currentTarget.value);
+    // console.log(e.currentTarget.value);
     // e.preventDefault();
 
     instanceAxios
@@ -160,14 +160,14 @@ const SuperAdmin = () => {
         },
       })
       .then((response) => {
-        // //console.log('response', response);
+        // console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Utilisateur supprimé`);
         colorToast('success');
       })
       .catch((error) => {
-        //console.log('Error', error);
+        console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de suppression de l'Utilisateur`);
         colorToast('danger');

@@ -57,16 +57,16 @@ const AddKarateka = () => {
         },
       })
       .then((response) => {
-        // //console.log('Get All karateka', response);
+        // console.log('Get All karateka', response);
         SetAllKarateka(response.data);
       })
       .catch((error) => {
-        // //console.log('Get All Cours Error', error);
+        // console.log('Get All Cours Error', error);
       });
   }, [count]);
 
   const handleDelete = () => {
-    // //console.log(e.currentTarget.value);
+    // console.log(e.currentTarget.value);
     // e.preventDefault();
 
     // if (window.confirm('Voulez vous vraiment supprimer ce karatéka ?')) {
@@ -77,14 +77,14 @@ const AddKarateka = () => {
         },
       })
       .then((response) => {
-        // //console.log('response', response);
+        // console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Karatéka supprimé`);
         colorToast('success');
       })
       .catch((error) => {
-        //console.log('Error', error);
+        console.log('Error', error);
       });
     // }
   };
@@ -94,7 +94,7 @@ const AddKarateka = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const showModal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //console.log(e.currentTarget.value);
+    console.log(e.currentTarget.value);
     setIsOpen(true);
   };
 
@@ -109,7 +109,7 @@ const AddKarateka = () => {
   // info
   const [info, setInfo] = useState<string>('');
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //console.log(e.currentTarget.value, 'showModalUpdate');
+    console.log(e.currentTarget.value, 'showModalUpdate');
     setIsOpenUpdate(true);
 
     instanceAxios
@@ -119,8 +119,8 @@ const AddKarateka = () => {
         },
       })
       .then((response) => {
-        // //console.log('Get All karateka', response);
-        //console.log(response.data.nom, 'à louverture de la modale');
+        // console.log('Get All karateka', response);
+        console.log(response.data.nom, 'à louverture de la modale');
         SetOneKaratekaNom(response.data.nom);
         SetOneKaratekaPrenom(response.data.prenom);
         SetOneKaratekaAge(response.data.age);
@@ -131,7 +131,7 @@ const AddKarateka = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        // //console.log('Get All Cours Error', error);
+        // console.log('Get All Cours Error', error);
       });
   };
 
@@ -140,7 +140,7 @@ const AddKarateka = () => {
   };
 
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
-    //console.log(e.currentTarget.value);
+    console.log(e.currentTarget.value);
     e.preventDefault();
     instanceAxios
       .patch(
@@ -159,7 +159,7 @@ const AddKarateka = () => {
         }
       )
       .then((response) => {
-        //console.log('response', response);
+        console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Karatéka modifié`);
@@ -167,7 +167,7 @@ const AddKarateka = () => {
         setIsOpenUpdate(false);
       })
       .catch((error) => {
-        //console.log('Error', error);
+        console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de la création du karatéka`);
         colorToast('danger');
@@ -196,7 +196,7 @@ const AddKarateka = () => {
         }
       )
       .then((response) => {
-        // //console.log('response', response);
+        // console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Karatéka créé`);
@@ -204,7 +204,7 @@ const AddKarateka = () => {
         setIsOpen(false);
       })
       .catch((error) => {
-        //console.log('Error', error);
+        console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de la création du karatéka`);
         colorToast('danger');
@@ -216,7 +216,7 @@ const AddKarateka = () => {
   const [isOpenInfo, setIsOpenInfo] = useState<boolean>(false);
 
   const showModalInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
-    //console.log(e.currentTarget.value);
+    console.log(e.currentTarget.value);
     instanceAxios
       .get<Karateka>(`/karatekas/${e.currentTarget.value}`, {
         headers: {
@@ -224,14 +224,14 @@ const AddKarateka = () => {
         },
       })
       .then((response) => {
-        // //console.log('Get All karateka', response);
-        //console.log(response.data.note, 'à louverture de la modale');
+        // console.log('Get All karateka', response);
+        console.log(response.data.note, 'à louverture de la modale');
         setInfo(response.data.note);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
-        // //console.log('Get All Cours Error', error);
+        // console.log('Get All Cours Error', error);
       });
     setIsOpenInfo(true);
   };
@@ -240,8 +240,8 @@ const AddKarateka = () => {
     setIsOpenInfo(false);
   };
 
-  //console.log(info, 'info valeur avant remplissage');
-  // //console.log(oneKaratekaNom, 'oneKaratekaNom valeur avant remplissage');
+  console.log(info, 'info valeur avant remplissage');
+  // console.log(oneKaratekaNom, 'oneKaratekaNom valeur avant remplissage');
   return (
     <div style={{ minHeight: '100vh' }} className='list-group '>
       <ul className='list-group pt-3'>

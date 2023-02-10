@@ -13,8 +13,8 @@ const Subscribe = () => {
   //
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    //console.log(emailElement.current?.value);
-    //console.log(passwordElement.current?.value);
+    console.log(emailElement.current?.value);
+    console.log(passwordElement.current?.value);
 
     // Requete Sub
     instanceAxios
@@ -56,7 +56,7 @@ const Subscribe = () => {
         navigate('/connect');
       })
       .catch((error) => {
-        //console.log('Inscription impossible', error);
+        console.log('Inscription impossible', error);
         if (error.response.data.statusCode === 409) {
           onToastChange(true);
           messageToast(`Cet email existe déjà dans notre base de donnée.`);
