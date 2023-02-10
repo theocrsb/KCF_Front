@@ -60,10 +60,10 @@ const Subscribe = () => {
         //   messageToast(`Cet email existe déjà dans notre base de donnée.`);
         //   colorToast('danger');
         // }
-        // onToastChange(true);
-        // messageToast('Inscription réussie ! Veuillez vous connecter.');
-        // colorToast('success');
-        // navigate('/connect');
+        onToastChange(true);
+        messageToast('Inscription réussie ! Veuillez vous connecter.');
+        colorToast('success');
+        navigate('/connect');
       })
       .catch((error) => {
         console.log('Inscription impossible', error);
