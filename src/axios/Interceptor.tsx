@@ -31,8 +31,9 @@ const Interceptor = ({ children }: InterceptorProps) => {
       },
       (error) => {
         console.log(error);
-        // 401 : pas connecté ou expiré
-        // 403 : pas acces a cette donnée (pas bon role)
+        onLoadingChange(false);
+        //   // 401 : pas connecté ou expiré
+        //   // 403 : pas acces a cette donnée (pas bon role)
 
         if (error.response.data.statusCode === 401) {
           localStorage.removeItem('accessToken');
@@ -40,16 +41,21 @@ const Interceptor = ({ children }: InterceptorProps) => {
           messageToast(
             'Vous devez être connecté pour accéder à cette page. Veuillez vous connecter.'
           );
-          // messageToast(error.response.data.message);
-          colorToast('danger');
           UpdateToken('');
           setRole('');
-
-          onLoadingChange(false);
-          navigate('/connect');
+          return Promise.reject(error);
         }
-        onLoadingChange(false);
-        return error;
+        //     // messageToast(error.response.data.message);
+        //     colorToast('danger');
+        //     UpdateToken('');
+        //     setRole('');
+
+        //     onLoadingChange(false);
+        //     navigate('/connect');
+        //   }
+        //   onLoadingChange(false);
+        //   // return error;
+        return Promise.reject(error);
       }
     );
   }, []);

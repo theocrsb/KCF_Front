@@ -63,7 +63,8 @@ const Update = () => {
         onToastChange(true);
         messageToast('Vos informations ont bien été mises à jour !');
         colorToast('success');
-        navigate('/calendrier');
+        // navigate('/calendrier');
+        setCount(count + 1);
       })
       .catch((error) => {
         console.log(error);

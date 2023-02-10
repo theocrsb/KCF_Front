@@ -122,7 +122,7 @@ const SuperAdmin = () => {
       .patch(
         `/users/${id}/admin`,
         {
-          role: { id: valueId },
+          role: { roleId: valueId },
           member: valueMember,
         },
         {

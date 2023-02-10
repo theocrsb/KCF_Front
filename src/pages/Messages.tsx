@@ -77,40 +77,49 @@ const Messages = () => {
 
   return (
     <div>
-      {allMessage.map((x) => (
-        <div key={x.id} className='card text-center m-5'>
-          <div className='card-header'>
-            Message de {x.nom}{' '}
-            <Popconfirm
-              placement='top'
-              title={text}
-              description={description}
-              onConfirm={handleDelete}
-              okText='Oui'
-              cancelText='Non'
-            >
-              <button
-                onClick={confirm}
-                value={x.id}
-                style={{
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  fontSize: '150%',
-                }}
-              >
-                <DeleteOutlined />
-              </button>
-            </Popconfirm>
-          </div>
-          <div className='card-body'>
-            <h5 className='card-title'>{x.message}</h5>
-            <p className='card-text'>Email : {x.email}</p>
-          </div>
-          <div className='card-footer text-muted'>
-            {new Date(x.createdAt).toLocaleDateString('fr')}
-          </div>
+      {allMessage.length === 0 ? (
+        <div
+          className='text-center'
+          style={{ fontWeight: 'bolder', fontSize: '2rem', padding: '20px' }}
+        >
+          Aucun message pour le moment
         </div>
-      ))}
+      ) : (
+        allMessage.map((x) => (
+          <div key={x.id} className='card text-center m-5'>
+            <div className='card-header'>
+              Message de {x.nom}{' '}
+              <Popconfirm
+                placement='top'
+                title={text}
+                description={description}
+                onConfirm={handleDelete}
+                okText='Oui'
+                cancelText='Non'
+              >
+                <button
+                  onClick={confirm}
+                  value={x.id}
+                  style={{
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontSize: '150%',
+                  }}
+                >
+                  <DeleteOutlined />
+                </button>
+              </Popconfirm>
+            </div>
+            <div className='card-body'>
+              <h5 className='card-title'>{x.message}</h5>
+              <p className='card-text'>Email : {x.email}</p>
+            </div>
+            <div className='card-footer text-muted'>
+              {new Date(x.createdAt).toLocaleDateString('fr')}
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };

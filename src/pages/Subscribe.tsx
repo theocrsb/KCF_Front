@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { FormEvent, useContext, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
+import { LoadingContext } from '../context/loading-spinner';
 import { ToastContext } from '../context/toast-context';
 
 const Subscribe = () => {
@@ -10,6 +11,7 @@ const Subscribe = () => {
   const navigate = useNavigate();
   // Lien avec le toast context
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
+  const { onLoadingChange } = useContext(LoadingContext);
   //
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -24,58 +26,74 @@ const Subscribe = () => {
       })
       .then((response) => {
         console.log(response);
-        if (response.status === 400) {
-          onToastChange(true);
-          messageToast(
-            `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
-          );
-          colorToast('danger');
-        }
+        // if (response.data.statusCode === 400) {
+        //   onToastChange(true);
+        //   messageToast(
+        //     `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
+        //   );
+        //   colorToast('danger');
+        // }
 
-        if (response.data.statusCode === 400) {
-          onToastChange(true);
-          messageToast(
-            `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
-          );
-          colorToast('danger');
-        }
-        if (response.status === 409) {
-          onToastChange(true);
-          messageToast(`Cet email existe déjà dans notre base de donnée.`);
-          colorToast('danger');
-        }
+        // if (response.status === 400) {
+        //   onToastChange(true);
+        //   messageToast(
+        //     `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
+        //   );
+        //   colorToast('danger');
+        // }
 
-        if (response.data.statusCode === 409) {
-          onToastChange(true);
-          messageToast(`Cet email existe déjà dans notre base de donnée.`);
-          colorToast('danger');
-        }
-        onToastChange(true);
-        messageToast('Inscription réussie ! Veuillez vous connecter.');
-        colorToast('success');
-        navigate('/connect');
+        // if (response.data.statusCode === 400) {
+        //   onToastChange(true);
+        //   messageToast(
+        //     `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère.`
+        //   );
+        //   colorToast('danger');
+        // }
+        // if (response.status === 409) {
+        //   onToastChange(true);
+        //   messageToast(`Cet email existe déjà dans notre base de donnée.`);
+        //   colorToast('danger');
+        // }
+
+        // if (response.data.statusCode === 409) {
+        //   onToastChange(true);
+        //   messageToast(`Cet email existe déjà dans notre base de donnée.`);
+        //   colorToast('danger');
+        // }
+        // onToastChange(true);
+        // messageToast('Inscription réussie ! Veuillez vous connecter.');
+        // colorToast('success');
+        // navigate('/connect');
       })
       .catch((error) => {
         console.log('Inscription impossible', error);
+        onLoadingChange(false);
+        if (error.response.data.statusCode === 400) {
+          onToastChange(true);
+          // messageToast(`Cet email existe déjà dans notre base de donnée.`);
+          messageToast(error.response.data.message);
+          colorToast('danger');
+        }
         if (error.response.data.statusCode === 409) {
           onToastChange(true);
-          messageToast(`Cet email existe déjà dans notre base de donnée.`);
+          // messageToast(`Cet email existe déjà dans notre base de donnée.`);
+          messageToast(error.response.data.message);
           colorToast('danger');
         }
 
-        if (error.response.data.statusCode === 400) {
-          onToastChange(true);
-          messageToast(
-            `Votre mot de passe doit contenir au moins 6 caractères.`
-          );
-          colorToast('danger');
-        }
-        onToastChange(true);
-        messageToast(
-          `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère et l'adresse email doit être unique.`
-        );
-        // messageToast(error.response.data.message[0]);
-        colorToast('danger');
+        // if (error.response.data.statusCode === 400) {
+        //   onToastChange(true);
+        //   messageToast(
+        //     `Votre mot de passe doit contenir au moins 6 caractères.`
+        //   );
+        //   colorToast('danger');
+        // }
+        // onToastChange(true);
+        // messageToast(
+        //   `Erreur lors de l'inscription. Le mot de passe de contenir 6 caractère et l'adresse email doit être unique.`
+        // );
+        // // messageToast(error.response.data.message[0]);
+        // colorToast('danger');
       });
   };
   return (
@@ -94,7 +112,7 @@ const Subscribe = () => {
 
         <div>
           <button type='submit' className='btn btn-primary btnPerso mt-5 mb-4'>
-            <NavLink to='/' className='nav-link'>
+            <NavLink to='/subscribe' className='nav-link'>
               Page d'inscription
             </NavLink>
           </button>
