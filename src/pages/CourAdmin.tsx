@@ -148,20 +148,12 @@ const CourAdmin = () => {
         let newDateString = date.toISOString().split('T')[0];
         setOnedate(newDateString);
         // MISE AU FORMAT POUR L'HEURE
-        const dateHeure = new Date(
-          new Date(response.data.heureDebut).toLocaleString('fr-fr', {
-            timeZone: 'UTC',
-          })
-        );
+        const dateHeure = new Date(response.data.heureDebut);
         const hours = dateHeure.getHours();
         const minutes = dateHeure.getMinutes().toString().padStart(2, '0');
         const formattedTime = `${hours}:${minutes}`;
         setOnestart(formattedTime);
-        const dateHeureFin = new Date(
-          new Date(response.data.heureFin).toLocaleString('fr-fr', {
-            timeZone: 'UTC',
-          })
-        );
+        const dateHeureFin = new Date(response.data.heureFin);
         const hoursFin = dateHeureFin.getHours();
         const minutesFin = dateHeureFin
           .getMinutes()
