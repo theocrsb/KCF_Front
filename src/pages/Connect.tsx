@@ -52,7 +52,11 @@ const Connect = () => {
     <div style={{ minHeight: '100vh' }}>
       <div className='d-flex text-center justify-content-center'>
         <div>
-          <button type='submit' className='btn btn-primary btnPerso mt-5 mb-4'>
+          <button
+            type='submit'
+            className='btn btn-primary btnPerso mt-5 mb-4'
+            style={{ backgroundColor: 'white', color: '#383b87' }}
+          >
             <NavLink to='/connect' className='nav-link'>
               Page de connexion
             </NavLink>
