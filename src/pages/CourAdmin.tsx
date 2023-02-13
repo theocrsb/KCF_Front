@@ -113,7 +113,7 @@ const CourAdmin = () => {
         console.log(response);
         setCount(count + 1);
         onToastChange(true);
-        messageToast(`Cours Créer`);
+        messageToast(`Cours créé`);
         colorToast('success');
         setIsOpen(false);
       })
@@ -148,12 +148,20 @@ const CourAdmin = () => {
         let newDateString = date.toISOString().split('T')[0];
         setOnedate(newDateString);
         // MISE AU FORMAT POUR L'HEURE
-        const dateHeure = new Date(response.data.heureDebut);
+        const dateHeure = new Date(
+          new Date(response.data.heureDebut).toLocaleString('fr-fr', {
+            timeZone: 'UTC',
+          })
+        );
         const hours = dateHeure.getHours();
         const minutes = dateHeure.getMinutes().toString().padStart(2, '0');
         const formattedTime = `${hours}:${minutes}`;
         setOnestart(formattedTime);
-        const dateHeureFin = new Date(response.data.heureFin);
+        const dateHeureFin = new Date(
+          new Date(response.data.heureFin).toLocaleString('fr-fr', {
+            timeZone: 'UTC',
+          })
+        );
         const hoursFin = dateHeureFin.getHours();
         const minutesFin = dateHeureFin
           .getMinutes()
