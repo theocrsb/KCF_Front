@@ -26,6 +26,8 @@ import KaratekaAdmin from './pages/KaratekaAdmin';
 import CourAdmin from './pages/CourAdmin';
 import Contact from './pages/Contact';
 import Messages from './pages/Messages';
+import Reset from './pages/Reset';
+import FormReset from './pages/FormReset';
 
 export interface PayloadToken {
   exp: number;
@@ -56,6 +58,8 @@ function App() {
               <Route path='/contact' element={<Contact />} />
               <Route path='/connect' element={<Connect />} />
               <Route path='/subscribe' element={<Subscribe />} />
+              <Route path='/reset' element={<Reset />} />
+              <Route path='/form/reset' element={<FormReset />} />
 
               {/* -protected route User */}
               <Route
