@@ -98,7 +98,7 @@ const Subscribe = () => {
   };
   return (
     <div style={{ minHeight: '100vh' }}>
-      <div className='d-flex text-center justify-content-center'>
+      <div className='d-flex text-center justify-content-center '>
         <div>
           <NavLink to='/connect' className='nav-link'>
             <button

@@ -145,7 +145,10 @@ const CourAdmin = () => {
         // MISE AU FORMAT POUR LA DATE
         let date = new Date(response.data.date);
         date.setDate(date.getDate() + 1);
+        console.warn('response.data.date; ', response.data.date);
+        console.warn('date; ', date);
         let newDateString = date.toISOString().split('T')[0];
+        console.warn('newDateString; ', newDateString);
         setOnedate(newDateString);
         // MISE AU FORMAT POUR L'HEURE
         const dateHeure = new Date(response.data.heureDebut);
