@@ -110,7 +110,18 @@ const Connect = () => {
           </button>
         </form>
       </div>
-      <div className='pt-0 text-center'>
+      <div
+        className='pt-0 text-center pb-4'
+        style={{ color: 'black', fontSize: '1.1rem' }}
+      >
+        <NavLink to='/reset' className='nav-link'>
+          Mot de passe oublié
+        </NavLink>
+      </div>
+      <div
+        className='pt-0 text-center'
+        style={{ color: 'black', fontSize: '1.5rem' }}
+      >
         <NavLink to='/subscribe' className='nav-link'>
           Pas de compte ?
         </NavLink>

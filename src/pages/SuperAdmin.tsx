@@ -45,6 +45,7 @@ const SuperAdmin = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   //
   const [oneRole, setOneRole] = useState<string>('');
+  const [allRole, setAllRole] = useState<Role[]>([]);
   const [oneMember, setOneMember] = useState<string>('');
 
   const confirm = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -91,6 +92,23 @@ const SuperAdmin = () => {
         setIsLoading(false);
         // console.log(error);
       });
+
+    // get roles
+    instanceAxios
+      .get<Role[]>('/roles/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      .then((response) => {
+        console.log(response, 'response');
+        setAllRole(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
   };
 
   const hideModalUpdate = () => {
@@ -99,17 +117,19 @@ const SuperAdmin = () => {
   let valueId: string;
   let valueMember: boolean;
   // console.log(newString, 'newDateString');
+  console.log(allRole, 'allrole');
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
     console.log(e.currentTarget.value);
     e.preventDefault();
+    console.log(allRole, 'allrole');
     if (oneRole === 'user') {
-      valueId = 'd7c21c44-d565-46d8-a75c-b198a66bfe40';
+      valueId = allRole[0].id;
     }
     if (oneRole === 'admin') {
-      valueId = '391cd106-4915-484a-bfb1-d9093cd6ef44';
+      valueId = allRole[1].id;
     }
     if (oneRole === 'superadmin') {
-      valueId = 'cb738998-7196-4ff2-b659-bc01e9ef4737';
+      valueId = allRole[2].id;
     }
 
     if (oneMember === 'oui') {
@@ -122,7 +142,7 @@ const SuperAdmin = () => {
       .patch(
         `/users/${id}/admin`,
         {
-          role: { roleId: valueId },
+          role: { id: valueId },
           member: valueMember,
         },
         {
