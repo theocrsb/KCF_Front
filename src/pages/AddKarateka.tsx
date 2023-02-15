@@ -254,7 +254,7 @@ const AddKarateka = () => {
               justifyContent: 'center',
               // paddingLeft: '5%',
               // marginLeft: '10%',
-              backgroundColor: '#32313140',
+              backgroundColor: '#21252940',
             }}
           >
             <Card

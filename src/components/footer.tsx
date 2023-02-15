@@ -15,7 +15,7 @@ const footer = () => {
   };
   return (
     <div>
-      <div style={{ backgroundColor: '#585b5e', padding: '10px' }}>
+      <div style={{ padding: '10px', opacity: '95%' }} className='bg-dark'>
         <ul className='p-0'>
           <li className='list-group-item p-2'>
             <NavLink to='/contact' end className='nav-link'>
