@@ -27,27 +27,27 @@
 }
 
 .btnDirection {
-  background-color: #323131;
+  background-color: #212529;
   color: white;
-  border-color: #323131;
+  border-color: #212529;
   margin-left: 2rem;
   margin-right: 2rem;
-  --bs-btn-bg: #323131;
-  --bs-btn-border-color: #323131;
-  --bs-btn-hover-bg: #323131;
-  --bs-btn-hover-border-color: #323131;
-  --bs-btn-active-bg: #323131;
-  --bs-btn-active-border-color: #323131;
-  --bs-btn-disabled-bg: #323131;
-  --bs-btn-disabled-border-color: #323131;
-  --bs-link-color: #323131;
-  --bs-link-hover-color: #323131;
+  --bs-btn-bg: #212529;
+  --bs-btn-border-color: #212529;
+  --bs-btn-hover-bg: #212529;
+  --bs-btn-hover-border-color: #212529;
+  --bs-btn-active-bg: #212529;
+  --bs-btn-active-border-color: #212529;
+  --bs-btn-disabled-bg: #212529;
+  --bs-btn-disabled-border-color: #212529;
+  --bs-link-color: #212529;
+  --bs-link-hover-color: #212529;
 }
 
 .btnDirection:hover {
   background-color: #ffffff00;
-  color: #323131;
-  border-color: #323131;
+  color: #212529;
+  border-color: #212529;
 }
 
 /* swiper */
@@ -119,7 +119,7 @@ body {
   top: 0;
   bottom: 0;
   left: 0;
-  background-color: #3231311c;
+  background-color: #2125291c;
   backdrop-filter: blur(3px);
   height: 100%;
   width: 100%;

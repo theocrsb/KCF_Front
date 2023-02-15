@@ -55,12 +55,12 @@ const NavBar = () => {
   return (
     <nav
       className='navbar sticky-top navbar-expand-lg navbar-dark bg-dark shadow'
-      style={{ opacity: '90%' }}
+      style={{ opacity: '95%' }}
     >
       <div className='container-fluid'>
         <div className='navbar-brand'>
           <NavLink to='/' className='nav-link'>
-            <img src={logo} width={32} alt='logo de karate'></img> | Karaté Club
+            <img src={logo} width={32} alt='logo de karate' /> | Karaté Club
             Fosses
           </NavLink>
         </div>
@@ -84,6 +84,7 @@ const NavBar = () => {
                   className='nav-link'
                   data-bs-toggle='collapse'
                   data-bs-target='#navbarSupportedContent'
+                  style={{ color: 'white' }}
                 >
                   Accueil
                 </div>
@@ -98,6 +99,7 @@ const NavBar = () => {
                     className='nav-link'
                     data-bs-toggle='collapse'
                     data-bs-target='#navbarSupportedContent'
+                    style={{ color: 'white' }}
                   >
                     Planning
                   </div>
@@ -112,6 +114,7 @@ const NavBar = () => {
                     className='nav-link'
                     data-bs-toggle='collapse'
                     data-bs-target='#navbarSupportedContent'
+                    style={{ color: 'white' }}
                   >
                     Profil
                   </div>
@@ -126,6 +129,7 @@ const NavBar = () => {
                     className='nav-link'
                     data-bs-toggle='collapse'
                     data-bs-target='#navbarSupportedContent'
+                    style={{ color: 'white' }}
                   >
                     Professeur
                   </div>
@@ -140,6 +144,7 @@ const NavBar = () => {
                     className='nav-link'
                     data-bs-toggle='collapse'
                     data-bs-target='#navbarSupportedContent'
+                    style={{ color: 'white' }}
                   >
                     Administrateur
                   </div>
@@ -152,7 +157,7 @@ const NavBar = () => {
                 <NavLink to='connect' className='nav-link'>
                   <button
                     className='btn btn-primary btnPerso'
-                    style={{ margin: '0' }}
+                    style={{ margin: '0', color: 'white' }}
                     onClick={handleDeco}
                     data-bs-toggle='collapse'
                     data-bs-target='#navbarSupportedContent'
@@ -168,6 +173,7 @@ const NavBar = () => {
                     className='nav-link'
                     data-bs-toggle='collapse'
                     data-bs-target='#navbarSupportedContent'
+                    style={{ color: 'white' }}
                   >
                     Connexion
                   </div>

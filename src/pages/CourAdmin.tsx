@@ -363,7 +363,7 @@ const CourAdmin = () => {
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'center',
-            backgroundColor: '#32313140',
+            backgroundColor: '#21252940',
           }}
         >
           {cours

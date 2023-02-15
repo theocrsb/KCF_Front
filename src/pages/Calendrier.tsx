@@ -271,7 +271,7 @@ const Calendrier = () => {
           className='text-center p-3'
           style={{
             fontSize: '1.3rem',
-            backgroundColor: '#323131',
+            backgroundColor: '#212529',
             color: 'white',
           }}
         >
