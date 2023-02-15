@@ -55,6 +55,14 @@ const footer = () => {
               Adresse : Avenue de la Haute Grève 95470 FOSSES
             </p>
           </li>
+          {/* <li>
+                <p
+                  style={{ color: 'white', margin: '0' }}
+                  className='nav-link text-center pt-3'
+                >
+                  Email : karateclubfosses.contact@gmail.com
+                </p>
+              </li> */}
         </ul>
       </div>
     </div>

@@ -10,11 +10,9 @@ interface InterceptorProps {
 }
 const Interceptor = ({ children }: InterceptorProps) => {
   const { onLoadingChange } = useContext(LoadingContext);
-  const { onToastChange } = useContext(ToastContext);
-  const { messageToast } = useContext(ToastContext);
-  const { colorToast } = useContext(ToastContext);
-  const navigate = useNavigate();
+  const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   const { UpdateToken, setRole } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     instanceAxios.interceptors.request.use((send: any) => {
@@ -41,8 +39,10 @@ const Interceptor = ({ children }: InterceptorProps) => {
           messageToast(
             'Vous devez être connecté pour accéder à cette page. Veuillez vous connecter.'
           );
+          colorToast('danger');
           UpdateToken('');
           setRole('');
+          navigate('/connect');
           return Promise.reject(error);
         }
         //     // messageToast(error.response.data.message);
