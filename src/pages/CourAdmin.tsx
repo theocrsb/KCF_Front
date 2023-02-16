@@ -426,14 +426,14 @@ const CourAdmin = () => {
                   <Meta
                     avatar={<Avatar size={64} icon={<BookOutlined />} />}
                     title={`${x?.sensei} | ${x?.type}`}
-                    description={`${new Date(
-                      x.heureDebut
-                    ).getHours()}h${new Date(x.heureDebut)
+                    description={`${new Date(x.heureDebut)
+                      .getHours()
+                      .toLocaleString('fr')}h${new Date(x.heureDebut)
                       .getMinutes()
                       .toString()
-                      .padStart(2, '0')}/${new Date(
-                      x?.heureFin
-                    ).getHours()}h${new Date(x?.heureFin)
+                      .padStart(2, '0')}/${new Date(x?.heureFin)
+                      .getHours()
+                      .toLocaleString('fr')}h${new Date(x?.heureFin)
                       .getMinutes()
                       .toString()
                       .padStart(2, '0')} le ${new Date(
