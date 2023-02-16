@@ -84,11 +84,9 @@ const CourAdmin = () => {
   const handleSumbit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(sensei.current?.value);
-    // console.log(date.current?.value);
-    // console.log(start.current?.value);
-    // console.log(newStart);
-    // console.log(end.current?.value);
-    // console.log(newEnd);
+    console.log(date.current?.value, 'la date dans le create');
+    console.log(start.current?.value, 'le debut dans le create');
+    console.log(end.current?.value, 'la fin dans le create');
     // console.log(type.current?.value);
     // console.log(note.current?.value);
 
@@ -145,16 +143,17 @@ const CourAdmin = () => {
         // MISE AU FORMAT POUR LA DATE
         let date = new Date(response.data.date);
         date.setDate(date.getDate() + 1);
-        console.warn('response.data.date; ', response.data.date);
-        console.warn('date; ', date);
+        console.warn('response.data.date ', response.data.date);
+        console.warn('date ', date);
         let newDateString = date.toISOString().split('T')[0];
-        console.warn('newDateString; ', newDateString);
+        console.warn('Jour select; ', newDateString);
         setOnedate(newDateString);
         // MISE AU FORMAT POUR L'HEURE
         const dateHeure = new Date(response.data.heureDebut);
         const hours = dateHeure.getHours();
         const minutes = dateHeure.getMinutes().toString().padStart(2, '0');
         const formattedTime = `${hours}:${minutes}`;
+        console.warn('Heure debut formated : ', formattedTime);
         setOnestart(formattedTime);
         const dateHeureFin = new Date(response.data.heureFin);
         const hoursFin = dateHeureFin.getHours();
@@ -163,6 +162,7 @@ const CourAdmin = () => {
           .toString()
           .padStart(2, '0');
         const formattedTimeFin = `${hoursFin}:${minutesFin}`;
+        console.warn('Heure fin formated : ', formattedTimeFin);
         setOneend(formattedTimeFin);
         // FIN MISE AU FORMAT POUR L'HEURE
         setOnetype(response.data.type);
@@ -180,9 +180,12 @@ const CourAdmin = () => {
     setIsOpenUpdate(false);
   };
 
-  console.log(Onedate, 'DATE');
-  console.log(Onestart, 'START');
-  console.log(Oneend, 'END');
+  console.log(date.current?.value, 'la date dans le update');
+  console.log(start.current?.value, 'le debut dans le update');
+  console.log(end.current?.value, 'la fin dans le update');
+  // console.log(Onedate, 'DATE');
+  // console.log(Onestart, 'START');
+  // console.log(Oneend, 'END');
 
   // console.log(newString, 'newDateString');
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
