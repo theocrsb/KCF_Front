@@ -60,7 +60,7 @@ function App() {
               <Route path='/connect' element={<Connect />} />
               <Route path='/subscribe' element={<Subscribe />} />
               <Route path='/reset' element={<Reset />} />
-              <Route path='/form/reset' element={<FormReset />} />
+              <Route path='/formreset' element={<FormReset />} />
 
               {/* -protected route User */}
               <Route
