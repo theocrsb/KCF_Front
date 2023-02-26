@@ -6,6 +6,8 @@ import {
 } from '@ant-design/icons';
 import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
+import axios from 'axios';
+
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
@@ -18,6 +20,17 @@ const SuperAdmin = () => {
   //
   const [count, setCount] = useState<number>(0);
   const [allUser, setAllUser] = useState<User[]>([]);
+
+  // // démo erreur oublie bearer
+  // axios
+  //   .get(`http://localhost:8080/api/users`)
+  //   .then((response) => {
+  //     console.log(response, 'response');
+  //   })
+  //   .catch((error) => {
+  //     console.log('error', error);
+  //   });
+
   useEffect(() => {
     instanceAxios
       .get<User[]>('/users/', {
@@ -194,6 +207,7 @@ const SuperAdmin = () => {
       });
   };
 
+  console.log(allUser, 'tous les utilisateurs !');
   return (
     <div style={{ minHeight: '100vh' }}>
       <h3 className='pt-4 text-center'>Gestion des utilisateurs</h3>
