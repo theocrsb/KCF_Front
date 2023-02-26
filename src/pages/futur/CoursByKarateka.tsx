@@ -11,19 +11,20 @@
 //   const [oneKarateka, setOneKarateka] = useState<Karateka>();
 
 //   useEffect(() => {
-//     instanceAxios
-//       .get<Karateka>(`/karatekas/${paramsId.id}`, {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-//         },
-//       })
-//       .then((response) => {
-//         console.log(response, 'response');
-//         setOneKarateka(response.data);
-//       })
-//       .catch((error) => {
-//         console.log('error', error);
-//       });
+
+    // Axios
+    //   .get(`http://localhost:8080/api/users`, {
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    //     },
+    //   })
+    //   .then((response) => {
+    //     console.log(response, 'response');
+    //   })
+    //   .catch((error) => {
+    //     console.log('error', error);
+    //   });
+
 //   }, [paramsId]);
 
 //   return (
