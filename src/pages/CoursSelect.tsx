@@ -217,13 +217,13 @@ const CoursSelect = () => {
               color: 'black',
             }}
           >
-            {oneCours && new Date(oneCours.heureDebut).getHours()}h
+            {oneCours && new Date(oneCours.heureDebut).getUTCHours()}h
             {oneCours &&
               new Date(oneCours.heureDebut)
                 .getMinutes()
                 .toString()
                 .padStart(2, '0')}{' '}
-            / {oneCours && new Date(oneCours?.heureFin).getHours()}h
+            / {oneCours && new Date(oneCours?.heureFin).getUTCHours()}h
             {oneCours &&
               new Date(oneCours?.heureFin)
                 .getMinutes()
