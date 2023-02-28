@@ -246,12 +246,12 @@ const Calendrier = () => {
                         color: 'black',
                       }}
                     >
-                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getUTCHours()}h
                       {new Date(x.heureDebut)
                         .getMinutes()
                         .toString()
                         .padStart(2, '0')}{' '}
-                      / {new Date(x.heureFin).getHours()}h
+                      / {new Date(x.heureFin).getUTCHours()}h
                       {new Date(x.heureFin)
                         .getMinutes()
                         .toString()
@@ -324,12 +324,12 @@ const Calendrier = () => {
                         color: 'black',
                       }}
                     >
-                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getUTCHours()}h
                       {new Date(x.heureDebut)
                         .getMinutes()
                         .toString()
                         .padStart(2, '0')}{' '}
-                      / {new Date(x.heureFin).getHours()}h
+                      / {new Date(x.heureFin).getUTCHours()}h
                       {new Date(x.heureFin)
                         .getMinutes()
                         .toString()
@@ -430,12 +430,12 @@ const Calendrier = () => {
                         color: 'black',
                       }}
                     >
-                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getUTCHours()}h
                       {new Date(x.heureDebut)
                         .getMinutes()
                         .toString()
                         .padStart(2, '0')}{' '}
-                      / {new Date(x.heureFin).getHours()}h
+                      / {new Date(x.heureFin).getUTCHours()}h
                       {new Date(x.heureFin)
                         .getMinutes()
                         .toString()
@@ -556,12 +556,12 @@ const Calendrier = () => {
                         color: 'black',
                       }}
                     >
-                      {new Date(x.heureDebut).getHours()}h
+                      {new Date(x.heureDebut).getUTCHours()}h
                       {new Date(x.heureDebut)
                         .getMinutes()
                         .toString()
                         .padStart(2, '0')}{' '}
-                      / {new Date(x.heureFin).getHours()}h
+                      / {new Date(x.heureFin).getUTCHours()}h
                       {new Date(x.heureFin)
                         .getMinutes()
                         .toString()
