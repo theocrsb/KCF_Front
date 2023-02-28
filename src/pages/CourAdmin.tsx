@@ -100,8 +100,8 @@ const CourAdmin = () => {
         {
           sensei: sensei.current?.value,
           date: date.current?.value,
-          heureDebut: `${date.current?.value}T${start.current?.value}`,
-          heureFin: `${date.current?.value}T${end.current?.value}`,
+          heureDebut: `${date.current?.value}T${start.current?.value}:00.000Z`,
+          heureFin: `${date.current?.value}T${end.current?.value}:00.000Z`,
           type: type.current?.value,
           note: note.current?.value,
         },
