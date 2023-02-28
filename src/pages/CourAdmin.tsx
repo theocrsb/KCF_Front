@@ -154,13 +154,13 @@ const CourAdmin = () => {
         setOnedate(newDateString);
         // MISE AU FORMAT POUR L'HEURE
         const dateHeure = new Date(response.data.heureDebut);
-        const hours = dateHeure.getHours();
+        const hours = dateHeure.getUTCHours();
         const minutes = dateHeure.getMinutes().toString().padStart(2, '0');
         const formattedTime = `${hours}:${minutes}`;
         console.warn('Heure debut formated : ', formattedTime);
         setOnestart(formattedTime);
         const dateHeureFin = new Date(response.data.heureFin);
-        const hoursFin = dateHeureFin.getHours();
+        const hoursFin = dateHeureFin.getUTCHours();
         const minutesFin = dateHeureFin
           .getMinutes()
           .toString()
@@ -427,12 +427,12 @@ const CourAdmin = () => {
                     avatar={<Avatar size={64} icon={<BookOutlined />} />}
                     title={`${x?.sensei} | ${x?.type}`}
                     description={`${new Date(x.heureDebut)
-                      .getHours()
+                      .getUTCHours()
                       .toLocaleString('fr')}h${new Date(x.heureDebut)
                       .getMinutes()
                       .toString()
                       .padStart(2, '0')}/${new Date(x?.heureFin)
-                      .getHours()
+                      .getUTCHours()
                       .toLocaleString('fr')}h${new Date(x?.heureFin)
                       .getMinutes()
                       .toString()
