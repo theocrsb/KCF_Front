@@ -147,7 +147,7 @@ const CourAdmin = () => {
         setOnesensei(response.data.sensei);
         // MISE AU FORMAT POUR LA DATE
         let date = new Date(response.data.date);
-        console.warn(date);
+        console.warn(date, 'Date PB +1');
         date.setDate(date.getDate() + 1);
         console.warn('response.data.date ', response.data.date);
         console.warn('date ', date);
