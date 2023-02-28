@@ -1,6 +1,5 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import LogoMicka from '../images/logoMickRetouch.png';
 
 const NotFound = () => {
   const isBigScreen = useMediaQuery({ query: '(min-width: 700.1px)' });
@@ -24,7 +23,7 @@ const NotFound = () => {
       </p>
       {isBigScreen && (
         <img
-          src={LogoMicka}
+          src={process.env.PUBLIC_URL + '/assets/karatekaDraw.svg'}
           alt='karateka'
           width={150}
           className='text-center'
@@ -32,7 +31,7 @@ const NotFound = () => {
       )}
       {isTabletOrMobile && (
         <img
-          src={LogoMicka}
+          src={process.env.PUBLIC_URL + '/assets/karatekaDraw.svg'}
           alt='karateka'
           width={100}
           className='text-center'

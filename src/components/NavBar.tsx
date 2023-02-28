@@ -1,5 +1,3 @@
-import logo from '../images/favicon.png';
-import logooffi from '../images/logo.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContext } from '../context/toast-context';
 import { useContext, useEffect, useState } from 'react';
@@ -60,8 +58,12 @@ const NavBar = () => {
       <div className='container-fluid'>
         <div className='navbar-brand'>
           <NavLink to='/' className='nav-link'>
-            <img src={logo} width={32} alt='logo de karate' /> | Karaté Club
-            Fosses
+            <img
+              src={process.env.PUBLIC_URL + '/assets/kimono.svg'}
+              width={32}
+              alt='logo de karate'
+            />{' '}
+            | Karaté Club Fosses
           </NavLink>
         </div>
         <button

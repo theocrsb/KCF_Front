@@ -7,7 +7,6 @@ import fr from 'date-fns/locale/fr';
 import axios from 'axios';
 import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import LogoMicka from '../images/logoMickRetouch.png';
 import Modal from 'react-bootstrap/Modal';
 import { MdOutlineSwipe } from 'react-icons/md';
 // import required modules
@@ -449,7 +448,7 @@ const Calendrier = () => {
 
                 <div className='card d-flex' style={{ width: '18rem' }}>
                   <img
-                    src={LogoMicka}
+                    src={process.env.PUBLIC_URL + '/assets/karatekaDraw.svg'}
                     className='card-img-top mx-auto d-block'
                     alt='karateka dessiné'
                     style={{
@@ -574,7 +573,7 @@ const Calendrier = () => {
                 // Si pas de cours a afficher :
                 <div className='card d-flex' style={{ width: '18rem' }}>
                   <img
-                    src={LogoMicka}
+                    src={process.env.PUBLIC_URL + '/assets/karatekaDraw.svg'}
                     className='card-img-top mx-auto d-block'
                     alt='karateka dessiné'
                     style={{

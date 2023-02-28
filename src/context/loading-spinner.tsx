@@ -1,7 +1,6 @@
 import { createContext, useState, ReactElement, Dispatch } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Interceptor from '../axios/Interceptor';
-import LogoMicka from '../images/logoMickRetouch.png';
 
 interface LoadingContextProps {
   children: ReactElement;

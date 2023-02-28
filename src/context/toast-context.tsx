@@ -1,7 +1,6 @@
 import { createContext, useState, ReactElement, Dispatch } from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import LogoMicka from '../images/logoMickRetouch.png';
 
 interface ToastContextProps {
   children: ReactElement;
@@ -68,7 +67,11 @@ export const ToastContextProvider = ({ children }: ToastContextProps) => {
           </Toast.Header>
           <Toast.Body className='d-flex'>
             <>
-              <img src={LogoMicka} alt='logo de karateka' width={50} />
+              <img
+                src={process.env.PUBLIC_URL + '/assets/karatekaDraw.svg'}
+                alt='logo de karateka'
+                width={50}
+              />
               <p className='text-center' style={{ color: 'white' }}>
                 {message}
               </p>

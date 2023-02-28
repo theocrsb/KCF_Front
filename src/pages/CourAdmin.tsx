@@ -11,7 +11,7 @@ import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
 import { Cours } from './Calendrier';
-import LogoMicka from '../images/logoMickRetouch.png';
+
 const CourAdmin = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
