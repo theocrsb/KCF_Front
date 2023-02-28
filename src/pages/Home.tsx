@@ -1,6 +1,3 @@
-import logo from '../images/logo.jpg';
-import logoMick from '../images/logoMick.png';
-import planning from '../images/p2.png';
 import { NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useContext, useEffect } from 'react';
@@ -44,7 +41,7 @@ const Home = () => {
         <div className='m-3'>
           <img
             className='img-responsive'
-            src={logo}
+            src={process.env.PUBLIC_URL + '/assets/logoOffi.svg'}
             style={{ width: '15rem' }}
             alt={'logo du club de karaté club de Fosses'}
           />
@@ -88,7 +85,7 @@ const Home = () => {
         <div>
           <div className='d-flex justify-content-center m-3 mt-5'>
             <img
-              src={planning}
+              src={process.env.PUBLIC_URL + '/assets/planningBrut.svg'}
               alt='planning club karaté'
               style={{ width: '672px' }}
             />
@@ -103,7 +100,7 @@ const Home = () => {
         <div>
           <div className='d-flex justify-content-center m-3 mt-5'>
             <img
-              src={planning}
+              src={process.env.PUBLIC_URL + '/assets/planningBrut.svg'}
               alt='planning club karaté'
               style={{ width: '90%' }}
             />
