@@ -35,6 +35,7 @@ const NotFound = () => {
           alt='karateka'
           width={100}
           className='text-center'
+          style={{ marginBottom: '50%' }}
         />
       )}
     </div>

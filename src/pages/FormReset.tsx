@@ -9,9 +9,7 @@ const FormReset = () => {
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   const [passwordState, setPasswordState] = useState<string>();
   const [passwordState2, setPasswordState2] = useState<string>();
-  const [UserProfileId, setUserProfileId] = useState<string>();
   const [showState, setShowState] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>();
   const navigate = useNavigate();
   const location = useLocation();
   // utilisation des query params pour recuperer le token dans l'url
