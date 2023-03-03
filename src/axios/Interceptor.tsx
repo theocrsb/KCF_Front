@@ -13,26 +13,26 @@ const Interceptor = ({ children }: InterceptorProps) => {
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   const { UpdateToken, setRole } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  // console.log(children, 'children dans interceptor');
   useEffect(() => {
+    // lors de depart de la request
     instanceAxios.interceptors.request.use((send: any) => {
-      // lors de depart de la request
       console.log('send request START LOADING');
+      // Lancement du chargement
       onLoadingChange(true);
       return send;
     });
-
+    // lors de l'arrivé de la request
     instanceAxios.interceptors.response.use(
       (response) => {
+        // fin du chargement et envoie de la reponse
         onLoadingChange(false);
         return response;
       },
       (error) => {
         console.log(error);
+        // fin du chargement et envoie de l'erreur
         onLoadingChange(false);
-        //   // 401 : pas connecté ou expiré
-        //   // 403 : pas acces a cette donnée (pas bon role)
-
         if (error.response.data.statusCode === 401) {
           localStorage.removeItem('accessToken');
           onToastChange(true);
@@ -45,16 +45,6 @@ const Interceptor = ({ children }: InterceptorProps) => {
           navigate('/connect');
           return Promise.reject(error);
         }
-        //     // messageToast(error.response.data.message);
-        //     colorToast('danger');
-        //     UpdateToken('');
-        //     setRole('');
-
-        //     onLoadingChange(false);
-        //     navigate('/connect');
-        //   }
-        //   onLoadingChange(false);
-        //   // return error;
         return Promise.reject(error);
       }
     );
