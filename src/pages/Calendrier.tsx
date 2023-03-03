@@ -67,9 +67,7 @@ const Calendrier = () => {
   );
 
   // Lien avec le toast context
-  const { onToastChange } = useContext(ToastContext);
-  const { messageToast } = useContext(ToastContext);
-  const { colorToast } = useContext(ToastContext);
+  const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   //
 
   /////////////////////////////////////////////// FIN USESTATE ///////////////////////////////////////////////

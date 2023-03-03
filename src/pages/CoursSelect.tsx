@@ -94,7 +94,7 @@ const CoursSelect = () => {
           messageToast(
             'Ce karatéka est déjà inscrit dans le cours selectionné'
           );
-          colorToast('success');
+          colorToast('danger');
         }
         // console.log('response', response);
       })
@@ -174,11 +174,7 @@ const CoursSelect = () => {
                           </label>
                         </div>
                       ))}
-
-                      <button
-                        className='btn btn-primary btnDirection mt-3'
-                        // value={oneCours?.id}
-                      >
+                      <button className='btn btn-primary btnDirection mt-3'>
                         Valider l'inscription
                       </button>
                     </form>

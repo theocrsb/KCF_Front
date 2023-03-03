@@ -24,6 +24,7 @@ export const LoadingContextProvider = ({ children }: LoadingContextProps) => {
   return (
     <LoadingContext.Provider value={contextValue}>
       <>
+        {/* children fait partie de la syntaxe du loading context */}
         {children}
         {show && (
           <div className='d-flex'>
