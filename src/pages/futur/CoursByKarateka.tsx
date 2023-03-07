@@ -7,23 +7,23 @@
 
 // const CoursByKarateka = () => {
 //   const paramsId = useParams();
-//   console.log(paramsId, 'paramsID');
+//   //console.log(paramsId, 'paramsID');
 //   const [oneKarateka, setOneKarateka] = useState<Karateka>();
 
 //   useEffect(() => {
 
-    // Axios
-    //   .get(`http://localhost:8080/api/users`, {
-    //     headers: {
-    //       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response, 'response');
-    //   })
-    //   .catch((error) => {
-    //     console.log('error', error);
-    //   });
+// Axios
+//   .get(`http://localhost:8080/api/users`, {
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+//     },
+//   })
+//   .then((response) => {
+//     //console.log(response, 'response');
+//   })
+//   .catch((error) => {
+//     //console.log('error', error);
+//   });
 
 //   }, [paramsId]);
 
@@ -136,7 +136,6 @@
 // };
 
 // export default CoursByKarateka;
-
 
 const CoursByKarateka = () => {
   return <div>ATTENTE</div>;

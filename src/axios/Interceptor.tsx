@@ -13,11 +13,11 @@ const Interceptor = ({ children }: InterceptorProps) => {
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   const { UpdateToken, setRole } = useContext(AuthContext);
   const navigate = useNavigate();
-  // console.log(children, 'children dans interceptor');
+  // //console.log(children, 'children dans interceptor');
   useEffect(() => {
     // lors de depart de la request
     instanceAxios.interceptors.request.use((send: any) => {
-      console.log('send request START LOADING');
+      //console.log('send request START LOADING');
       // Lancement du chargement
       onLoadingChange(true);
       return send;
@@ -30,7 +30,7 @@ const Interceptor = ({ children }: InterceptorProps) => {
         return response;
       },
       (error) => {
-        console.log(error);
+        //console.log(error);
         // fin du chargement et envoie de l'erreur
         onLoadingChange(false);
         if (error.response.data.statusCode === 401) {

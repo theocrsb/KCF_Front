@@ -1,5 +1,4 @@
-
-import  { FormEvent, useContext, useRef } from 'react';
+import { FormEvent, useContext, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { LoadingContext } from '../context/loading-spinner';
@@ -15,8 +14,8 @@ const Subscribe = () => {
   //
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(emailElement.current?.value);
-    console.log(passwordElement.current?.value);
+    //console.log(emailElement.current?.value);
+    //console.log(passwordElement.current?.value);
 
     // Requete Sub
     instanceAxios
@@ -25,7 +24,7 @@ const Subscribe = () => {
         password: passwordElement.current?.value,
       })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         // if (response.data.statusCode === 400) {
         //   onToastChange(true);
         //   messageToast(
@@ -66,7 +65,7 @@ const Subscribe = () => {
         navigate('/connect');
       })
       .catch((error) => {
-        console.log('Inscription impossible', error);
+        //console.log('Inscription impossible', error);
         onLoadingChange(false);
         if (error.response.data.statusCode === 400) {
           onToastChange(true);

@@ -18,18 +18,18 @@ const Contact = () => {
   };
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(contenuMessage, 'contenu du message');
+    //console.log(contenuMessage, 'contenu du message');
     instanceAxios
       .post(`/messages`, contenuMessage)
       .then((response) => {
-        // console.log('response', response);
+        // //console.log('response', response);
         onToastChange(true);
         messageToast(`Message envoyé`);
         colorToast('success');
         navigate('/');
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de l'envoie du message`);
         colorToast('danger');

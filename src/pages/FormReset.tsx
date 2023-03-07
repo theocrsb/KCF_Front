@@ -15,7 +15,7 @@ const FormReset = () => {
   // utilisation des query params pour recuperer le token dans l'url
   let queryParam = new URLSearchParams(location.search);
   let recupToken = queryParam.get('token');
-  console.log("token récuperé dans l'url via les query params", recupToken);
+  //console.log("token récuperé dans l'url via les query params", recupToken);
   const tokenExpiration = (token: string | null) => {
     if (recupToken) {
       const decoded: PayloadToken = jwt_decode(recupToken);
@@ -28,7 +28,7 @@ const FormReset = () => {
   };
 
   let tokenValidator: boolean | undefined = tokenExpiration(recupToken);
-  //   console.log('le token est il encore valide:', tokenValidator);
+  //   //console.log('le token est il encore valide:', tokenValidator);
 
   // Mise à jour des infos de l'utilisateur
   const passwordFunction1 = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,9 +39,9 @@ const FormReset = () => {
   };
   const submitFunction = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('cliké');
-    console.log('password dans le state 1', passwordState);
-    console.log('password dans le state 2', passwordState2);
+    //console.log('cliké');
+    //console.log('password dans le state 1', passwordState);
+    //console.log('password dans le state 2', passwordState2);
     // fonction de verification du mot de passe
     if (passwordState !== passwordState2) {
       onToastChange(true);
@@ -60,14 +60,14 @@ const FormReset = () => {
           token: recupToken,
         })
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           onToastChange(true);
           messageToast(`Mot de passe modifié avec succès`);
           colorToast('success');
           navigate('/connect');
         })
         .catch((error) => {
-          console.log(error);
+          //console.log(error);
           onToastChange(true);
           messageToast(`Erreur lors de la modification du mot de passe`);
           colorToast('danger');
@@ -111,7 +111,7 @@ const FormReset = () => {
               name='drone'
               onClick={(e: React.MouseEvent<HTMLInputElement>) => {
                 setShowState(e.currentTarget.checked);
-                //   console.log('valeur de la checkbox', e.currentTarget.checked);
+                //   //console.log('valeur de la checkbox', e.currentTarget.checked);
               }}
               // defaultChecked={user.role.label === "user" ? true : false}
             />

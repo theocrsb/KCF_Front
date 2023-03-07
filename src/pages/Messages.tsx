@@ -38,16 +38,16 @@ const Messages = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setAllMessage(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   }, [count]);
 
   const handleDelete = () => {
-    // console.log(e.currentTarget.value);
+    // //console.log(e.currentTarget.value);
     // e.preventDefault();
 
     // if (window.confirm('Voulez vous vraiment supprimer ce cours ?')) {
@@ -59,21 +59,21 @@ const Messages = () => {
         },
       })
       .then((response) => {
-        // console.log('response', response);
+        // //console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`message supprimé`);
         colorToast('success');
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de suppression du cours`);
         colorToast('danger');
       });
   };
 
-  console.log(allMessage);
+  //console.log(allMessage);
 
   return (
     <div>

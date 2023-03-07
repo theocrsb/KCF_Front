@@ -1,9 +1,4 @@
-import {
-
-  DeleteOutlined,
-  EditOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useContext, useEffect, useState } from 'react';
@@ -23,10 +18,10 @@ const SuperAdmin = () => {
   // axios
   //   .get(`http://localhost:8080/api/users`)
   //   .then((response) => {
-  //     console.log(response, 'response');
+  //     //console.log(response, 'response');
   //   })
   //   .catch((error) => {
-  //     console.log('error', error);
+  //     //console.log('error', error);
   //   });
 
   useEffect(() => {
@@ -37,11 +32,11 @@ const SuperAdmin = () => {
         },
       })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         setAllUser(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   }, [count]);
 
@@ -65,20 +60,20 @@ const SuperAdmin = () => {
     setIdDelete(e.currentTarget.value);
   };
 
-  // console.log(sensei.current?.value);
-  // console.log(date.current?.value);
-  // console.log(start.current?.value);
-  // console.log(newStart);
-  // console.log(end.current?.value);
-  // console.log(newEnd);
-  // console.log(type.current?.value);
-  // console.log(note.current?.value);
+  // //console.log(sensei.current?.value);
+  // //console.log(date.current?.value);
+  // //console.log(start.current?.value);
+  // //console.log(newStart);
+  // //console.log(end.current?.value);
+  // //console.log(newEnd);
+  // //console.log(type.current?.value);
+  // //console.log(note.current?.value);
 
   // ----------------------------- UPDATE -----------------------------
   const [isOpenUpdate, setIsOpenUpdate] = useState<boolean>(false);
 
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.value, 'showModalUpdate');
+    //console.log(e.currentTarget.value, 'showModalUpdate');
     setIsOpenUpdate(true);
 
     instanceAxios
@@ -88,7 +83,7 @@ const SuperAdmin = () => {
         },
       })
       .then((response) => {
-        console.log(response.data, 'à louverture de la modale');
+        //console.log(response.data, 'à louverture de la modale');
         setOneRole(response.data.role.label);
         if (response.data.member === true) {
           setOneMember('oui');
@@ -101,7 +96,7 @@ const SuperAdmin = () => {
       })
       .catch((error) => {
         setIsLoading(false);
-        // console.log(error);
+        // //console.log(error);
       });
 
     // get roles
@@ -112,12 +107,12 @@ const SuperAdmin = () => {
         },
       })
       .then((response) => {
-        console.log(response, 'response');
+        //console.log(response, 'response');
         setAllRole(response.data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
         setIsLoading(false);
       });
   };
@@ -127,12 +122,12 @@ const SuperAdmin = () => {
   };
   let valueId: string;
   let valueMember: boolean;
-  // console.log(newString, 'newDateString');
-  console.log(allRole, 'allrole');
+  // //console.log(newString, 'newDateString');
+  //console.log(allRole, 'allrole');
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
-    console.log(e.currentTarget.value);
+    //console.log(e.currentTarget.value);
     e.preventDefault();
-    console.log(allRole, 'allrole');
+    //console.log(allRole, 'allrole');
     if (oneRole === 'user') {
       valueId = allRole[0].id;
     }
@@ -148,7 +143,7 @@ const SuperAdmin = () => {
     } else {
       valueMember = false;
     }
-    console.log(valueId, 'id avant le patch');
+    //console.log(valueId, 'id avant le patch');
     instanceAxios
       .patch(
         `/users/${id}/admin`,
@@ -163,7 +158,7 @@ const SuperAdmin = () => {
         }
       )
       .then((response) => {
-        console.log('response', response);
+        //console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Utilisateur modifié avec succès`);
@@ -171,7 +166,7 @@ const SuperAdmin = () => {
         setIsOpenUpdate(false);
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de la modification de l'utilisateur`);
         colorToast('danger');
@@ -179,9 +174,9 @@ const SuperAdmin = () => {
   };
 
   // ----------------------------- DELETE -----------------------------
-  console.log(idDelete, 'idDelete avant delete');
+  //console.log(idDelete, 'idDelete avant delete');
   const handleDelete = () => {
-    // console.log(e.currentTarget.value);
+    // //console.log(e.currentTarget.value);
     // e.preventDefault();
 
     instanceAxios
@@ -191,21 +186,21 @@ const SuperAdmin = () => {
         },
       })
       .then((response) => {
-        // console.log('response', response);
+        // //console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Utilisateur supprimé`);
         colorToast('success');
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de suppression de l'Utilisateur`);
         colorToast('danger');
       });
   };
 
-  console.log(allUser, 'tous les utilisateurs !');
+  //console.log(allUser, 'tous les utilisateurs !');
   return (
     <div style={{ minHeight: '100vh' }}>
       <h3 className='pt-4 text-center'>Gestion des utilisateurs</h3>

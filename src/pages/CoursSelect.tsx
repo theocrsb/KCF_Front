@@ -11,14 +11,14 @@ const CoursSelect = () => {
   const { colorToast } = useContext(ToastContext);
   //
   const coursId = useParams();
-  //   console.log(coursId.id);
+  //   //console.log(coursId.id);
   const [oneCours, SetOneCours] = useState<Cours>();
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
   const [checkCategories, setCheckCategories] = useState<string>('');
   const [count, setCount] = useState<number>(0);
 
   const karatekaId = allKarateka?.map((x) => x.id);
-  console.log(karatekaId, 'id des karateka');
+  //console.log(karatekaId, 'id des karateka');
   // Requete pour afficher les cours select
   useEffect(() => {
     // get le cours par l'id
@@ -29,12 +29,12 @@ const CoursSelect = () => {
         },
       })
       .then((response) => {
-        console.log('Get All Cours', response);
+        //console.log('Get All Cours', response);
         SetOneCours(response.data);
       })
 
       .catch((error) => {
-        // console.log('Get All Cours Error', error);
+        // //console.log('Get All Cours Error', error);
       });
 
     //get les karateka du user
@@ -45,16 +45,16 @@ const CoursSelect = () => {
         },
       })
       .then((response) => {
-        // console.log('Get All karateka', response);
+        // //console.log('Get All karateka', response);
         SetAllKarateka(response.data);
       })
       .catch((error) => {
-        // console.log('Get All Cours Error', error);
+        // //console.log('Get All Cours Error', error);
       });
   }, [coursId.id, count]);
   // Fin requete get
-  //   console.log(oneCours);
-  //   console.log('allKarateka', allKarateka);
+  //   //console.log(oneCours);
+  //   //console.log('allKarateka', allKarateka);
 
   // Fonction
   function handleCheck(e: React.ChangeEvent<HTMLInputElement>) {
@@ -64,7 +64,7 @@ const CoursSelect = () => {
   //   fonction submit inscritption cours
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log('id du karateka select', checkCategories);
+    // //console.log('id du karateka select', checkCategories);
 
     //Requete ajout karateka a un cours
     instanceAxios
@@ -80,7 +80,7 @@ const CoursSelect = () => {
         }
       )
       .then((response) => {
-        console.log('response', response);
+        //console.log('response', response);
         onToastChange(true);
         messageToast('Karatéka ajouté avec succès');
         colorToast('success');
@@ -95,16 +95,16 @@ const CoursSelect = () => {
           );
           colorToast('danger');
         }
-        // console.log('response', response);
+        // //console.log('response', response);
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
       });
   };
 
   // Retrait d'une personne inscrite si ils nous appartient
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log(e.currentTarget.value);
+    // //console.log(e.currentTarget.value);
 
     instanceAxios
       .patch(
@@ -119,19 +119,19 @@ const CoursSelect = () => {
         }
       )
       .then((response) => {
-        // console.log('response', response);
+        // //console.log('response', response);
         onToastChange(true);
         messageToast('Karatéka retiré avec succès');
         colorToast('success');
         setCount(count + 1);
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
       });
   };
 
-  console.log(oneCours, 'oneCours');
-  console.log(allKarateka, 'mes karateka');
+  //console.log(oneCours, 'oneCours');
+  //console.log(allKarateka, 'mes karateka');
   return (
     <div style={{ minHeight: '100vh' }}>
       <div className='card text-center mt-3'>

@@ -10,7 +10,7 @@ const Reset = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(emailElement.current?.value);
+    //console.log(emailElement.current?.value);
 
     // Requete pour se connecter
     instanceAxios
@@ -18,7 +18,7 @@ const Reset = () => {
         email: emailElement.current?.value,
       })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         onToastChange(true);
         messageToast('Email envoyé ! Veuillez verifier votre boite mail.');
         colorToast('success');

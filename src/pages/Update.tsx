@@ -57,7 +57,7 @@ const Update = () => {
         },
       })
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         onToastChange(true);
         messageToast('Vos informations ont bien été mises à jour !');
         colorToast('success');
@@ -65,7 +65,7 @@ const Update = () => {
         setCount(count + 1);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
         if (error.response.data.statusCode === 400) {
           onToastChange(true);
           messageToast(error.response.data.message[0]);
@@ -82,11 +82,11 @@ const Update = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setUserEmail(response.data.email);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   }, [count]);
 
@@ -98,21 +98,21 @@ const Update = () => {
         },
       })
       .then((response) => {
-        // console.log('response', response);
+        // //console.log('response', response);
         onToastChange(true);
         messageToast(`Vous venez de supprimer votre compte`);
         colorToast('success');
         setCount(count + 1);
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de la suppresion de votre compte`);
         colorToast('danger');
       });
   };
 
-  console.log(userEmail, 'user dans update');
+  //console.log(userEmail, 'user dans update');
   return (
     <div style={{ minHeight: '50vh' }}>
       <div className='d-flex flex-wrap justify-content-around m-3 border border-light rounded shadow-lg p-3 mb-5 bgCard mt-5'>

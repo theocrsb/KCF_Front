@@ -34,11 +34,11 @@ const KaratekaAdmin = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         SetKarateka(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   }, [count]);
 
@@ -46,7 +46,7 @@ const KaratekaAdmin = () => {
   const [isOpenUpdate, setIsOpenUpdate] = useState<boolean>(false);
 
   const showModalUpdate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.value, 'showModalUpdate');
+    //console.log(e.currentTarget.value, 'showModalUpdate');
     setIsOpenUpdate(true);
 
     instanceAxios
@@ -56,14 +56,14 @@ const KaratekaAdmin = () => {
         },
       })
       .then((response) => {
-        console.log(response.data, 'à louverture de la modale');
+        //console.log(response.data, 'à louverture de la modale');
         setId(response.data.id);
         setOneote(response.data.note);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
-        // console.log(error);
+        // //console.log(error);
       });
   };
 
@@ -71,9 +71,9 @@ const KaratekaAdmin = () => {
     setIsOpenUpdate(false);
   };
 
-  // console.log(newString, 'newDateString');
+  // //console.log(newString, 'newDateString');
   const handleUpdate = (e: React.MouseEvent<HTMLFormElement>) => {
-    console.log(e.currentTarget.value);
+    //console.log(e.currentTarget.value);
     e.preventDefault();
 
     instanceAxios
@@ -89,7 +89,7 @@ const KaratekaAdmin = () => {
         }
       )
       .then((response) => {
-        console.log('response', response);
+        //console.log('response', response);
         setCount(count + 1);
         onToastChange(true);
         messageToast(`Commentaire modifié avec succès`);
@@ -97,7 +97,7 @@ const KaratekaAdmin = () => {
         setIsOpenUpdate(false);
       })
       .catch((error) => {
-        console.log('Error', error);
+        //console.log('Error', error);
         onToastChange(true);
         messageToast(`Erreur lors de la modification du commentaire`);
         colorToast('danger');
