@@ -90,7 +90,7 @@
 // };
 
 // export default AllKarateka;
-import React from 'react';
+
 
 const AllKarateka = () => {
   return <div>ATTENTE</div>;

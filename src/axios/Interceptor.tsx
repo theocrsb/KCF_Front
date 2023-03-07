@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/Auth-context';
 import { LoadingContext } from '../context/loading-spinner';
 import { ToastContext } from '../context/toast-context';

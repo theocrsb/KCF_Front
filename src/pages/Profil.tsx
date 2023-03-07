@@ -1,12 +1,10 @@
-import React, { useContext, useRef, useState } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 import { ToastContext } from '../context/toast-context';
 
 const Profil = () => {
   // Lien avec le toast context
-  const { onToastChange } = useContext(ToastContext);
-  const { messageToast } = useContext(ToastContext);
-  const { colorToast } = useContext(ToastContext);
+  const { onToastChange, messageToast, colorToast } = useContext(ToastContext);
   //
 
   return (
@@ -29,7 +27,6 @@ const Profil = () => {
             Gestion cours
           </NavLink>
         </li> */}
-
       </ul>
       <div className='d-flex justify-content-center'></div>
       {/* OUTLET PERMET D'AFFICHER SELON L'URL */}

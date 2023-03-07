@@ -1,4 +1,4 @@
-import { BookOutlined, EditOutlined, UserOutlined } from '@ant-design/icons';
+import { EditOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useContext, useEffect, useRef, useState } from 'react';

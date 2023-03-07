@@ -136,7 +136,7 @@
 // };
 
 // export default CoursByKarateka;
-import React from 'react';
+
 
 const CoursByKarateka = () => {
   return <div>ATTENTE</div>;

@@ -1,5 +1,5 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Avatar, List, Popconfirm } from 'antd';
+import { Popconfirm } from 'antd';
 import React, { useContext, useEffect, useState } from 'react';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';

@@ -1,9 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContext } from '../context/toast-context';
-import { useContext, useEffect, useState } from 'react';
-import { instanceAxios } from '../axios/instance-axios';
-import { Role } from '../pages/Calendrier';
-import axios from 'axios';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/Auth-context';
 import { PayloadToken } from '../App';
 import jwt_decode from 'jwt-decode';
