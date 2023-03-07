@@ -1,6 +1,4 @@
 import { createContext, useState, ReactElement, Dispatch } from 'react';
-import { useMediaQuery } from 'react-responsive';
-import Interceptor from '../axios/Interceptor';
 
 interface LoadingContextProps {
   children: ReactElement;

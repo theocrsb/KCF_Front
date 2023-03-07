@@ -2,7 +2,6 @@ import {
   BookOutlined,
   DeleteOutlined,
   EditOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
 import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Role } from '../pages/Calendrier';
 
 // ------------------------------------------------ METTRE A JOUR POUR MEMBER -----------------------------------------------------
 interface MemberAuthProps {

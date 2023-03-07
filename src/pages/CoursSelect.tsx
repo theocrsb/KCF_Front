@@ -1,6 +1,5 @@
-import { DeleteOutlined, LockOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { DeleteOutlined } from '@ant-design/icons';
+import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';

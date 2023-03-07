@@ -1,7 +1,6 @@
-import { createContext, useState, useEffect, ReactElement } from 'react';
+import { createContext, useState, ReactElement } from 'react';
 import jwt_decode from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
-import { PayloadToken, Role } from '../App';
+import { PayloadToken } from '../App';
 
 interface AuthContextProps {
   children: ReactElement;

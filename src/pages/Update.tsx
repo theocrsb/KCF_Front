@@ -1,9 +1,7 @@
 import { Popconfirm } from 'antd';
-import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
-import { LoadingContext } from '../context/loading-spinner';
 import { ToastContext } from '../context/toast-context';
 import { User } from './Calendrier';
 
@@ -14,7 +12,7 @@ const Update = () => {
   const [userEmail, setUserEmail] = useState<string>('');
   const passwordElement = useRef<HTMLInputElement>(null);
   const passwordElementConfirm = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
+
   // delete
   const text = 'Voulez vous vraiment supprimer votre compte ?';
   const description = `Supprimer votre compte`;

@@ -5,12 +5,10 @@ import {
   UserAddOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Avatar, Card, Popconfirm, Skeleton } from 'antd';
+import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
-import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
 import { Karateka } from './Calendrier';

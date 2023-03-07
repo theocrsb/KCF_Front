@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useContext, useEffect } from 'react';
-import { ToastContext } from '../context/toast-context';
 import { AuthContext } from '../context/Auth-context';
 import { PayloadToken } from '../App';
 import jwt_decode from 'jwt-decode';
@@ -12,7 +11,6 @@ const Home = () => {
     UpdateToken,
     tokenExpirationFunction,
     tokenExpired,
-    role,
     setRole,
   } = useContext(AuthContext);
 

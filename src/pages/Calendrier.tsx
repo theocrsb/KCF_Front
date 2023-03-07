@@ -1,13 +1,10 @@
 // import './calendrier.css';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import 'react-day-picker/dist/style.css';
-import { addDays, format, lightFormat } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import fr from 'date-fns/locale/fr';
-import axios from 'axios';
-import { Navigate, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import Modal from 'react-bootstrap/Modal';
 import { MdOutlineSwipe } from 'react-icons/md';
 // import required modules
 import { Pagination, Navigation, EffectCards } from 'swiper';
@@ -18,7 +15,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { ToastContext } from '../context/toast-context';
-import { Popover } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 
 export interface Cours {
