@@ -184,23 +184,23 @@ const CoursSelect = () => {
                   <p className='card-text'>
                     Vous n'avez aucune personne à ajouter au cours
                   </p>
-                  <NavLink to='/profil/add/karateka' className='nav-link'>
-                    <button className='btn btn-primary btnDirection mt-3'>
+                  <button className='btn btn-primary btnDirection mt-3'>
+                    <NavLink to='/profil/add/karateka' className='nav-link'>
                       Ajouter un karateka à mon compte
-                    </button>
-                  </NavLink>
+                    </NavLink>
+                  </button>
                 </div>
               )}
               {/*  fin select */}
 
-              <NavLink to='/calendrier' replace={true} className='nav-link'>
-                <button
-                  className='btn btn-primary btnPerso mt-3'
-                  // value={oneCours?.id}
-                >
+              <button
+                className='btn btn-primary btnPerso mt-3'
+                // value={oneCours?.id}
+              >
+                <NavLink to='/calendrier' replace={true} className='nav-link'>
                   Retour
-                </button>
-              </NavLink>
+                </NavLink>
+              </button>
             </div>
             {/* fin form */}
           </div>
