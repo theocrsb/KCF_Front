@@ -3,7 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Cours, Karateka } from './Calendrier';
+import { Cours } from '../interface/cours.interface';
+import { Karateka } from '../interface/karateka.interface';
+
 const CoursSelect = () => {
   // Lien avec le toast context
   const { onToastChange } = useContext(ToastContext);

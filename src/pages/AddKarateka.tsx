@@ -11,7 +11,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Karateka } from './Calendrier';
+import { Karateka } from '../interface/karateka.interface';
 
 const AddKarateka = () => {
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { User } from './Calendrier';
+import { User } from '../interface/user.interface';
 
 const Update = () => {
   // Lien avec le toast context

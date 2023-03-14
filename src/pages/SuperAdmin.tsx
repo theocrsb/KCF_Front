@@ -1,16 +1,12 @@
-import {
-
-  DeleteOutlined,
-  EditOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Role, User } from './Calendrier';
+import { Role } from '../interface/role.interface';
+import { User } from '../interface/user.interface';
 
 const SuperAdmin = () => {
   // Lien avec le toast context

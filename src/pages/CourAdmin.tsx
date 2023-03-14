@@ -1,15 +1,11 @@
-import {
-  BookOutlined,
-  DeleteOutlined,
-  EditOutlined,
-} from '@ant-design/icons';
+import { BookOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Avatar, Card, Popconfirm } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Cours } from './Calendrier';
+import { Cours } from '../interface/cours.interface';
 
 const CourAdmin = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

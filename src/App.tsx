@@ -26,19 +26,19 @@ import Messages from './pages/Messages';
 import Reset from './pages/Reset';
 import FormReset from './pages/FormReset';
 
-export interface PayloadToken {
-  exp: number;
-  iat: number;
-  id: string;
-  member: boolean;
-  role: Role;
-  email: string;
-}
+// export interface PayloadToken {
+//   exp: number;
+//   iat: number;
+//   id: string;
+//   member: boolean;
+//   role: Role;
+//   email: string;
+// }
 
-export interface Role {
-  id: string;
-  label: string;
-}
+// export interface Role {
+//   id: string;
+//   label: string;
+// }
 
 function App() {
   return (
