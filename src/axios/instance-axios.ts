@@ -5,5 +5,6 @@ export const instanceAxios = axios.create({
   // baseURL: 'https://karateclubfosses.onrender.com/api/',
   headers: {
     'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
   },
 });
