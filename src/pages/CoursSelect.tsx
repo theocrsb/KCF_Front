@@ -8,12 +8,9 @@ import { Karateka } from '../interface/karateka.interface';
 
 const CoursSelect = () => {
   // Lien avec le toast context
-  const { onToastChange } = useContext(ToastContext);
-  const { messageToast } = useContext(ToastContext);
-  const { colorToast } = useContext(ToastContext);
+  const { onToastChange, colorToast, messageToast } = useContext(ToastContext);
   //
   const coursId = useParams();
-  //   console.log(coursId.id);
   const [oneCours, SetOneCours] = useState<Cours>();
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
   const [checkKarateka, setCheckKarateka] = useState<string>('');
