@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Cours } from './Calendrier';
+import { Cours } from '../interface/cours.interface';
 
 const CourAdmin = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

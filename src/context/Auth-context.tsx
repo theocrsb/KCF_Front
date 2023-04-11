@@ -1,6 +1,6 @@
 import { createContext, useState, ReactElement } from 'react';
 import jwt_decode from 'jwt-decode';
-import { PayloadToken } from '../App';
+import { PayloadToken } from '../interface/payloadToken.interface';
 
 interface AuthContextProps {
   children: ReactElement;

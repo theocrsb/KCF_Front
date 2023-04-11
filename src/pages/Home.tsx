@@ -2,8 +2,9 @@ import { NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/Auth-context';
-import { PayloadToken } from '../App';
+
 import jwt_decode from 'jwt-decode';
+import { PayloadToken } from '../interface/payloadToken.interface';
 
 const Home = () => {
   const {

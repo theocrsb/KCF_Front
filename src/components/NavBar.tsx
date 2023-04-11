@@ -2,8 +2,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { ToastContext } from '../context/toast-context';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/Auth-context';
-import { PayloadToken } from '../App';
+
 import jwt_decode from 'jwt-decode';
+import { PayloadToken } from '../interface/payloadToken.interface';
 
 const NavBar = () => {
   // Lien avec le toast context

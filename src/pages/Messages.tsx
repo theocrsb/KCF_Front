@@ -3,14 +3,15 @@ import { Popconfirm } from 'antd';
 import React, { useContext, useEffect, useState } from 'react';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
+import { MessageType } from '../interface/messageType.interface';
 
-interface MessageType {
-  id: number;
-  nom: string;
-  email: string;
-  message: string;
-  createdAt: string;
-}
+// interface MessageType {
+//   id: number;
+//   nom: string;
+//   email: string;
+//   message: string;
+//   createdAt: string;
+// }
 
 const Messages = () => {
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);

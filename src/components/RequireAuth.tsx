@@ -3,7 +3,7 @@ import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { AuthContext } from '../context/Auth-context';
 import { ToastContext } from '../context/toast-context';
-import { Role } from '../pages/Calendrier';
+import { Role } from '../interface/role.interface';
 
 interface RequireAuthProps {
   roles: string[];

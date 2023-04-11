@@ -3,18 +3,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Cours, Karateka } from './Calendrier';
+import { Cours } from '../interface/cours.interface';
+import { Karateka } from '../interface/karateka.interface';
+
 const CoursSelect = () => {
   // Lien avec le toast context
-  const { onToastChange } = useContext(ToastContext);
-  const { messageToast } = useContext(ToastContext);
-  const { colorToast } = useContext(ToastContext);
+  const { onToastChange, colorToast, messageToast } = useContext(ToastContext);
   //
   const coursId = useParams();
-  //   //console.log(coursId.id);
+  //   console.log(coursId.id);
   const [oneCours, SetOneCours] = useState<Cours>();
   const [allKarateka, SetAllKarateka] = useState<Karateka[]>();
-  const [checkCategories, setCheckCategories] = useState<string>('');
+  const [checkKarateka, setCheckKarateka] = useState<string>('');
   const [count, setCount] = useState<number>(0);
 
   const karatekaId = allKarateka?.map((x) => x.id);
@@ -58,20 +58,20 @@ const CoursSelect = () => {
 
   // Fonction
   function handleCheck(e: React.ChangeEvent<HTMLInputElement>) {
-    setCheckCategories(e.currentTarget.value);
+    setCheckKarateka(e.currentTarget.value);
   }
 
   //   fonction submit inscritption cours
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // //console.log('id du karateka select', checkCategories);
+    // console.log('id du karateka select', checkKarateka);
 
     //Requete ajout karateka a un cours
     instanceAxios
       .patch(
         `/cours/${coursId.id}/add`,
         {
-          karateka: [{ id: checkCategories }],
+          karateka: [{ id: checkKarateka }],
         },
         {
           headers: {

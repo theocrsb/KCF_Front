@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PayloadToken } from '../App';
 import jwt_decode from 'jwt-decode';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
+import { PayloadToken } from '../interface/payloadToken.interface';
 
 const FormReset = () => {
   const { onToastChange, messageToast, colorToast } = useContext(ToastContext);

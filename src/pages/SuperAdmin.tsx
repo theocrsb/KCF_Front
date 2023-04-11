@@ -5,7 +5,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { instanceAxios } from '../axios/instance-axios';
 import { ToastContext } from '../context/toast-context';
-import { Role, User } from './Calendrier';
+import { Role } from '../interface/role.interface';
+import { User } from '../interface/user.interface';
 
 const SuperAdmin = () => {
   // Lien avec le toast context

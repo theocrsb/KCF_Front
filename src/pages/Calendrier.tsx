@@ -16,39 +16,40 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { ToastContext } from '../context/toast-context';
 import { instanceAxios } from '../axios/instance-axios';
+import { Cours } from '../interface/cours.interface';
 
-export interface Cours {
-  id: string;
-  sensei: string;
-  date: string;
-  heureDebut: string;
-  heureFin: string;
-  type: string;
-  note: string;
-  karateka: Karateka[];
-}
+// export interface Cours {
+//   id: string;
+//   sensei: string;
+//   date: string;
+//   heureDebut: string;
+//   heureFin: string;
+//   type: string;
+//   note: string;
+//   karateka: Karateka[];
+// }
 
-export interface Karateka {
-  id: string;
-  nom: string;
-  prenom: string;
-  age: number;
-  sexe: string;
-  ceinture: string;
-  note: string;
-}
+// export interface Karateka {
+//   id: string;
+//   nom: string;
+//   prenom: string;
+//   age: number;
+//   sexe: string;
+//   ceinture: string;
+//   note: string;
+// }
 
-export interface User {
-  id: string;
-  email: string;
-  member: boolean;
-  role: Role;
-}
+// export interface User {
+//   id: string;
+//   email: string;
+//   member: boolean;
+//   role: Role;
+// }
 
-export interface Role {
-  id: string;
-  label: string;
-}
+// export interface Role {
+//   id: string;
+//   label: string;
+// }
 
 const Calendrier = () => {
   const today = new Date();
