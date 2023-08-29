@@ -66,7 +66,7 @@ const Home = () => {
         </div>
       </div>
       {/* Fin partie logo + info principal */}
-      <div className='d-flex flex-wrap justify-content-center m-3'>
+      {/* <div className='d-flex flex-wrap justify-content-center m-3'>
         <NavLink to='connect' className='nav-link'>
           <button className='btn btn-primary btnDirection mt-1'>
             Nous rejoindre
@@ -77,7 +77,7 @@ const Home = () => {
             Nous contacter
           </button>
         </NavLink>
-      </div>
+      </div> */}
       {/* calendrier fix + info */}
       {/* ordi */}
       {isBigScreen && (

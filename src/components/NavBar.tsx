@@ -78,7 +78,7 @@ const NavBar = () => {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             {/* --------------------------- debut LI --------------------------- */}
-            <li className='nav-item'>
+            {/* <li className='nav-item'>
               <NavLink to='/' end className='nav-link'>
                 <div
                   className='nav-link'
@@ -89,10 +89,10 @@ const NavBar = () => {
                   Accueil
                 </div>
               </NavLink>
-            </li>
+            </li> */}
 
             {/* --------------------------- user ou admin ou superadmin connecté --------------------------- */}
-            {(role === 'admin' || role === 'superadmin' || role === 'user') && (
+            {/* {(role === 'admin' || role === 'superadmin' || role === 'user') && (
               <li className='nav-item'>
                 <NavLink to='calendrier' className='nav-link'>
                   <div
@@ -105,9 +105,9 @@ const NavBar = () => {
                   </div>
                 </NavLink>
               </li>
-            )}
+            )} */}
             {/* --------------------------- user ou admin ou superadmin connecté --------------------------- */}
-            {(role === 'admin' || role === 'superadmin' || role === 'user') && (
+            {/* {(role === 'admin' || role === 'superadmin' || role === 'user') && (
               <li className='nav-item'>
                 <NavLink to='profil/update' className='nav-link'>
                   <div
@@ -120,9 +120,9 @@ const NavBar = () => {
                   </div>
                 </NavLink>
               </li>
-            )}
+            )} */}
             {/* --------------------------- admin ou superadmin connecté --------------------------- */}
-            {(role === 'admin' || role === 'superadmin') && (
+            {/* {(role === 'admin' || role === 'superadmin') && (
               <li className='nav-item'>
                 <NavLink to='admin/cours' className='nav-link'>
                   <div
@@ -135,9 +135,9 @@ const NavBar = () => {
                   </div>
                 </NavLink>
               </li>
-            )}
+            )} */}
             {/* --------------------------- superadmin connecté --------------------------- */}
-            {role === 'superadmin' && (
+            {/* {role === 'superadmin' && (
               <li className='nav-item'>
                 <NavLink to='superadmin' className='nav-link'>
                   <div
@@ -150,9 +150,9 @@ const NavBar = () => {
                   </div>
                 </NavLink>
               </li>
-            )}
+            )} */}
             {/* --------------------------- setSavedToken mis à jour dans le connect --------------------------- */}
-            {savedToken ? (
+            {/* {savedToken ? (
               <li className='nav-item'>
                 <NavLink to='connect' className='nav-link'>
                   <button
@@ -179,7 +179,7 @@ const NavBar = () => {
                   </div>
                 </NavLink>
               </li>
-            )}
+            )} */}
             {/* --------------------------- setSavedToken mis à jour dans le handleDeco --------------------------- */}
           </ul>
         </div>

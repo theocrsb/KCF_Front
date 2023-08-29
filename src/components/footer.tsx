@@ -16,7 +16,7 @@ const footer = () => {
     <div>
       <div style={{ padding: '10px', opacity: '95%' }} className='bg-dark'>
         <ul className='p-0'>
-          <li className='list-group-item p-2'>
+          {/* <li className='list-group-item p-2'>
             <NavLink to='/contact' end className='nav-link'>
               <div
                 style={{ color: 'white' }}
@@ -25,7 +25,7 @@ const footer = () => {
                 Nous contacter
               </div>
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <a
               style={{ color: 'white' }}
